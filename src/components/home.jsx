@@ -8,7 +8,7 @@ const Home = () => {
             className="min-h-screen bg-cover bg-center" 
             style={{ backgroundImage: `url(${backgroundImage})`}}
         >
-            <Navbar />
+            <Navbar isAuthenticated={false} showLoginSignUp={true} />
         </div>
     )
 };
