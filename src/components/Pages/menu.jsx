@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../navbar";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaPen, FaFileAlt, FaHome, FaCreditCard, FaRegEye } from "react-icons/fa";
 
 export default function Menu({ firstName, lastName }) {
     const [profileImg, setProfileImg] = useState("");
@@ -16,8 +16,8 @@ export default function Menu({ firstName, lastName }) {
     return (
         <div className="space-y-6">
             <Navbar isAuthenticated={true} showLoginSignUp={false} className="w-full fixed top-0 left-0 z-50" />
-            <div className="flex flex-col pl-8 pt-4">
-                <div className="relative inline-block">
+            <div className="flex flex-col md:pl-8 pt-4 ">
+                <div className="relative inline-block pl-6">
                     <label className="cursor-pointer">
                         <input 
                             type="file"
@@ -33,7 +33,7 @@ export default function Menu({ firstName, lastName }) {
                                 className="rounded-full shadow-md w-12 h-12 md:w-16 md:h-16 object-cover"
                             />
                         ) : (
-                            <FaUserCircle className="text-gray-500 w-12 h-12 md:w-16 md:h-16" />
+                            <FaUserCircle className="text-sky-100 w-12 h-12 md:w-16 md:h-16" />
                         )}
                     </label>
                     <Link to="/profile">
@@ -43,30 +43,35 @@ export default function Menu({ firstName, lastName }) {
                         </p>
                     </Link>
                 </div>
-                <nav className="flex mt-6 bg-gray-200 max-w-50 h-screen">
-                    <ul className="space-y-4 p-4 font-semibold">
-                        <li>
-                            <Link to="/create-quote" className="hover:underline">
+                <nav className="flex mt-6 bg-sky-100 md:max-w-60 w-screen h-full text-gray-800">
+                    <ul className="space-y-8 mt-10 mb-10 font-semibold text-lg">
+                        <li className="flex gap-2 md:max-w-60 hover:shadow-lg w-screen p-4">
+                            <FaHome size={24} />
+                            <Link to="/create-quote">
                                 Get Quote
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/view-coverages" className="hover:underline">
+                        <li className="flex gap-2 md:max-w-60 hover:shadow-lg w-screen p-4">
+                            <FaRegEye size={24} />
+                            <Link to="/view-coverages">
                                 View coverages
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/change-coverages" className="hover:underline">
+                        <li className="flex gap-2 md:max-w-60 hover:shadow-lg w-screen p-4">
+                            <FaPen size={24} />
+                            <Link to="/change-coverages" >
                                 Change coverages
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/policy-documents" className="hover:underline">
+                        <li className="flex gap-2 md:max-w-60 hover:shadow-lg w-screen p-4">
+                            <FaFileAlt size={24} />
+                            <Link to="/policy-documents" >
                                 Policy Documents
                             </Link>
                         </li>
-                        <li>
-                            <Link to="/billing-info" className="hover:underline">
+                        <li className="flex gap-2 md:max-w-60 hover:shadow-lg w-screen p-4">
+                            <FaCreditCard size={24} />
+                            <Link to="/billing-info" >
                                 Billing Info
                             </Link>
                         </li>
