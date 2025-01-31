@@ -10,7 +10,7 @@ const About = () => {
                 <div className="flex flex-col lg:flex-row lg:gap-18">
                     <img src={professionalImg} alt="profession" className="w-auto lg:w-200 h-auto"/>
                     <section className="leading-loose space-y-2 pt-10">
-                        <h1 className="text-2xl lg:text-4xl font-bold pb-4 lg:pb-8">About Us</h1>
+                        <h1 className="text-2xl lg:text-3xl font-bold pb-4 lg:pb-8">About Us</h1>
                         <h2 className="text-xl lg:text-2xl font-semibold pb-2 lg:pb-4">Protecting Homes, Securing Futures</h2>
                         <p className="w-full lg:w-4/5">Founded in 2025, HomeSecure was built with a simple yet powerful mission: <span className="font-semibold">to provide homeowners with reliable, affordable, and comprehensive insurance coverage.</span> We understand that a home is more than just a place to live—it's a lifetime investment, a space filled with cherished memories, and a foundation for the future.</p>
                         <p className="w-full lg:w-4/5">With a deep commitment to security, trust, and exceptional customer service, we offer policies tailored to meet the unique needs of homeowners. Whether you're purchasing your first home, safeguarding a family property, or protecting your dream house, <span className="font-semibold">HomeSecure</span> is here to ensure that you're covered in any situation.</p>

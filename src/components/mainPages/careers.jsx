@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from "../Pages/navbar";
+import Navbar from "../pages/navbar";
 
 const Careers = () => {
     return (
         <div>
-            <Navbar />
+            <Navbar isAuthenticated={false} showLoginSignUp={true} />
             <h1>Careers</h1>
         </div>
     )

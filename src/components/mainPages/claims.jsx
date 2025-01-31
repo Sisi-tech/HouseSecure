@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from "../Pages/navbar";
+import Navbar from "../pages/navbar";
 
 const Claims = () => {
     return (
         <div>
-            <Navbar />
+            <Navbar isAuthenticated={false} showLoginSignUp={true} />
             <h1>Claims</h1>
         </div>
     )
