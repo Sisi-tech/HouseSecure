@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import Navbar from './navbar';
+import Navbar from '../pages/navbar';
 import { Link } from "react-router-dom";
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
+import { FaUserCircle } from "react-icons/fa";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);

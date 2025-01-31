@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./navbar";
-import backgroundImage from "../assets/home.jpg";
+import Navbar from "../pages/navbar";
+import backgroundImage from "../../assets/home.jpg";
 
 const Home = () => {
     return (
