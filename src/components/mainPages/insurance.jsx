@@ -9,7 +9,7 @@ const Insurance = () => {
     return (
         <dvi>
             <Navbar isAuthenticated={false} showLoginSignUp={true} />
-            <div className="flex flex-col justify-center items-center gap-6 w-full p-8">
+            <div className="flex flex-col justify-center items-center gap-6 w-full p-8 text-lg">
                 <h1 className="text-2xl lg:text-3xl font-bold pb-4">Homeowner Insurance Programs</h1>
                 <p className="text-lg w-4/5 text-center">We offer a variety of <span className="font-semibold">homeowner insurance policies</span> tailored to fit different property types and coverage needs. Whether you own a house, condo, rent an apartment, or personal property, we have the right protection for you.</p>
                 <div className="flex flex-col lg:grid lg:grid-cols-4 gap-4">
