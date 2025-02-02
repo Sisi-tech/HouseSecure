@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from '../pages/navbar';
 import { Link } from "react-router-dom";
+import BackToTop from '../pages/backToTop';
+import Footer from '../pages/footer';
 
 const SignUp = () => {
     const [firstName, setFirstName] = useState("");
@@ -176,6 +178,8 @@ const SignUp = () => {
                     </form>
                 </div>
             </div>   
+            <BackToTop />
+            <Footer />
         </div>
     )
 };

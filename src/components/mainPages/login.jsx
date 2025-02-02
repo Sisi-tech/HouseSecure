@@ -3,6 +3,8 @@ import Navbar from '../pages/navbar';
 import { Link } from "react-router-dom";
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 import { FaUserCircle } from "react-icons/fa";
+import BackToTop from '../pages/backToTop';
+import Footer from '../pages/footer';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -85,6 +87,8 @@ const Login = () => {
                     </form>
                 </div>
             </div>
+            <BackToTop />
+            <Footer />
         </div>
     )
 };
