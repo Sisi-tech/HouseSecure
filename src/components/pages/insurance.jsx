@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "../pages/navbar";
+import Navbar from "../shared/navbar";
 import houseImg from "../../assets/house02.jpg";
 import condo from "../../assets/condo.jpg";
 import watch from "../../assets/watch.jpg";
 import ring from "../../assets/ring02.jpg";
-import BackToTop from "../pages/backToTop";
-import Footer from "../pages/footer";
+import BackToTop from "../shared/backToTop";
+import Footer from "../shared/footer";
 
 const Insurance = () => {
     return (
@@ -22,7 +22,7 @@ const Insurance = () => {
                 </p>
 
                 {/* Image Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-5xl">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-6xl">
                     {[houseImg, condo, watch, ring].map((img, index) => (
                         <div key={index} className="relative group">
                             <img
@@ -36,7 +36,7 @@ const Insurance = () => {
                 </div>
 
                 {/* Insurance Policy Types */}
-                <div className="grid grid-cols-1 text-black md:grid-cols-2 gap-8 w-full max-w-5xl mt-10">
+                <div className="grid grid-cols-1 text-black md:grid-cols-2 gap-8 w-full lg:max-w-6xl mt-10">
                     <div className="bg-gray-50 p-6 rounded-xl shadow-md">
                         <h2 className="text-lg lg:text-xl font-semibold mb-3">🏡 Homeowner Insurance Policy Types</h2>
                         <ul className="leading-loose pl-5 space-y-2">

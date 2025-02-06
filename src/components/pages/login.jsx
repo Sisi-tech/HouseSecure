@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Navbar from '../pages/navbar';
+import Navbar from '../shared/navbar';
 import { Link } from "react-router-dom";
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 import { FaUserCircle } from "react-icons/fa";
-import BackToTop from '../pages/backToTop';
-import Footer from '../pages/footer';
+import BackToTop from '../shared/backToTop';
+import Footer from '../shared/footer';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);

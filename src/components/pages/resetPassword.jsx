@@ -1,7 +1,7 @@
 import React from "react";
-import BackToTop from "../pages/backToTop";
-import Footer from "../pages/footer";
-import Navbar from "../pages/navbar";
+import BackToTop from "../shared/backToTop";
+import Footer from "../shared/footer";
+import Navbar from "../shared/navbar";
 
 export default function ResetPassword() {
     return (

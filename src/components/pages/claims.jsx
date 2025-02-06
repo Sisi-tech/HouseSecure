@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "../pages/navbar";
+import Navbar from "../shared/navbar";
 import { Link } from "react-router-dom";
-import BackToTop from "../pages/backToTop";
-import Footer from "../pages/footer";
+import BackToTop from "../shared/backToTop";
+import Footer from "../shared/footer";
 
 const Claims = () => {
     return (
@@ -28,7 +28,7 @@ const Claims = () => {
                 {/* How to File a Claim Section */}
                 <section>
                     <h2 className="text-lg lg:text-xl font-semibold pb-6 text-center">📌 How to File a Claim</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-screen-lg mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 max-w-screen-lg mx-auto">
                         {/* Step 1 */}
                         <div className="p-6 bg-gray-100 text-gray-900 shadow-md rounded-lg">
                             <h3 className="text-lg font-semibold">1️⃣ Assess the Situation</h3>

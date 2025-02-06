@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../pages/navbar";
+import Navbar from "../shared/navbar";
 import backgroundImage from "../../assets/home.jpg";
-import Footer from "../pages/footer";
+import Footer from "../shared/footer";
 
 const Home = () => {
     return (

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Navbar from '../pages/navbar';
+import Navbar from '../shared/navbar';
 import { Link } from "react-router-dom";
-import BackToTop from '../pages/backToTop';
-import Footer from '../pages/footer';
+import BackToTop from '../shared/backToTop';
+import Footer from '../shared/footer';
 
 const SignUp = () => {
     const [firstName, setFirstName] = useState("");

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Navbar from "../pages/navbar";
+import Navbar from "../shared/navbar";
 import professionalImg from "../../assets/professional01.jpg";
 import professionalImg02 from "../../assets/professional02.jpg";
 import professionalImg03 from "../../assets/professional03.jpg";
-import BackToTop from "../pages/backToTop";
-import Footer from "../pages/footer";
+import BackToTop from "../shared/backToTop";
+import Footer from "../shared/footer";
 
 const About = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
