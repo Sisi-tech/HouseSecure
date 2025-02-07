@@ -30,10 +30,10 @@ export default function Menu({ isAuthenticated }) {
     }
 
     return (
-        <div className="flex flex-col w-full px-4 py-2 shadow-md bg-white">
+        <div className="flex flex-col w-full px-4 py-2 shadow-md">
             {/* Navbar Header */}
-            <div className="flex justify-between items-center w-full">
-                <Link to="/" className="font-bold text-xl md:text-2xl pl-4">
+            <div className="flex justify-between items-center w-full pt-2">
+                <Link to="/" className="font-bold text-xl md:text-2xl pl-4 text-sky-700 font-serif" style={{ textShadow: "3px 3px 4px rgba(0, 0, 0, 0.5)" }}>
                     HomeSecure
                 </Link>
 

@@ -22,7 +22,7 @@ const Navbar = ({ isAuthenticated, showLoginSignUp }) => {
 
     return (
         <div className='min-w-min flex justify-between items-center p-2 bg-gray-100 shadow' data-theme={theme}>
-            <div className='flex items-center'>
+            <div className='flex items-center text-sky-700 font-serif'>
                 <Link 
                     to="/" 
                     className='font-bold text-xl  md:text-2xl pl-4' 
