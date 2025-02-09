@@ -30,9 +30,9 @@ export default function Menu({ isAuthenticated }) {
     }
 
     return (
-        <div className="flex flex-col w-full px-4 py-2 shadow-md">
+        <div className="flex flex-col w-full px-4 pt-2 shadow-md">
             {/* Navbar Header */}
-            <div className="flex justify-between items-center w-full pt-2">
+            <div className="flex justify-between items-center w-full pt-2 pb-2">
                 <Link to="/" className="font-bold text-xl md:text-2xl pl-4 text-sky-700 font-serif" style={{ textShadow: "3px 3px 4px rgba(0, 0, 0, 0.5)" }}>
                     HomeSecure
                 </Link>
@@ -46,28 +46,11 @@ export default function Menu({ isAuthenticated }) {
             {/* Navigation Links */}
             <nav className={`lg:flex lg:items-center lg:justify-between ${menuOpen ? "block" : "hidden"} w-full ${showDropdown ? "dropdown-open" : ""}`}>
                 <ul className="flex flex-col lg:flex-row font-semibold text-lg space-y-4 lg:space-y-0 lg:space-x-6 py-4">
-                    <li className="relative flex flex-col">
-                        <button className="flex items-center gap-2 p-4 hover:scale-105 "
-                            onClick={toggleDropdown}
-                        >
-                            <FaHome size={20} />
-                            Get Quote
-                        </button>
-                        {showDropdown && (
-                            <div className="absolute left-0 w-full md:w-screen mt-10 md:mt-26 p-4 ">
-                                <ul className="flex flex-col md:flex-row justify-center bg-white gap-4">
-                                    <li><Link to="/quote/applicant-info" className="block px-4 py-2 bg-gray-100 hover:bg-gray-200" onClick={() => setShowDropdown(false)}>Applicant Info</Link></li>
-                                    <li><Link to="/quote/location" className="block px-4 py-2 bg-gray-100 hover:bg-gray-200">Location</Link></li>
-                                    <li><Link to="/quote/history" className="block px-4 py-2 bg-gray-100 hover:bg-gray-200">History</Link></li>
-                                    <li><Link to="/quote/coverage" className="block px-4 py-2 bg-gray-100 hover:bg-gray-200">Coverage</Link></li>
-                                    <li><Link to="/quote/interest" className="block px-4 py-2 bg-gray-100 hover:bg-gray-200">Additional Interest</Link></li>
-                                    <li><Link to="/quote/question" className="block px-4 py-2 bg-gray-100 hover:bg-gray-200">Underwriting Questions</Link></li>
-                                    <li><Link to="/quote/rate" className="block px-4 py-2 bg-gray-100 hover:bg-gray-200">Rate</Link></li>
-                                </ul>
-                            </div>
-                        )}
+                    <li className="flex items-center gap-2 p-4 hover:scale-105">
+                       <FaHome size={20} />
+                        <Link to="" onClick={() => setMenuOpen(false)}>Create Quote</Link>
                     </li>
-                    <li className={`flex items-center gap-2 p-4 hover:scale-105 ${menuOpen ? "block" : "hidden"} `}>
+                    <li className="flex items-center gap-2 p-4 hover:scale-105">
                         <FaRegEye size={20} />
                         <Link to="/view-coverages" onClick={() => setMenuOpen(false)}>View Coverages</Link>
                     </li>
