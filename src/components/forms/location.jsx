@@ -187,6 +187,18 @@ const Location = () => {
                     </div>
                 </div>
             </form>
+            <div className="w-full flex justify-end gap-4 p-6 lg:pr-10 lg:pt-20">
+                <Link to="/quote/applicant-info">
+                    <button className="bg-sky-700 w-20 p-1 rounded-lg shadow-lg text-md">
+                        Previous
+                    </button>
+                </Link>
+                <Link to="/quote/history">
+                    <button className="bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-md">
+                        Next
+                    </button>
+                </Link>
+            </div>
         </div>
     )
 }
