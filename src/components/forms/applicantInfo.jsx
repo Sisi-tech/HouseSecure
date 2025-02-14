@@ -25,21 +25,21 @@ const ApplicantInfo = () => {
             <CreateQuote />
             <form className="w-full mx-auto max-w-screen-lg text-lg space-y-5 pt-4 md:pt-10 p-4 bg-gray-100">
                 <div className="flex flex-col md:flex-row md:items-center gap-4">
-                    <label htmlFor="date" className="md:w-160 lg:w-240 sm:text-start md:text-right">Proposed Effective Date:</label>
+                    <label htmlFor="date" className="w-auto md:w-160 lg:w-240 text-start md:text-right">Proposed Effective Date:</label>
                     <input
                         id="date"
                         type="date"
-                        className="p-1 pl-2 border rounded-sm w-auto md:w-full"
+                        className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
                         value={selectedDate}
                         min={today}
                         onChange={(e) => setSelectedDate(e.target.value)}
                     />
                 </div>
                 <div className="flex flex-col md:flex-row md:items-center gap-4">
-                    <label htmlFor="entityType" className="md:w-160 lg:w-240 sm:text-start md:text-right">Entity Type:</label>
+                    <label htmlFor="entityType" className="w-auto md:w-160 lg:w-240 text-start md:text-right">Entity Type:</label>
                     <select
                         id="entityType"
-                        className="p-2 border rounded-sm sm:w-auto md:w-100 lg:w-200"
+                        className="p-2 border rounded-sm w-auto md:w-100 lg:w-200"
                         value={entityType}
                         onChange={(e) => setEntityType(e.target.value)}
                     >
@@ -55,13 +55,13 @@ const ApplicantInfo = () => {
                 {entityType === "individual" ? (
                     <>
                         <div className="flex flex-col md:flex-row md:items-center gap-4">
-                            <label htmlFor="firstName" className="sm:w-auto md:w-160 lg:w-240 sm:text-start md:text-right">
+                            <label htmlFor="firstName" className="w-auto md:w-160 lg:w-240 text-start md:text-right">
                                 First Name:
                             </label>
                             <input
                                 id="firstName"
                                 type="text"
-                                className="p-1 pl-2 border rounded-sm sm:w-auto md:w-100 lg:w-200"
+                                className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                                 required
@@ -75,7 +75,7 @@ const ApplicantInfo = () => {
                             <input
                                 id="lastName"
                                 type="text"
-                                className="p-1 pl-2 border rounded-sm sm:w-auto md:w-100 lg:w-200"
+                                className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                                 required
@@ -91,7 +91,7 @@ const ApplicantInfo = () => {
                         <input
                             id="businessName"
                             type="text"
-                            className="p-1 pl-2 border rounded-sm sm:w-auto md:w-100 lg:w-200"
+                            className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
                             value={businessName}
                             onChange={(e) => setBusinessName(e.target.value)}
                             required
@@ -100,12 +100,12 @@ const ApplicantInfo = () => {
                     </div>
                 ) : null}
                 <div className="flex flex-col md:flex-row md:items-center gap-4">
-                    <label htmlFor="policyForm" className="md:w-160 lg:w-240 sm:text-start md:text-right">
+                    <label htmlFor="policyForm" className="w-auto md:w-160 lg:w-240 text-start md:text-right">
                         Policy Form:
                     </label>
                     <select
                         id="policyForm"
-                        className="p-2 border rounded-sm sm:w-auto md:w-100 lg:w-200"
+                        className="p-2 border rounded-sm w-auto md:w-100 lg:w-200"
                         value={policyForm}
                         onChange={(e) => setPolicyForm(e.target.value)}
                     >
@@ -121,12 +121,12 @@ const ApplicantInfo = () => {
                     </select>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-center gap-4">
-                    <label htmlFor="occupancyType" className="md:w-160 lg:w-240 sm:text-start md:text-right">
+                    <label htmlFor="occupancyType" className="md:w-160 lg:w-240 text-start md:text-right">
                         Occupancy Type:
                     </label>
                     <select
                         id="occupancyType"
-                        className="p-2 border rounded-sm sm:w-auto md:w-100 lg:w-200"
+                        className="p-2 border rounded-sm w-auto md:w-100 lg:w-200"
                         value={occupancyType}
                         onChange={(e) => setOccupancyType(e.target.value)}
                     >
@@ -139,10 +139,10 @@ const ApplicantInfo = () => {
                     </select>
                 </div>
                 <div className="flex flex-col md:flex-row md:items-center gap-4">
-                    <label htmlFor="loss" className="md:w-160 lg:w-240 sm:text-start md:text-right">Is there any loss history from the past 3 years?</label>
+                    <label htmlFor="loss" className="w-auto md:w-160 lg:w-240 text-start md:text-right">Is there any loss history from the past 3 years?</label>
                     <select
                         id="loss"
-                        className="p-2 border rounded-sm sm:w-auto md:w-100 lg:w-200"
+                        className="p-2 border rounded-sm w-auto md:w-100 lg:w-200"
                         value={lossHistory}
                         onChange={(e) => setLossHistory(e.target.value)}
                     >

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import CreateQuote from "../policy/createQuote";
+import BackToTop from "../shared/backToTop";
 
 const questions = [
     "1. Any type of business on the premises?",
@@ -86,9 +87,9 @@ const UnderwritingQuestion = () => {
     return (
         <div className="w-full h-full flex flex-col items-center">
             <CreateQuote />
-            <div className="pt-4">
-                <h3 className="text-xl font-semibold text-center pb-4">Underwriting Questions</h3>
-                <div className="w-full flex justify-end pb-4">
+            <div className="w-full mx-auto max-w-screen-lg text-lg space-y-5 p-4 bg-gray-100 text-black">
+                <h3 className="text-xl font-semibold text-center pt-4">Underwriting Questions</h3>
+                <div className="w-full flex justify-end">
                     <button
                         onClick={selectAllNo}
                         className="bg-gray-600 text-white px-4 py-2 rounded-md mt-4"
