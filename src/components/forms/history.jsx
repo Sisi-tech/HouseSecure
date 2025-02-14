@@ -1,4 +1,3 @@
-import { listItemIconClasses } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import CreateQuote from "../policy/createQuote";
@@ -105,6 +104,7 @@ const History = () => {
                         className="p-1 pl-2 border rounded-sm w-full"
                         value={priorCarrier}
                         onChange={(e) => setPriorCarrier(e.target.value)}
+                        required 
                     />
                 </div>
                 <div className="flex flex-col gap-4">
@@ -115,6 +115,7 @@ const History = () => {
                         className="p-1 pl-2 border rounded-sm w-full "
                         value={expirationDate}
                         onChange={(e) => setExpirationDate(e.target.value)}
+                        required 
                     />
                 </div>
                 <div className="flex flex-col gap-4">
@@ -124,6 +125,7 @@ const History = () => {
                         className="p-2 border rounded-sm w-full"
                         value={lapse}
                         onChange={(e) => setLapse(e.target.value)}
+                        required 
                     >
                         <option value="" disabled hidden></option>
                         <option value="lapse">Yes</option>
