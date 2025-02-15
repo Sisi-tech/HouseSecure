@@ -2,6 +2,8 @@ import { number } from "prop-types";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import CreateQuote from "../policy/createQuote";
+import BackToTop from "../shared/backToTop";
+import Footer from "../shared/footer";
 
 const Location = () => {
     const [address1, setAddress1] = useState();
@@ -19,13 +21,14 @@ const Location = () => {
     const [yearBuilt, setYearBuilt] = useState();
 
     return (
-        <div className="w-full h-full flex flex-col items-center">
+        <div className="w-full h-full flex flex-col">
             <CreateQuote />
+            <div className="mx-auto max-w-screen-lg p-12"></div>
             <form className="w-full flex flex-col gap-4 mx-auto max-w-screen-lg text-lg pt-4 md:pt-10 lg:p-10 text-black bg-gray-100">
-                <div className="w-full flex flex-col align-center mx-auto max-w-screen-lg text-lg space-y-2 p-4">
+                <div className="w-full flex flex-col align-center mx-auto max-w-screen-lg text-lg gap-6 p-4">
                     {/* row1 address line */}
                     <div className="w-full flex flex-col md:flex-row justify-between gap-4">
-                        <div className="flex flex-col justify-center items-center space-y-2 w-full md:w-3/5">
+                        <div className="flex flex-col justify-center items-center gap-4 w-full md:w-3/5">
                             <label htmlFor="address1" className="w-full">Address:</label>
                             <input
                                 id="address1"
@@ -37,7 +40,7 @@ const Location = () => {
                                 placeholder="Required"
                             />
                         </div>
-                        <div className="flex flex-col justify-center items-center space-y-2 w-full md:w-2/5">
+                        <div className="flex flex-col justify-center items-center gap-4 w-full md:w-2/5">
                             <label htmlFor="address2" className="w-full">Additional address:</label>
                             <input
                                 id="address2"
@@ -53,7 +56,7 @@ const Location = () => {
 
                     {/* row2 city, state, code */}
                     <div className="w-full flex flex-col md:flex-row justify-between gap-4">
-                        <div className="flex flex-col justify-center items-center space-y-2">
+                        <div className="flex flex-col justify-center items-center gap-4">
                             <label htmlFor="city" className="w-full">City:</label>
                             <input
                                 id="city"
@@ -65,7 +68,7 @@ const Location = () => {
                                 placeholder="Required"
                             />
                         </div>
-                        <div className="flex flex-col justify-center items-center space-y-2">
+                        <div className="flex flex-col justify-center items-center gap-4">
                             <label htmlFor="state" className="w-full">State:</label>
                             <input
                                 id="state"
@@ -77,7 +80,7 @@ const Location = () => {
                                 placeholder="Required"
                             />
                         </div>
-                        <div className="flex flex-col justify-center items-center space-y-2">
+                        <div className="flex flex-col justify-center items-center gap-4">
                             <label htmlFor="zipCode" className="w-full">Zip Code:</label>
                             <input
                                 id="zipCode"
@@ -92,27 +95,39 @@ const Location = () => {
                     </div>
 
                     {/* row 3 */}
-                    <div className="flex flex-col gap-4 w-full md:w-2/7">
-                        <label htmlFor="distanceToCostal" className="w-full">Distance To Coastal:</label>
-                        <select
-                            id="distanceToCostal"
-                            className="p-2 border rounded-sm w-full"
-                            value={distanceToCoast}
-                            onChange={(e) => setDistanceToCoast(e.target.value)}
-                        >
-                            <option value="" disabled hidden></option>
-                            <option value="0.3">Equal or less than less than 0.3 mile</option>
-                            <option value="0.5">Equal or less than less than 0.5 mile</option>
-                            <option value="1">Equal or less than 1 mile</option>
-                            <option value="1+">Greater than 1 mile</option>
-                        </select>
+                    <div className="w-full flex flex-col md:flex-row  gap-6">
+                        <div className="flex flex-col gap-4 w-full md:w-2/7">
+                            <label htmlFor="distanceToCostal" className="w-full">Distance To Coastal:</label>
+                            <select
+                                id="distanceToCostal"
+                                className="p-2 border rounded-sm w-full"
+                                value={distanceToCoast}
+                                onChange={(e) => setDistanceToCoast(e.target.value)}
+                            >
+                                <option value="" disabled hidden></option>
+                                <option value="0.3">Equal or less than less than 0.3 mile</option>
+                                <option value="0.5">Equal or less than less than 0.5 mile</option>
+                                <option value="1">Equal or less than 1 mile</option>
+                                <option value="1+">Greater than 1 mile</option>
+                            </select>
+                        </div>
+                        <div className="flex flex-col justify-center items-center gap-4">
+                            <label htmlFor="yearBuilt" className="w-full">Year of built:</label>
+                            <input
+                                id="yearBuilt"
+                                type="text"
+                                className="p-1.5 border rounded-sm w-full"
+                                value={yearBuilt}
+                                onChange={(e) => setYearBuilt(e.target.value)}
+                            />
+                        </div>
                     </div>
                 </div>
 
-                <div className="w-full flex flex-col align-center mx-auto max-w-screen-lg text-lg space-y-2  p-4">
+                <div className="w-full flex flex-col align-center mx-auto max-w-screen-lg text-lg gap-6 p-4">
                     {/* first row  */}
                     <div className="w-full grid grid-cols-1 md:grid-cols-3 md:flex-row justify-between gap-4">
-                        <div className="flex flex-col justify-center items-center space-y-2">
+                        <div className="flex flex-col justify-center items-center gap-4">
                             <label htmlFor="rental" className="w-full">Rental:</label>
                             <select
                                 id="rental"
@@ -126,7 +141,7 @@ const Location = () => {
                                 <option value="six">Less than 6 months</option>
                             </select>
                         </div>
-                        <div className="flex flex-col justify-center items-center space-y-2">
+                        <div className="flex flex-col justify-center items-center gap-4">
                             <label htmlFor="numOfFamily" className="w-full">Number Of Family:</label>
                             <select
                                 id="numOfFamily"
@@ -141,7 +156,7 @@ const Location = () => {
                                 <option value="fourFamily">4 family</option>
                             </select>
                         </div>
-                        <div className="flex flex-col justify-center items-center space-y-2">
+                        <div className="flex flex-col justify-center items-center gap-4">
                             <label htmlFor="townhouse" className="w-full">Townhouse:</label>
                             <select
                                 id="townhouse"
@@ -158,7 +173,7 @@ const Location = () => {
 
                     {/* second row */}
                     <div className="w-full grid grid-cols-1 md:grid-cols-3 md:flex-row justify-between gap-4">
-                        <div className="flex flex-col justify-center items-center space-y-2">
+                        <div className="flex flex-col justify-center items-center gap-4">
                             <label htmlFor="sqft" className="w-full">Total sqft:</label>
                             <input
                                 id="sqft"
@@ -168,7 +183,7 @@ const Location = () => {
                                 onChange={(e) => setSqft(e.target.value)}
                             />
                         </div>
-                        <div className="flex flex-col justify-center items-center space-y-2">
+                        <div className="flex flex-col justify-center items-center gap-4">
                             <label htmlFor="constructionType" className="w-full">Construction Type:</label>
                             <select
                                 id="constructionType"
@@ -183,7 +198,7 @@ const Location = () => {
                                 <option value="Frame">Frame</option>
                             </select>
                         </div>
-                        <div className="flex flex-col justify-center items-center space-y-2">
+                        <div className="flex flex-col justify-center items-center gap-4">
                             <label htmlFor="protectionClass" className="w-full">Protection Class Code:</label>
                             <select
                                 id="protectionClass"
@@ -204,7 +219,7 @@ const Location = () => {
                     </div>
                 </div>
             </form>
-            <div className="w-full flex justify-end gap-4 p-6 lg:pr-10 lg:pt-20">
+            <div className="w-full flex justify-center gap-4 p-6 pt-14 pb-14 text-white">
                 <Link to="/quote/applicant-info">
                     <button className="bg-sky-700 w-20 p-1 rounded-lg shadow-lg text-md">
                         Previous
@@ -216,6 +231,8 @@ const Location = () => {
                     </button>
                 </Link>
             </div>
+            <BackToTop />
+            <Footer />
         </div>
     )
 }

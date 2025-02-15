@@ -1,9 +1,9 @@
 import { QuestionMarkSharp } from "@mui/icons-material";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CreateQuote from "../policy/createQuote";
 import BackToTop from "../shared/backToTop";
+import Footer from "../shared/footer";
 
 const questions = [
     "1. Any type of business on the premises?",
@@ -85,14 +85,14 @@ const UnderwritingQuestion = () => {
     const isFormValid = questions.every((question) => answers[question]);
 
     return (
-        <div className="w-full h-full flex flex-col items-center">
+        <div className="w-full h-full flex flex-col">
             <CreateQuote />
             <div className="w-full mx-auto max-w-screen-lg text-lg space-y-5 p-4 bg-gray-100 text-black">
                 <h3 className="text-xl font-semibold text-center pt-4">Underwriting Questions</h3>
                 <div className="w-full flex justify-end">
                     <button
                         onClick={selectAllNo}
-                        className="bg-gray-600 text-white px-4 py-2 rounded-md mt-4"
+                        className="bg-gray-500 text-white px-4 py-1.5 rounded-md mt-4"
                     >
                         Select All as No
                     </button>
@@ -132,7 +132,7 @@ const UnderwritingQuestion = () => {
                 </div>
             </div>
 
-            <div className="w-full flex justify-end gap-4 p-6 lg:pr-10">
+            <div className="w-full flex justify-center gap-4 p-6 pt-16 pb-10 text-white">
                 <Link to="/quote/interest">
                     <button className="bg-sky-700 w-20 p-1 rounded-lg shadow-lg text-md">
                         Previous
@@ -148,6 +148,8 @@ const UnderwritingQuestion = () => {
                     </button>
                 </Link>
             </div>
+            <BackToTop />
+            <Footer />
         </div>
     )
 }

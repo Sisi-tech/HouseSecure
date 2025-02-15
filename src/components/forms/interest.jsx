@@ -2,6 +2,8 @@ import { Interests } from "@mui/icons-material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import CreateQuote from "../policy/createQuote";
+import BackToTop from "../shared/backToTop";
+import Footer from "../shared/footer";
 
 const Interest = () => {
     const [interests, setInterests] = useState([]);
@@ -21,7 +23,7 @@ const Interest = () => {
     }
 
     return (
-        <div className="w-full h-full flex flex-col items-center">
+        <div className="w-full h-full flex flex-col">
             <CreateQuote />
             <div className="w-full mx-auto max-w-screen-lg text-lg space-y-5 pt-4 md:pt-10 p-4 bg-gray-100 text-black">
 
@@ -201,7 +203,7 @@ const Interest = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-full text-end pt-5">
+                    <div className="w-full text-center pt-5 text-white">
                         <button
                             className="bg-sky-700 w-30 p-1 rounded-lg shadow-lg text-md"
                             onSubmit={handleAddInterest}
@@ -212,7 +214,7 @@ const Interest = () => {
                 </form>
             </div>
             {/* button */}
-            <div className="w-full flex justify-end gap-4 p-6 lg:pr-10">
+            <div className="w-full flex justify-center gap-4 p-6 pt-14 pb-14 text-white">
                 <Link to="/quote/coverage">
                     <button className="bg-sky-700 w-20 p-1 rounded-lg shadow-lg text-md">
                         Previous
@@ -224,6 +226,8 @@ const Interest = () => {
                     </button>
                 </Link>
             </div>
+            <BackToTop />
+            <Footer />
         </div>
     )
 }

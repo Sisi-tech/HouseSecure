@@ -45,7 +45,7 @@ export default function Menu({ isAuthenticated }) {
 
             {/* Navigation Links */}
             <nav className={`lg:flex lg:items-center lg:justify-between ${menuOpen ? "block" : "hidden"} w-full ${showDropdown ? "dropdown-open" : ""}`}>
-                <ul className="flex flex-col lg:flex-row font-semibold text-lg space-y-4 lg:space-y-0 lg:space-x-6 py-4">
+                <ul className="flex flex-col lg:flex-row font-semibold text-lg lg:text-xl space-y-4 lg:space-y-0 lg:space-x-6 py-2">
                     <li className="flex items-center gap-2 p-4 hover:scale-105">
                        <FaHome size={20} />
                         <Link to="/quote/applicant-info" onClick={() => setMenuOpen(false)}>Create Quote</Link>

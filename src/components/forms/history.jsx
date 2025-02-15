@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import CreateQuote from "../policy/createQuote";
+import BackToTop from "../shared/backToTop";
+import Footer from "../shared/footer";
+import { FaTrash } from "react-icons/fa";
 
 const Loss = ({ index, loss, updatedLoss, removeLoss }) => {
     return (
-        <div className="w-full mx-auto max-w-screen-lg text-lg space-y-5 pt-4 md:pt-10 p-4">
+        <div className="w-full mx-auto max-w-screen-lg text-lg space-y-5 pt-4 md:pt-6">
             <h3 className="text-lg font-semibold text-center">Loss {index + 1}</h3>
 
             {/* first row */}
             <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex flex-col md:flex-1">
-                    <label htmlFor={`dateOfLoss-${index}`} className="w-48 md:w-56 text-start md:text-right">Date of Loss:</label>
+                    <label htmlFor={`dateOfLoss-${index}`} className="w-full">Date of Loss:</label>
                     <input
                         id={`dateOfLoss-${index}`}
                         type="date"
-                        className="p-2 border rounded-sm w-full"
+                        className="p-1.5 border rounded-sm w-full"
                         value={loss.dateOfLoss}
                         onChange={(e) => updatedLoss(index, "dateOfLoss", e.target.value)}
                     />
                 </div>
                 <div className="flex flex-col md:flex-1">
-                    <label htmlFor={`category-${index}`} className="w-48 md:w-56 text-start md:text-right">Category:</label>
+                    <label htmlFor={`category-${index}`} className="w-full">Category:</label>
                     <select
                         id={`category-${index}`}
                         className="p-2 border rounded-sm w-full"
@@ -33,11 +36,11 @@ const Loss = ({ index, loss, updatedLoss, removeLoss }) => {
                     </select>
                 </div>
                 <div className="flex flex-col md:flex-1">
-                    <label htmlFor={`paidAmount-${index}`} className="w-48 md:w-56 text-start md:text-right">Amount:</label>
+                    <label htmlFor={`paidAmount-${index}`} className="w-full">Amount:</label>
                     <input
                         id={`paidAmount-${index}`}
-                        type="number"
-                        className="p-2 border rounded-sm w-full"
+                        type="text"
+                        className="p-1.5 border rounded-sm w-full"
                         value={loss.paidAmount}
                         onChange={(e) => updatedLoss(index, "paidAmount", Number(e.target.value))}
                     />
@@ -46,7 +49,7 @@ const Loss = ({ index, loss, updatedLoss, removeLoss }) => {
 
             {/* second row */}
             <div className="flex flex-col">
-                <label htmlFor={`description-${index}`} className="md:w-160 lg:w-240 sm:text-start md:text-right">Description of Loss:</label>
+                <label htmlFor={`description-${index}`} className="w-full">Description of Loss:</label>
                 <textarea
                     id={`description-${index}`}
                     type="text"
@@ -60,10 +63,10 @@ const Loss = ({ index, loss, updatedLoss, removeLoss }) => {
             <div className="flex justify-end">
             <button
                 type="button"
-                className="bg-red-500 text-white px-3 py-1 rounded-lg shadow-md"
+                className="text-red-500 px-3 py-1"
                 onClick={() => removeLoss(index)}
             >
-                Remove
+                <FaTrash size={20} />
             </button>
             </div>
         </div>
@@ -93,10 +96,10 @@ const History = () => {
     };
 
     return (
-        <div className="w-full h-full flex flex-col items-center">
+        <div className="w-full h-full flex flex-col">
             <CreateQuote />
             <form className="w-full mx-auto max-w-screen-lg text-lg space-y-5 pt-4 md:pt-10 p-4 bg-gray-100 text-black">
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
                     <label htmlFor="priorCarrier" className="w-full">Prior Carrier(If new purchase please indicate new purchase):</label>
                     <input
                         id="priorCarrier"
@@ -107,18 +110,18 @@ const History = () => {
                         required 
                     />
                 </div>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
                     <label htmlFor="expirationDate" className="w-full text-start">Expiration Date (Please use current date for new purchase):</label>
                     <input
                         id="expirationDate"
                         type="date"
-                        className="p-1 pl-2 border rounded-sm w-full "
+                        className="p-1 pl-2 border rounded-sm w-full"
                         value={expirationDate}
                         onChange={(e) => setExpirationDate(e.target.value)}
                         required 
                     />
                 </div>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
                     <label htmlFor="lapse" className="w-full text-start">Lapsed in coverage (Please select No for new purchase):</label>
                     <select
                         id="lapse"
@@ -135,7 +138,7 @@ const History = () => {
                 {losses.map((loss, index) => (
                     <Loss key={index} index={index} loss={loss} updatedLoss={updateLoss} removeLoss={removeLoss} />
                 ))}
-                <div className="flex justify-end pb-2">
+                <div className="flex justify-center pb-2">
                     <button
                         type="button"
                         className="bg-sky-700 text-white w-23 p-1 rounded-lg shadow-lg text-md"
@@ -144,7 +147,7 @@ const History = () => {
                     </button>
                 </div>
             </form>
-            <div className="w-full flex justify-end gap-4 p-6 lg:pr-10 lg:pt-14">
+            <div className="w-full flex justify-center gap-4 p-6 pt-14 pb-14 text-white">
                 <Link to="/quote/location">
                     <button className="bg-sky-700 w-20 p-1 rounded-lg shadow-lg text-md">
                         Previous
@@ -156,6 +159,8 @@ const History = () => {
                     </button>
                 </Link>
             </div>
+            <BackToTop />
+            <Footer />
         </div>
     )
 }

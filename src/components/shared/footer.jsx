@@ -3,7 +3,7 @@ import { FaFacebook, FaInstagram, FaTwitter, FaEnvelope, FaPhoneAlt } from "reac
 
 const Footer = () => {
     return (
-        <div className="bg-gray-800 text-white py-8">
+        <div className="bg-gray-800 text-white py-8 bottom-0">
             <div className="max-w-screen-lg mx-auto flex justify-center items-center">
                 <ul className="flex space-x-6">
                     <li className="hover:scale-120 hover:text-blue-800">

@@ -1,34 +1,30 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const BackToTop = () => {
-    const [showButton, setShowButton] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
+        const toggleVisibility = () => {
             if (window.scrollY > 300) {
-                setShowButton(true);
+                setVisible(true);
             } else {
-                setShowButton(false);
+                setVisible(false);
             }
         };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+
+        window.addEventListener("scroll", toggleVisibility);
+        return () => window.removeEventListener("scroll", toggleVisibility);
     }, []);
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
 
     return (
-        <>
-            {showButton && (
-                <button 
-                    onClick={scrollToTop}
-                    className="fixed bottom-40 right-6 px-4 py-2 rounded-lg shadow-lg hover:text-gray-900 hover:bg-blue-100 transition"
-                >
-                    ↑ Back to Top
-                </button>
-            )}
-        </>
+        <button
+            className={`fixed bottom-50 right-5 z-50 p-1 text-2xl text-white rounded-full ${
+                visible ? "block" : "hidden"
+            }`}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+            ⬆ 
+        </button>
     );
 };
 
