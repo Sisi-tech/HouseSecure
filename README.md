@@ -16,7 +16,7 @@ Follow the steps below to set up the HomeSecure application on your local machin
 1. Clone the repository: ``` git clone https://github.com/Sisi-tech/HouseSecure.git```
 2. Navigate to the fronend: ```cd frontend```
 3. Install dependencies: ```npm install```
-4. Start the server: npm start
+4. Start the server: ```npm start```
 5. Install additional dependencies: ```npm install react-router-dom```
 ## Backend:
 1. Clone the repository: ```git clone https://github.com/Sisi-tech/HouseSecure.git```
