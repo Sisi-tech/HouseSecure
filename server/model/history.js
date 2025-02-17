@@ -17,7 +17,5 @@ const historySchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Connect the history with the user
 }, { timestamps: true });
 
-// Create a model for History
-const History = mongoose.model('History', historySchema);
 
-module.exports = History;
+module.exports = mongoose.model("History", historySchema);
