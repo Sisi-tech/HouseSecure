@@ -2,11 +2,6 @@ const mongoose = require("mongoose");
 
 const LocationSchema = new mongoose.Schema(
     {
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-            required: true, // Ensures each location is tied to a specific user
-        },
         address1: {
             type: String,
             required: [true, "Address line 1 is required"],
@@ -57,6 +52,11 @@ const LocationSchema = new mongoose.Schema(
         yearBuilt: {
             type: Number,
             required: [true, "Year built is required"],
+        },
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true, // Ensures each location is tied to a specific user
         },
     },
     { timestamps: true } // Automatically adds createdAt and updatedAt fields

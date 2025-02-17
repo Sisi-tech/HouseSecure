@@ -14,6 +14,8 @@ const notFoundMiddleware = require("./middleware/not_found");
 const errorHandleMiddleware = require("./middleware/error_handler");
 const userRouter = require("./routes/userRoutes");
 const historyRouter = require("./routes/historyRoutes");
+const locationRouter = require("./routes/locationRoutes");
+const applicantInfoRouter = require("./routes/applicantInfoRoutes");
 
 app.use(express.static("public"));
 app.use(
@@ -37,6 +39,8 @@ app.set("trust proxy", 1);
 
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/history", historyRouter);
+app.use("/api/v1/location", locationRouter);
+app.use("/api/v1/applicant-info", applicantInfoRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandleMiddleware);
