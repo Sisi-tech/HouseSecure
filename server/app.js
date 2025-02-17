@@ -12,10 +12,10 @@ const cookieParser = require("cookie-parser");
 // Middleware imports 
 const notFoundMiddleware = require("./middleware/not_found");
 const errorHandleMiddleware = require("./middleware/error_handler");
-const userRouter = require("./routes/user");
+const userRouter = require("./routes/userRoutes");
+const historyRouter = require("./routes/historyRoutes");
 
 app.use(express.static("public"));
-// cors
 app.use(
     cors({
         origin: "http://localhost:5173",
@@ -31,20 +31,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(mongoSanitize());
 // app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
-app.use(express.json());
+
 
 app.set("trust proxy", 1);
 
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/history", historyRouter);
 
 app.use(notFoundMiddleware);
-app.use((err, req, res, next) => {
-    console.error("Error stack:", err.stack);
-    res
-        .status(err.status || 500)
-        .json({ error: err.message || "Internal Server Error" });
-});
-
 app.use(errorHandleMiddleware);
 
 
