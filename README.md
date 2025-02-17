@@ -33,7 +33,7 @@ To deploy the application, follow these steps:
 
 ## 🔨 Built with
 * Frontend: React, TailwindCSS
-* Backend: Node.js, Express, MongoDB, Mongoose, Nodemiler
+* Backend: Node.js, Express, MongoDB, Mongoose, Nodemailer
 
 ## 📜 Author
 * Frontend: Sisi Wang
