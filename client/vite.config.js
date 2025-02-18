@@ -9,6 +9,19 @@ dotenv.config();
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss(),
+    tailwindcss({
+      config: {
+        content: [
+          "./src/**/*.{html,js,jsx,ts,tsx}", // Paths to your files
+        ],
+        safelist: [
+          'bg-gray-200', 
+          'text-center',
+          'flex',
+          'justify-center',
+          'items-center',
+        ],
+      }
+    }),
   ],
 })

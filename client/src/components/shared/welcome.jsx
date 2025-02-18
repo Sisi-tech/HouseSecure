@@ -1,4 +1,4 @@
-import React from React;
+import React from 'react';
 
 const WelcomeMessage = () => {
     return (
@@ -8,7 +8,7 @@ const WelcomeMessage = () => {
                 <p>Protect Your Home, Keep Your Family Happy.</p>
             </div>
         </div>
-    )
+    );
 };
 
 export default WelcomeMessage;

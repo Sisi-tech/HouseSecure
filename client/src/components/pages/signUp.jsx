@@ -5,6 +5,8 @@ import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
 import BackToTop from '../shared/backToTop';
 import Footer from '../shared/footer';
 
+const URL = `${import.meta.env.VITE_API_URL}/api/v1/user/register`;
+
 const SignUp = () => {
     const navigate = useNavigate();
     const [firstName, setFirstName] = useState("");
@@ -18,12 +20,10 @@ const SignUp = () => {
     const [error, setError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
 
-    const URL = `${import.meta.env.VITE_API_URL}/api/v1/user/register`;
-
     const validateForm = () => {
         if (!firstName) {
             setError("First name is required.");
-            return False;
+            return false;
         }
         if (!lastName) {
             setError("Last name is required.");
@@ -47,29 +47,32 @@ const SignUp = () => {
         }
         setError("");
         return true;
-        const requestBody = {
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password,
-            phone: phone,
-        };
-        registerUser(URL, requestBody);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
-        setSuccessMessage("Account has been successfully created!");
-        setTimeout(() => setSuccessMessage(""), 30000);
-        console.log("Form submitted successfully!");
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
-        setPhone("");
-    }
+        const requestBody = {
+            firstName,
+            lastName,
+            email,
+            password,
+            phone,
+        };
+        try {
+            await registerUser(URL, requestBody);
+            setSuccessMessage("Account has been successfully created!");
+            setTimeout(() => setSuccessMessage(""), 3000); 
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
+            setPhone("");
+        } catch (err) {
+            console.error("Error during sign-up:", err);
+        }
+    };
 
     const handleClose = useCallback((data) => {
         if (data?.user) {
@@ -79,7 +82,26 @@ const SignUp = () => {
         }
     }, [navigate]);
 
-    async function registerUser(URL, requestBody) {
+    const postData = async (url, data) => {
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+            if (!response) {
+                throw new Error("Failed to fetch data");
+            }
+            return await response.json();
+        } catch (error) {
+            console.error("Error in postData:", error);
+            throw error;
+        }
+    }
+
+    const registerUser = async (URL, requestBody) => {
         try {
             const myData = await postData(URL, requestBody);
             if (myData?.user) {
@@ -88,8 +110,9 @@ const SignUp = () => {
             }
         } catch (error) {
             console.error("Sign up failed", error);
+            throw new Error("Sign up failed");
         }
-    }
+    };
 
     return (
         <div className='min-h-screen flex flex-col'>
@@ -149,7 +172,7 @@ const SignUp = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                                 className='w-full px-4 py-2 border border-gray-800 text-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                                 required
-                                pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/"
+                                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                             />
                         </div>
                         <div className='flex flex-col space-y-1 pl-2'>
@@ -235,7 +258,7 @@ const SignUp = () => {
             <BackToTop />
             <Footer />
         </div>
-    )
+    );
 };
 
 export default SignUp;
