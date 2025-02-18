@@ -42,7 +42,7 @@ To deploy the application, follow these steps:
   3. Deploy the frontend and backend to the cloud.
 
 
-## 🔨 Built with
+##  🧰 Built with
 - **Frontend:** 
    - React
    - TailwindCSS
