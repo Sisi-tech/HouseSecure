@@ -1,7 +1,4 @@
 
-![React](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg)
-![Node.js](https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo_2015.svg)
-
 # ☂ HomeSecure  
 
 HomeSecure is a user-friendly web application that allows users to log in, generate insurance quotes, and edit their quotes within the system for a seamless and personalized experience. 🚀
@@ -45,17 +42,17 @@ To deploy the application, follow these steps:
   3. Deploy the frontend and backend to the cloud.
 
 
-
 ## 🔨 Built with
 - **Frontend:** 
-   - <i class="fab fa-react"></i> React
-   - <i class="fab fa-css3-alt"></i> TailwindCSS
+   - ![React](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg) React
+   - ![TailwindCSS](https://upload.wikimedia.org/wikipedia/commons/9/96/Tailwind_CSS_Logo.svg) TailwindCSS
 - **Backend:**
-   - <i class="fab fa-node"></i> Node.js
-   - <i class="fas fa-cogs"></i> Express
-   - <i class="fas fa-database"></i> MongoDB
-   - <i class="fab fa-node-js"></i> Mongoose
-   - <i class="fas fa-envelope"></i> Nodemailer
+   - ![Node.js](https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo_2015.svg) Node.js
+   - ![Express](https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png) Express
+   - ![MongoDB](https://upload.wikimedia.org/wikipedia/commons/4/46/MongoDB_Logo.svg) MongoDB
+   - ![Mongoose](https://upload.wikimedia.org/wikipedia/commons/e/e6/Mongoose_logo.svg) Mongoose
+   - ![Nodemailer](https://upload.wikimedia.org/wikipedia/commons/0/09/Nodemailer_logo.svg) Nodemailer
+
 
 ## 📜 Author
 * Frontend: Sisi Wang
