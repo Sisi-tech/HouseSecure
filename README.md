@@ -3,7 +3,7 @@
 
 HomeSecure is a user-friendly web application that allows users to log in, generate insurance quotes, and edit their quotes within the system for a seamless and personalized experience. 🚀
 
-## 🔥 Check Out the Application Here! 🚀💨👇
+## 🔥 Check Out the Application Here! 🚀👇
 <div>
    <a href="URL_TO_YOUR_VIDEO" alt="video">
       <button style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; cursor: pointer;">

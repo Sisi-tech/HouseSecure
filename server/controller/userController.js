@@ -10,22 +10,23 @@ const { sendEmail } = require("../utils/emails");
 
 const register = async (req, res) => {
     try {
-        const user = User.create({ ...req.body });
+        const { firstName, lastName, email, password, phone } = req.body;
+        const user = new User({
+            firstName,
+            lastName,
+            email,
+            password,
+            phone,
+        });
+        await user.save();
         const token = user.createJWT();
-        console.log("created user:", user);
         res.status(StatusCodes.CREATED).json({
             user: { id: user._id, name: `${user.firstName} ${user.lastName}`},
             token,
         });
     } catch (error) {
-        if (error.code === 11000) {
-            res.status(StatusCodes.BAD_REQUEST).json({ msg: "Email already exist" });
-        } else {
-            console.error("Registration Error:", error);
-            res 
-                .status(StatusCodes.INTERNAL_SERVER_ERROR)
-                .json({ msg: "Registration failed" });
-        }
+        console.error(error);
+        res.status(500).json({ message: "Error registering user"});
     }
 };
 
@@ -56,7 +57,7 @@ const login = async (req, res, next) => {
             sameSite: "strict"
         });
         res.status(StatusCodes.OK).json({
-            user: { id: user._id, name: `{$user.firstName} ${user.lastName}`},
+            user: { id: user._id, name: `${user.firstName} ${user.lastName}`},
             token,
         });
      } catch (error) {

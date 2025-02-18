@@ -62,7 +62,7 @@ export default function Menu({ isAuthenticated, handleLogout }) {
                     {isAuthenticated ? (
                         <button
                             onClick={handleLogout}
-                            className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700 transition duration-300"
+                            className="text-lg px-4 py-1.5 rounded-md hover:shadow-md"
                         >
                             Logout
                         </button>

@@ -7,6 +7,7 @@ import Footer from '../shared/footer';
 
 const URL = `${import.meta.env.VITE_API_URL}/api/v1/user/login`;
 
+
 const isEmail = (email) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
 const isPassword = (password) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password);
 
@@ -54,8 +55,7 @@ const Login = () => {
 
         setFormValid(null);
         try {
-            const response = await postData(URL, { email, password });
-            if (response) handleClose(response);
+            await loginUser(URL, { email, password });
         } catch (error) {
             setFormValid(error?.message || "Invalid email or password.");
         }
@@ -67,7 +67,11 @@ const Login = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
         });
-        if (!res.ok) throw new Error("Login failed");
+        if (!res.ok) {
+            const errorMessage = await res.text();
+            console.log("Error message from server:", errorMessage);
+            throw new Error(errorMessage);
+        }
         return res.json();
     }
 

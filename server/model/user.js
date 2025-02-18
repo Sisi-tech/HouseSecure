@@ -41,11 +41,29 @@ const UserSchema = new mongoose.Schema(
                     "Password must include at least one uppercase letter, one lowercase letter, and one number",
             },
         },
-        passwordResetToken: String,
-        passwordResetExpires: Date,
+        confirmPassword: {
+            type: String,
+            validate: {
+                validator: function (value) {
+                    return value === this.password;
+                },
+                message: "Passwords do not match.",
+            },
+        },
+        phone: {
+            type: String,
+            required: [true, "Please provide a valid phone number."],
+            validate: {
+                validator: function (value) {
+                    return /^\d{10}$/.test(value); // Ensures 10-digit phone number
+                },
+                message: "Please provide a valid 10-digit phone number.",
+            },
+        },
     },
-    {timestamps: true}
+    { timestamps: true }
 );
+
 
 UserSchema.pre("save", async function (next) {
     this.firstName = this.firstName.trim();
@@ -53,6 +71,7 @@ UserSchema.pre("save", async function (next) {
     this.email = this.email.toLowerCase().trim();
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
+    this.confirmPassword = undefined;
     next();
 });
 
