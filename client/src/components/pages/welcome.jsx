@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import BackToTop from "../shared/backToTop";
 import Footer from "../shared/footer";
 import Menu from "../shared/menu";
-import backgroundImage from "../../assets/house04.png";
+import backgroundImage from "../../assets/house05.png";
 
 const Welcome = () => {
     const [user, setUser] = useState(null);
@@ -29,12 +29,12 @@ const Welcome = () => {
                 className='flex justify-center w-full min-h-screen bg-no-repeat bg-contain bg-right'
                 style={{ backgroundImage: `url(${backgroundImage})` }}
             >
-                <div className="w-4/5 md:w-3/5 h-auto flex flex-col gap-2 p-6 rounded-lg shadow-lg">
+                <div className="w-4/5 md:w-3/5 h-full flex flex-col gap-2 pt-0 pl-6 pr-6 rounded-lg">
                     <div className="flex justify-center">
                         <img
                             src="https://media.giphy.com/media/Wj7lNjMNDxSmc/giphy.gif"
                             alt="Excited Dog GIF"
-                            className="w-40 h-auto"
+                            className="w-40 h-auto rounded-[100%]"
                         />
                     </div>
                     <div className="text-center text-md">
