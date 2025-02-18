@@ -44,15 +44,15 @@ const About = () => {
                     </div>
 
                     <section className="flex-1 leading-loose space-y-4 text-center lg:text-left">
-                        <h1 className="text-xl lg:text-2xl font-bold pb-1 lg:pb-4">About Us</h1>
-                        <h2 className="text-lg lg:text-xl font-semibold">Protecting Homes, Securing Futures</h2>
+                        <h1 className="text-lg font-bold pb-1 lg:pb-4">About Us</h1>
+                        <h2 className="text-md font-semibold">Protecting Homes, Securing Futures</h2>
                         <p className="leading-relaxed">Founded in 2025, HomeSecure was built with a simple yet powerful mission: <span className="font-semibold">to provide homeowners with reliable, affordable, and comprehensive insurance coverage.</span> We understand that a home is more than just a place to live—it's a lifetime investment, a space filled with cherished memories, and a foundation for the future.</p>
                         <p className="leading-relaxed">With a deep commitment to security, trust, and exceptional customer service, we offer policies tailored to meet the unique needs of homeowners. Whether you're purchasing your first home, safeguarding a family property, or protecting your dream house, <span className="font-semibold">HomeSecure</span> is here to ensure that you're covered in any situation.</p>
                     </section>
                 </div>
                 <div className="flex flex-col gap-8">
                     <section className="flex flex-col gap-4">
-                        <h2 className="text-lg lg:text-xl font-semibold">Why Choose HomeSecure?</h2>
+                        <h2 className="text-md font-semibold">Why Choose HomeSecure?</h2>
                         <ul className="list-disc leading-loose pl-5 space-y-2">
                             <li>🏡 <span className="font-semibold">Comprehensive Coverage</span> – From natural disasters to unexpected damages, we’ve got you covered.</li>
                             <li>💰 <span className="font-semibold">Affordable Plans</span> – Flexible pricing options to fit any budget.</li>
@@ -61,7 +61,7 @@ const About = () => {
                         </ul>
                     </section>
                     <section className="flex flex-col gap-4">
-                        <h2 className="text-lg lg:text-xl font-semibold">Our Promise</h2>
+                        <h2 className="text-md font-semibold">Our Promise</h2>
                         <p className="leading-relaxed">At HomeSecure, we believe in protecting what matters most. Our team is committed to making home insurance simple, stress-free, and effective, so you can focus on what truly matters—building a safe and happy home.</p>
                         <p className="leading-relaxed">Your home deserves the best protection. Let’s secure it together.</p>
                         <p className="font-semibold hover:text-blue-800">
