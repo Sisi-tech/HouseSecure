@@ -33,7 +33,7 @@ Follow the steps below to set up the HomeSecure application on your local machin
 2. Navigate to the backend: ```cd backend```
 3. Install dependencies: ```npm install```
 4. Start the server: ```npm start```
-5. Install additional dependencies: ```npm install cors express mongoose nodemon jsonwebtoken http-status-codes nodemailer @sendgrid/mail dotenv morgan helmet express-mongo-sanitize cookie-parser```
+5. Install additional dependencies: ```npm install cors express mongoose nodemon jsonwebtoken http-status-codes nodemailer @sendgrid/mail dotenv morgan helmet express-mongo-sanitize cookie-parser serve-favicon```
    
 ## 🚀 Deployment
 To deploy the application, follow these steps:
