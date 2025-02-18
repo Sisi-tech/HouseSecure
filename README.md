@@ -1,4 +1,7 @@
 
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
 # ☂ HomeSecure  
 
 HomeSecure is a user-friendly web application that allows users to log in, generate insurance quotes, and edit their quotes within the system for a seamless and personalized experience. 🚀
@@ -40,6 +43,8 @@ To deploy the application, follow these steps:
   1. Push your code to your cloud service provider (Heroku, AWS, etc.).
   2. Configure environment variables such as database URL and API keys.
   3. Deploy the frontend and backend to the cloud.
+
+
 
 ## 🔨 Built with
 - **Frontend:** 
