@@ -44,14 +44,15 @@ To deploy the application, follow these steps:
 
 ## 🔨 Built with
 - **Frontend:** 
-   - ![React](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg) React
-   - ![TailwindCSS](https://upload.wikimedia.org/wikipedia/commons/9/96/Tailwind_CSS_Logo.svg) TailwindCSS
+   - <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" width="30" /> React
+   - <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Tailwind_CSS_Logo.svg" width="30" /> TailwindCSS
 - **Backend:**
-   - ![Node.js](https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo_2015.svg) Node.js
-   - ![Express](https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png) Express
-   - ![MongoDB](https://upload.wikimedia.org/wikipedia/commons/4/46/MongoDB_Logo.svg) MongoDB
-   - ![Mongoose](https://upload.wikimedia.org/wikipedia/commons/e/e6/Mongoose_logo.svg) Mongoose
-   - ![Nodemailer](https://upload.wikimedia.org/wikipedia/commons/0/09/Nodemailer_logo.svg) Nodemailer
+   - <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo_2015.svg" width="30" /> Node.js
+   - <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" width="30" /> Express
+   - <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/MongoDB_Logo.svg" width="30" /> MongoDB
+   - <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Mongoose_logo.svg" width="30" /> Mongoose
+   - <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Nodemailer_logo.svg" width="30" /> Nodemailer
+
 
 
 ## 📜 Author
