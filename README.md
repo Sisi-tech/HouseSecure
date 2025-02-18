@@ -1,7 +1,7 @@
 
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
+![React](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg)
+![Node.js](https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo_2015.svg)
+
 # ☂ HomeSecure  
 
 HomeSecure is a user-friendly web application that allows users to log in, generate insurance quotes, and edit their quotes within the system for a seamless and personalized experience. 🚀
