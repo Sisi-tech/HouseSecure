@@ -87,17 +87,17 @@ const UnderwritingQuestion = () => {
     return (
         <div className="w-full h-full flex flex-col">
             <CreateQuote />
-            <div className="w-full mx-auto max-w-screen-lg text-lg space-y-5 p-4 bg-gray-100 text-black">
-                <h3 className="text-xl font-semibold text-center pt-4">Underwriting Questions</h3>
+            <div className="w-full max-w-screen-lg mx-auto text-md gap-4 pl-4 pr-4 text-black">
+                <h3 className="text-md font-semibold text-center">Underwriting Questions</h3>
                 <div className="w-full flex justify-end">
                     <button
                         onClick={selectAllNo}
-                        className="bg-gray-500 text-white px-4 py-1.5 rounded-md mt-4"
+                        className="bg-gray-500 text-white text-sm px-2 py-1 rounded-md mb-4"
                     >
                         Select All as No
                     </button>
                 </div>
-                <div className="text-lg">
+                <div className="w-full max-w-screen-lg mx-auto text-md bg-gray-100 p-4">
                     {questions.map((question, index) => (
                         <div key={index} className="flex justify-between gap-2 md:gap-4 mb-4 p-2 border-b">
                             <p className="flex items-center">{unansweredQuestions.includes(question) && (
@@ -134,13 +134,13 @@ const UnderwritingQuestion = () => {
 
             <div className="w-full flex justify-center gap-4 p-6 pt-16 pb-10 text-white">
                 <Link to="/quote/interest">
-                    <button className="bg-sky-700 w-20 p-1 rounded-lg shadow-lg text-md">
+                    <button className="bg-sky-700 w-20 p-1 rounded-lg shadow-lg text-sm">
                         Previous
                     </button>
                 </Link>
                 <Link to="/quote/rate">
                     <button
-                        className="bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-md"
+                        className="bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm"
                         onClick={handleSubmit}
                         disabled={!isFormValid}
                     >

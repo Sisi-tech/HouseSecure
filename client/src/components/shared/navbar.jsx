@@ -25,7 +25,7 @@ const Navbar = ({ isAuthenticated, showLoginSignUp }) => {
             <div className='flex items-center text-sky-700 font-serif'>
                 <Link 
                     to="/" 
-                    className='font-bold text-xl  md:text-2xl pl-4' 
+                    className='font-bold text-xl pl-4' 
                     style={{ textShadow: "3px 3px 4px rgba(0, 0, 0, 0.5)" }}
                 >
                     HomeSecure
@@ -47,7 +47,7 @@ const Navbar = ({ isAuthenticated, showLoginSignUp }) => {
                         </Link>
                     ) : showLoginSignUp ? (
                         <Link to="/login" className='rounded-full hover:text-blue-500 transition duration-300'>
-                            <FaUserCircle className="text-sky-100 w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12" />
+                            <FaUserCircle className="text-sky-100 w-8 h-8 md:w-10 md:h-10 " />
                         </Link>
                     ) : null}
                 </div>

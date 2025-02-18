@@ -48,7 +48,7 @@ const createApplicantInfo = async (req, res) => {
         const applicantInfo = new ApplicantInfo(applicantInfoData);
         await applicantInfo.save();
 
-        res.status(201).json(applicantInfo);
+        res.status(201).json({ _id: applicantInfo._id, ...applicantInfoData });
     } catch (err) {
         res.status(400).json({ message: "Error saving applicantInfo", error: err.message });
     }

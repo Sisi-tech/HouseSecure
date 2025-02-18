@@ -3,7 +3,7 @@ const Coverage = require("../model/coverage");
 const getCoverage = async (req, res) => {
     try {
         const { userId } = req.params;
-        const coverage = await Coverage.findOne({ userId });
+        const coverage = await Coverage.findOne(userId);
 
         if (!coverage) {
             return res.status(404).json({ message: "Coverage not found for this user" });
@@ -20,8 +20,8 @@ const upsertCoverage = async (req, res) => {
         const coverageData = req.body;
 
         const updatedCoverage = await Coverage.findOneAndUpdate(
-            { userId },
-            { ...coverageData, userId },
+            userId,
+            { ...coverageData },
             { new: true, upsert: true, runValidators: true }
         );
         res.status(200).json(updatedCoverage);
@@ -33,7 +33,7 @@ const upsertCoverage = async (req, res) => {
 const deleteCoverage = async (req, res) => {
     try {
         const { userId } = req.params;
-        const deletedCoverage = await Coverage.findOneAndDelete({ userId });
+        const deletedCoverage = await Coverage.findOneAndDelete(userId);
         if (!deletedCoverage) {
             return res.status(404).json({ message: 'Coverage not found for this user'});
         }

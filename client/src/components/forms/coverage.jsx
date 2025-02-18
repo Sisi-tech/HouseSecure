@@ -27,14 +27,14 @@ const Coverage = () => {
             <CreateQuote />
             <BackToTop />
             <div className="w-full pb-8">
-                <form className="w-full mx-auto max-w-screen-lg text-lg space-y-5 pt-4 md:pt-10 p-4 bg-gray-100 text-black">
-
+                <h3 className="text-md font-semibold text-center">Coverage</h3>
+                <form className="w-full mx-auto max-w-screen-lg text-md space-y-5 p-4 text-black">
                     {/* first row */}
-                    <div className="w-full flex flex-col md:flex-row justify-center gap-6">
+                    <div className="w-full mx-auto max-w-screen-lg grid grid-cols-1 md:grid-cols-2 justify-center gap-6">
                         {/* coverages */}
-                        <div className="flex flex-col bg-gray-200 gap-4 p-4">
-                            <h3 className="text-lg font-semibold">Coverages</h3>
-                            <div className="w-full flex flex-col p-4 gap-4">
+                        <div className="flex flex-col bg-gray-100 gap-4 p-4">
+                            <h3 className="text-md font-semibold">Coverages</h3>
+                            <div className="flex flex-col p-4 gap-4">
                                 <div className="flex justify-center items-center">
                                     <label htmlFor="coverageA" className="w-full">Coverage A - Dwelling:</label>
                                     <input
@@ -105,8 +105,8 @@ const Coverage = () => {
 
 
                         {/* deductibles */}
-                        <div className="flex flex-col bg-gray-200 gap-4 p-4">
-                            <h3 className="text-lg font-semibold">Deductible</h3>
+                        <div className="flex flex-col bg-gray-100 gap-4 p-4">
+                            <h3 className="text-md font-semibold">Deductible</h3>
 
                             <div className="w-full flex flex-col p-4 gap-4">
                                 <div className="flex justify-center items-center">
@@ -176,8 +176,8 @@ const Coverage = () => {
                     </div>
 
                     {/* second row - optional coverages */}
-                    <div className="w-full flex flex-col justify-center bg-gray-200 gap-4 p-4">
-                        <h3 className="text-lg font-semibold">Additional Coverages</h3>
+                    <div className="w-full flex flex-col justify-center bg-gray-100 gap-4 p-4">
+                        <h3 className="text-md font-semibold">Additional Coverages</h3>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
                             <div className="flex justify-center items-center">
@@ -250,8 +250,8 @@ const Coverage = () => {
                     </div>
 
                     {/* alarms */}
-                    <div className="w-full flex flex-col justify-center bg-gray-200 gap-4 p-4">
-                        <h3 className="text-lg font-semibold">Protection devices</h3>
+                    <div className="w-full flex flex-col justify-center bg-gray-100 gap-4 p-4">
+                        <h3 className="text-md font-semibold">Protection devices</h3>
                         <div className="w-full flex flex-col md:flex-row justify-between p-4 gap-4">
                             <div className="flex flex-col justify-center items-center space-y-2">
                                 <label htmlFor="burglarAlarm" className="w-full">Burglar Alarm:</label>
@@ -296,12 +296,12 @@ const Coverage = () => {
                 </form >
                 <div className="w-full flex justify-center gap-4 p-6  pt-16 text-white">
                     <Link to="/quote/history">
-                        <button className="bg-sky-700 w-20 p-1 rounded-lg shadow-lg text-md">
+                        <button className="bg-sky-700 w-20 p-1 rounded-lg shadow-lg text-sm">
                             Previous
                         </button>
                     </Link>
                     <Link to="/quote/interest">
-                        <button className="bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-md">
+                        <button className="bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm">
                             Next
                         </button>
                     </Link>

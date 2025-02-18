@@ -25,11 +25,10 @@ const Interest = () => {
     return (
         <div className="w-full h-full flex flex-col">
             <CreateQuote />
-            <div className="w-full mx-auto max-w-screen-lg text-lg space-y-5 pt-4 md:pt-10 p-4 bg-gray-100 text-black">
-
+            <div className="w-full mx-auto max-w-screen-lg text-md pl-4 pr-4 text-black">
+                <h3 className="text-md font-semibold text-center pb-4">Interest</h3>
                 {/* display list of interests has been added */}
-                <div className="flex flex-col justify-center items-center space-y-2">
-                    <h3 className="text-lg font-semibold">Interest</h3>
+                <div className="flex flex-col justify-center items-center gap-6">
                     {interests.length > 0 ? (
                         <table className="border-collapse border border-gray-400">
                             <thead>
@@ -60,7 +59,7 @@ const Interest = () => {
                 </div>
 
                 {/* add interest form */}
-                <form className="w-full mx-auto max-w-screen-lg text-lg space-y-5 pt-4 md:pt-10 p-4 bg-gray-100 text-black">
+                <form className="w-full mx-auto max-w-screen-lg text-md gap-6 p-4 bg-gray-100 text-black">
                     {/* interest type filed */}
                     <div className="flex flex-col justify-center items-center space-y-2">
                         <label htmlFor="interestType" className="w-full">Interest type:</label>
@@ -205,7 +204,7 @@ const Interest = () => {
                     </div>
                     <div className="w-full text-center pt-5 text-white">
                         <button
-                            className="bg-sky-700 w-30 p-1 rounded-lg shadow-lg text-md"
+                            className="bg-sky-700 w-26 p-1 rounded-lg shadow-lg text-sm"
                             onSubmit={handleAddInterest}
                         >
                             Add Interest
@@ -216,12 +215,12 @@ const Interest = () => {
             {/* button */}
             <div className="w-full flex justify-center gap-4 p-6 pt-14 pb-14 text-white">
                 <Link to="/quote/coverage">
-                    <button className="bg-sky-700 w-20 p-1 rounded-lg shadow-lg text-md">
+                    <button className="bg-sky-700 w-20 p-1 rounded-lg shadow-lg text-sm">
                         Previous
                     </button>
                 </Link>
                 <Link to="/quote/question">
-                    <button className="bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-md">
+                    <button className="bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm">
                         Next
                     </button>
                 </Link>

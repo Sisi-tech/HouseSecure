@@ -8,27 +8,27 @@ const Footer = () => {
                 <ul className="flex space-x-6">
                     <li className="hover:scale-120 hover:text-blue-800">
                         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                            <FaFacebook size={24} />
+                            <FaFacebook size={22} />
                         </a>
                     </li>
                     <li className="hover:scale-120 hover:text-blue-800">
                         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                            <FaInstagram size={24} />
+                            <FaInstagram size={22} />
                         </a>
                     </li>
                     <li className="hover:scale-120 hover:text-blue-800">
                         <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                            <FaTwitter size={24} />
+                            <FaTwitter size={22} />
                         </a>
                     </li>
                     <li className="hover:scale-120 hover:text-blue-800">
                         <a href="mailto:info@homesecure.com" target="_blank" rel="noopener noreferrer">
-                            <FaEnvelope size={24} />
+                            <FaEnvelope size={22} />
                         </a>
                     </li>
                     <li className="hover:scale-120 hover:text-blue-800">
                         <a href="tel:+18888888888">
-                            <FaPhoneAlt size={24} />
+                            <FaPhoneAlt size={22} />
                         </a>
                     </li>
                 </ul>

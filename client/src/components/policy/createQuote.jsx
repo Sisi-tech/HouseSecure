@@ -7,7 +7,7 @@ const CreateQuote = () => {
     return (
         <div className="w-full">
             <Menu />
-            <div className="left-0 w-full md:w-screen mt-8 mb-2 p-4 text-lg font-semibold">
+            <div className="left-0 w-full md:w-screen mb-2 p-4 text-md font-semibold">
                 <ul className="flex flex-col lg:flex-row justify-center gap-3.5 text-black">
                     {[
                         { path: "/quote/applicant-info", label: "Applicant Info" },

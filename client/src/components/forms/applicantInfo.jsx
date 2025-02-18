@@ -25,8 +25,9 @@ const ApplicantInfo = () => {
     return (
         <div className="w-full min-h-screen flex flex-col">
             <CreateQuote />
-            <div className="flex-1 flex justify-center items-center">
-                <form className="flex flex-col gap-4 p-12 pb-10 pt-6 max-w-screen-lg text-lg md:pt-10 lg:p-10 text-black bg-gray-100 m-4" >
+            <div className="w-full pl-4 pr-4 flex flex-col justify-center items-center">
+                <h3 className="text-md font-semibold text-center pb-4">Applicant Info</h3>
+                <form className="w-full md:max-w-screen-lg flex flex-col gap-4 p-4 text-md text-black bg-gray-100" >
                     <div className="flex flex-col md:flex-row md:items-center gap-4">
                         <label htmlFor="date" className="w-auto md:w-160 lg:w-240 text-start md:text-right">Proposed Effective Date:</label>
                         <input
@@ -159,7 +160,7 @@ const ApplicantInfo = () => {
             <div className="w-full flex justify-center gap-4 p-6 pt-14 pb-14 text-white">
                     <Link to="/quote/location">
                         <button
-                            className={`bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-md ${!isFormValid() ? 'opacity-50 cursor-not-allowed' : ""}`}
+                            className={`bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm ${!isFormValid() ? 'opacity-50 cursor-not-allowed' : ""}`}
                             disabled={!isFormValid()}
                         >
                             Next

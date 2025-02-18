@@ -31,9 +31,6 @@ const Profile = ({ firstName, lastName }) => {
                     <FaUserCircle className="text-sky-100 w-12 h-12 md:w-14 md:h-14" />
                 )}
             </label>
-            {/* <Link to="/profile" className="text-md">
-                {firstName} {lastName}
-            </Link> */}
         </div>
     )
 };
