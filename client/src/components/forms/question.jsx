@@ -87,7 +87,7 @@ const UnderwritingQuestion = () => {
     return (
         <div className="w-full h-full flex flex-col">
             <CreateQuote />
-            <div className="w-full max-w-screen-lg mx-auto text-md gap-4 pl-4 pr-4 text-black">
+            <div className="w-full max-w-screen-lg mx-auto text-md gap-4 pl-4 pr-4">
                 <h3 className="text-md font-semibold text-center">Underwriting Questions</h3>
                 <div className="w-full flex justify-end">
                     <button
@@ -97,7 +97,7 @@ const UnderwritingQuestion = () => {
                         Select All as No
                     </button>
                 </div>
-                <div className="w-full max-w-screen-lg mx-auto text-md bg-gray-100 p-4">
+                <div className="w-full max-w-screen-lg mx-auto text-md bg-gray-100 text-black p-4">
                     {questions.map((question, index) => (
                         <div key={index} className="flex justify-between gap-2 md:gap-4 mb-4 p-2 border-b">
                             <p className="flex items-center">{unansweredQuestions.includes(question) && (

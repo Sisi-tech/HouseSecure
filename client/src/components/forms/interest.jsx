@@ -25,12 +25,12 @@ const Interest = () => {
     return (
         <div className="w-full h-full flex flex-col">
             <CreateQuote />
-            <div className="w-full mx-auto max-w-screen-lg text-md pl-4 pr-4 text-black">
+            <div className="w-full mx-auto max-w-screen-lg text-md pl-4 pr-4">
                 <h3 className="text-md font-semibold text-center pb-4">Interest</h3>
                 {/* display list of interests has been added */}
                 <div className="flex flex-col justify-center items-center gap-6">
                     {interests.length > 0 ? (
-                        <table className="border-collapse border border-gray-400">
+                        <table className="border-collapse border border-gray-400 text-black">
                             <thead>
                                 <tr className="bg-gray-200">
                                     <th className="border border-gray-400 p-2">Interest Type</th>
