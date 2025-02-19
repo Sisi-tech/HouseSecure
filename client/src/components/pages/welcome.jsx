@@ -16,7 +16,7 @@ const Welcome = () => {
     };
 
     useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem("user"));
+        const storedUser = JSON.parse(localStorage.getItem("user") || "null");
         if (storedUser) {
             setUser(storedUser);
         }
@@ -26,10 +26,14 @@ const Welcome = () => {
         <div className='w-full min-h-screen flex flex-col justify-between'>
             <Menu isAuthenticated={!!user} handleLogout={handleLogout} />
             <div
-                className='flex justify-center w-full min-h-screen bg-no-repeat bg-contain bg-right'
-                style={{ backgroundImage: `url(${backgroundImage})` }}
+                className='flex justify-center w-full min-h-screen bg-no-repeat'
+                style={{ 
+                    backgroundImage: `url(${backgroundImage})`,
+                    backgroundSize: "800px",
+                    backgroundPosition: "right bottom"
+                }}
             >
-                <div className="w-4/5 md:w-3/5 h-full flex flex-col gap-2 pt-0 pl-6 pr-6 rounded-lg">
+                <div className="w-4/5 md:w-3/5 h-full flex flex-col gap-2 pt-1 pl-6 pr-6 rounded-lg">
                     <div className="flex justify-center">
                         <img
                             src="https://media.giphy.com/media/Wj7lNjMNDxSmc/giphy.gif"
@@ -37,8 +41,10 @@ const Welcome = () => {
                             className="w-40 h-auto rounded-[100%]"
                         />
                     </div>
-                    <div className="text-center text-md">
-                        <h1 className="font-semibold pb-2">Welcome to <span className="semibold text-blue-600">HomeSecure</span> {user ? `${user.firstName} ${user.lastName}` : ""}!</h1>
+                    <div 
+                        className="text-center text-md"
+                    >
+                        <h1 className="font-semibold pb-2">Welcome to <span className="font-semibold text-blue-600">HomeSecure</span> {user ? `${user?.firstName || ""} ${user?.lastName || ""}` : ""}!</h1>
                         <p>
                             We're glad to have you here. Let's work together to make our homes protected, safe, and full of happiness.
                         </p>
