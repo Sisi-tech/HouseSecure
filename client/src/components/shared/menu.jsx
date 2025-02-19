@@ -36,23 +36,23 @@ export default function Menu({ isAuthenticated, handleLogout }) {
             <nav className={`lg:flex lg:items-center lg:justify-between ${menuOpen ? "block" : "hidden"} w-full ${showDropdown ? "dropdown-open" : ""}`}>
                 <ul className="flex flex-col lg:flex-row font-semibold text-md space-y-4 lg:space-y-0 lg:space-x-6 py-2">
                     <li className="flex items-center gap-2 p-4 hover:scale-105">
-                        <FaHome size={20} />
+                        <FaHome size={18} />
                         <Link to="/quote/applicant-info" onClick={() => setMenuOpen(false)}>Create Quote</Link>
                     </li>
                     <li className="flex items-center gap-2 p-4 hover:scale-105">
-                        <FaRegEye size={20} />
+                        <FaRegEye size={18} />
                         <Link to="/view-coverages" onClick={() => setMenuOpen(false)}>View Coverages</Link>
                     </li>
                     <li className="flex items-center gap-2 p-4 hover:scale-105">
-                        <FaPen size={20} />
+                        <FaPen size={18} />
                         <Link to="/change-coverages" onClick={() => setMenuOpen(false)}>Change Coverages</Link>
                     </li>
                     <li className="flex items-center gap-2 p-4 hover:scale-105">
-                        <FaFileAlt size={20} />
+                        <FaFileAlt size={18} />
                         <Link to="/policy-documents" onClick={() => setMenuOpen(false)}>Policy Documents</Link>
                     </li>
                     <li className="flex items-center gap-2 p-4 hover:scale-105">
-                        <FaCreditCard size={20} />
+                        <FaCreditCard size={18} />
                         <Link to="/billing-info" onClick={() => setMenuOpen(false)}>Billing Info</Link>
                     </li>
                 </ul>
