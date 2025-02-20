@@ -49,11 +49,10 @@ const Location = () => {
     const isFormValid = () => {
         return (
             formData.address1 &&
-            formData.address2 &&
             formData.zipCode &&
             formData.city &&
             formData.state &&
-            formData.distanceToCostal && // Corrected this condition
+            formData.distanceToCostal &&
             formData.rental &&
             formData.numOfFamily &&
             formData.townhouse &&
@@ -95,8 +94,6 @@ const Location = () => {
                                     className="p-1 pl-2 border rounded-sm w-full"
                                     value={formData.address2}
                                     onChange={handleChange}
-                                    required
-                                    placeholder="Required"
                                 />
                             </div>
                         </div>
@@ -189,6 +186,7 @@ const Location = () => {
                                     onChange={handleChange}
                                 >
                                     <option value="" disabled hidden></option>
+                                    <option value="no-rental">None</option>
                                     <option value="annual">Annual</option>
                                     <option value="three">Less than 3 months</option>
                                     <option value="six">Less than 6 months</option>

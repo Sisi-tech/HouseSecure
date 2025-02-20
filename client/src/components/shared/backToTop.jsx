@@ -25,7 +25,7 @@ const BackToTop = () => {
             }`}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
-            <FontAwesomeIcon icon={faAngleDoubleUp} size="md"/>
+            <FontAwesomeIcon icon={faAngleDoubleUp} size="lg"/>
         </button>
     );
 };

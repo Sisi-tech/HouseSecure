@@ -1,4 +1,3 @@
-import { QuestionMarkSharp } from "@mui/icons-material";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CreateQuote from "../policy/createQuote";

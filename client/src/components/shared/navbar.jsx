@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
 import LightDarkMode from './lightDarkMode';
 import "../../index.css";
 
-const Navbar = ({ isAuthenticated, showLoginSignUp }) => {
+const Navbar = ({ isAuthenticated, handleLogout }) => {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-    const location = useLocation();
 
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme");
@@ -42,14 +41,17 @@ const Navbar = ({ isAuthenticated, showLoginSignUp }) => {
                 <div className='flex items-center gap-4'>
                     <LightDarkMode theme={theme} setTheme={setTheme} />
                     {isAuthenticated ? (
-                        <Link to="/" className='rounded-full hover:text-blue-500 transition duration-300'>
-                            <FaUserCircle className="text-sky-100 w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:md-12" />
+                        <button
+                            onClick={handleLogout}
+                            className="text-md px-4 py-1.5 rounded-md hover:shadow-md"
+                        >
+                            Logout
+                        </button>
+                    ) : (
+                        <Link to="/login" className="rounded-full hover:text-blue-500 transition duration-300">
+                            <FaUserCircle className="text-sky-600 w-8 h-8 md:w-10 md:h-10" />
                         </Link>
-                    ) : showLoginSignUp ? (
-                        <Link to="/login" className='rounded-full hover:text-blue-500 transition duration-300'>
-                            <FaUserCircle className="text-sky-100 w-8 h-8 md:w-10 md:h-10 " />
-                        </Link>
-                    ) : null}
+                    )}
                 </div>
             </nav>
         </div>

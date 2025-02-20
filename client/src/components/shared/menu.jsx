@@ -7,7 +7,6 @@ export default function Menu({ isAuthenticated, handleLogout }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-    const location = useLocation();
 
     useEffect(() => {
         document.body.setAttribute("data-theme", theme);

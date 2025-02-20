@@ -1,12 +1,28 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Menu from "../shared/menu";
 
 const CreateQuote = () => {
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        const userData = localStorage.getItem("user");
+        if (userData) {
+            setUser(JSON.parse(userData));
+        }
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem("user");
+        setUser(null);
+        navigate("/");
+    };
+
     return (
         <div className="w-full">
-            <Menu />
+            <Menu isAuthenticated={!!user} handleLogout={handleLogout}  />
             <div className="left-0 w-full md:w-screen mb-2 p-4 text-md font-semibold">
                 <ul className="flex flex-col lg:flex-row justify-center gap-3.5 text-black">
                     {[

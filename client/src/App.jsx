@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './index.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/pages/home';
@@ -27,7 +27,6 @@ import Welcome from './components/pages/welcome';
 
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>
