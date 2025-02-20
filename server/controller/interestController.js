@@ -22,7 +22,7 @@ const createInterest = async (req, res) => {
             user: user._id,
         });
         await interest.save();
-        res.status(201).json(interest);
+        res.status(201).json({ interestId: interest._id });
     } catch (err) {
         res.status(500).json({ message: "Error saving interest", error: err.message });
     }

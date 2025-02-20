@@ -1,24 +1,68 @@
-import { number } from "prop-types";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CreateQuote from "../policy/createQuote";
 import BackToTop from "../shared/backToTop";
 import Footer from "../shared/footer";
 
 const Location = () => {
-    const [address1, setAddress1] = useState();
-    const [address2, setAddress2] = useState();
-    const [zipCode, setZipCode] = useState();
-    const [city, setCity] = useState();
-    const [state, setState] = useState();
-    const [distanceToCoast, setDistanceToCoast] = useState();
-    const [rental, setRental] = useState();
-    const [numOfFamily, setNumOfFamily] = useState();
-    const [townhouse, setTownhouse] = useState();
-    const [sqft, setSqft] = useState();
-    const [constructionType, setConstructionType] = useState();
-    const [protectionClass, setProtectionClass] = useState();
-    const [yearBuilt, setYearBuilt] = useState();
+    // const [address1, setAddress1] = useState();
+    // const [address2, setAddress2] = useState();
+    // const [zipCode, setZipCode] = useState();
+    // const [city, setCity] = useState();
+    // const [state, setState] = useState();
+    // const [distanceToCoast, setDistanceToCoast] = useState();
+    // const [rental, setRental] = useState();
+    // const [numOfFamily, setNumOfFamily] = useState();
+    // const [townhouse, setTownhouse] = useState();
+    // const [sqft, setSqft] = useState();
+    // const [constructionType, setConstructionType] = useState();
+    // const [protectionClass, setProtectionClass] = useState();
+    // const [yearBuilt, setYearBuilt] = useState();
+    const [formData, setFormData] = useState({
+        address1: "",
+        address2: "",
+        zipCode: "",
+        city: "",
+        state: "",
+        distanceToCostal: "",
+        rental: "",
+        numOfFamily: "",
+        townhouse: "",
+        sqft: "",
+        constructionType: "",
+        protectionClass: "",
+        yearBuilt: "",
+    });
+
+    useEffect(() => {
+        const savedData = JSON.parse(localStorage.getItem("location")) || {};
+        if (savedData) setFormData(savedData);
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        const updatedData = { ...formData, [name]: value};
+        setFormData(updatedData);
+        localStorage.setItem("location", JSON.stringify(updatedData)); 
+    };
+
+    const isFormValid = () => {
+        return (
+            formData.address1 &&
+            formData.address2 &&
+            formData.zipCode &&
+            formData.city &&
+            formData.state &&
+            formData.distanceToCostal && // Corrected this condition
+            formData.rental &&
+            formData.numOfFamily &&
+            formData.townhouse &&
+            formData.sqft &&
+            formData.constructionType &&
+            formData.protectionClass &&
+            formData.yearBuilt
+        );
+    };
 
     return (
         <div className="w-full h-full flex flex-col">
@@ -34,9 +78,10 @@ const Location = () => {
                                 <input
                                     id="address1"
                                     type="text"
+                                    name="address1"
                                     className="p-1 pl-2 border rounded-sm w-full"
-                                    value={address1}
-                                    onChange={(e) => setAddress1(e.target.value)}
+                                    value={formData.address1}
+                                    onChange={handleChange}
                                     required
                                     placeholder="Required"
                                 />
@@ -46,9 +91,10 @@ const Location = () => {
                                 <input
                                     id="address2"
                                     type="text"
+                                    name="address2"
                                     className="p-1 pl-2 border rounded-sm w-full"
-                                    value={address2}
-                                    onChange={(e) => setAddress2(e.target.value)}
+                                    value={formData.address2}
+                                    onChange={handleChange}
                                     required
                                     placeholder="Required"
                                 />
@@ -62,9 +108,10 @@ const Location = () => {
                                 <input
                                     id="city"
                                     type="text"
+                                    name="city"
                                     className="p-1 pl-2 border rounded-sm w-full"
-                                    value={city}
-                                    onChange={(e) => setCity(e.target.value)}
+                                    value={formData.city}
+                                    onChange={handleChange}
                                     required
                                     placeholder="Required"
                                 />
@@ -74,9 +121,10 @@ const Location = () => {
                                 <input
                                     id="state"
                                     type="text"
+                                    name="state"
                                     className="p-1 pl-2 border rounded-sm w-full"
-                                    value={state}
-                                    onChange={(e) => setCity(e.target.value)}
+                                    value={formData.state}
+                                    onChange={handleChange}
                                     required
                                     placeholder="Required"
                                 />
@@ -86,9 +134,10 @@ const Location = () => {
                                 <input
                                     id="zipCode"
                                     type="text"
+                                    name="zipCode"
                                     className="p-1 pl-2 border rounded-sm w-full"
-                                    value={zipCode}
-                                    onChange={(e) => setZipCode(e.target.value)}
+                                    value={formData.zipCode}
+                                    onChange={handleChange}
                                     required
                                     placeholder="Required"
                                 />
@@ -101,9 +150,10 @@ const Location = () => {
                                 <label htmlFor="distanceToCostal" className="w-full">Distance To Coastal:</label>
                                 <select
                                     id="distanceToCostal"
+                                    name="distanceToCostal"
                                     className="p-2 border rounded-sm w-full"
-                                    value={distanceToCoast}
-                                    onChange={(e) => setDistanceToCoast(e.target.value)}
+                                    value={formData.distanceToCostal}
+                                    onChange={handleChange}
                                 >
                                     <option value="" disabled hidden></option>
                                     <option value="0.3">Equal or less than less than 0.3 mile</option>
@@ -117,9 +167,10 @@ const Location = () => {
                                 <input
                                     id="yearBuilt"
                                     type="text"
+                                    name="yearBuilt"
                                     className="p-1.5 border rounded-sm w-full"
-                                    value={yearBuilt}
-                                    onChange={(e) => setYearBuilt(e.target.value)}
+                                    value={formData.yearBuilt}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
@@ -132,9 +183,10 @@ const Location = () => {
                                 <label htmlFor="rental" className="w-full">Rental:</label>
                                 <select
                                     id="rental"
+                                    name="rental"
                                     className="p-2 border rounded-sm w-full"
-                                    value={rental}
-                                    onChange={(e) => setRental(e.target.value)}
+                                    value={formData.rental}
+                                    onChange={handleChange}
                                 >
                                     <option value="" disabled hidden></option>
                                     <option value="annual">Annual</option>
@@ -146,9 +198,10 @@ const Location = () => {
                                 <label htmlFor="numOfFamily" className="w-full">Number Of Family:</label>
                                 <select
                                     id="numOfFamily"
+                                    name="numOfFamily"
                                     className="p-2 border rounded-sm w-full"
-                                    value={numOfFamily}
-                                    onChange={(e) => setNumOfFamily(e.target.value)}
+                                    value={formData.numOfFamily}
+                                    onChange={handleChange}
                                 >
                                     <option value="" disabled></option>
                                     <option value="oneFamily">1 family</option>
@@ -161,9 +214,10 @@ const Location = () => {
                                 <label htmlFor="townhouse" className="w-full">Townhouse:</label>
                                 <select
                                     id="townhouse"
+                                    name="townhouse"
                                     className="p-2 border rounded-sm w-full"
-                                    value={townhouse}
-                                    onChange={(e) => setTownhouse(e.target.value)}
+                                    value={formData.townhouse}
+                                    onChange={handleChange}
                                 >
                                     <option value="" disabled></option>
                                     <option value="townhouse">Yes</option>
@@ -178,19 +232,21 @@ const Location = () => {
                                 <label htmlFor="sqft" className="w-full">Total sqft:</label>
                                 <input
                                     id="sqft"
+                                    name="sqft"
                                     type="text"
                                     className="p-2 border rounded-sm w-full"
-                                    value={sqft}
-                                    onChange={(e) => setSqft(e.target.value)}
+                                    value={formData.sqft}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="flex flex-col justify-center items-center gap-4">
                                 <label htmlFor="constructionType" className="w-full">Construction Type:</label>
                                 <select
                                     id="constructionType"
+                                    name="constructionType"
                                     className="p-2 border rounded-sm w-full"
-                                    value={constructionType}
-                                    onChange={(e) => setConstructionType(e.target.value)}
+                                    value={formData.constructionType}
+                                    onChange={handleChange}
                                 >
                                     <option value="" disabled></option>
                                     <option value="fireResistive">Fire Resistive</option>
@@ -203,9 +259,10 @@ const Location = () => {
                                 <label htmlFor="protectionClass" className="w-full">Protection Class Code:</label>
                                 <select
                                     id="protectionClass"
+                                    name="protectionClass"
                                     className="p-2 border rounded-sm w-full"
-                                    value={protectionClass}
-                                    onChange={(e) => setProtectionClass(e.target.value)}
+                                    value={formData.protectionClass}
+                                    onChange={handleChange}
                                 >
                                     <option value="" disabled></option>
                                     <option value="nyc">NYC</option>
@@ -228,7 +285,10 @@ const Location = () => {
                     </button>
                 </Link>
                 <Link to="/quote/history">
-                    <button className="bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm">
+                    <button
+                        className={`bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm ${!isFormValid() ? 'opacity-50 cursor-not-allowed' : ""}`}
+                        disabled={!isFormValid()}
+                    >
                         Next
                     </button>
                 </Link>

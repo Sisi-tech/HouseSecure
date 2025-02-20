@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CreateQuote from "../policy/createQuote";
 import BackToTop from "../shared/backToTop";
@@ -80,12 +80,17 @@ const History = () => {
         { dateOfLoss: "", category: "", paidAmount: "", description: "" }
     ]);
 
+    useEffect(() => {
+        localStorage.setItem("historyData", JSON.stringify({ priorCarrier, expirationDate, lapse, losses }));
+    }, [priorCarrier, expirationDate, lapse, losses]);
+
     const addLoss = () => {
         setLosses([...losses, { dateOfLoss: "", category: "", paidAmount: "", description: "" }]);
     }
 
     const removeLoss = (index) => {
-        setLosses(losses.filter((_, i) => i !== index));
+        const updatedLosses = losses.filter((_, i) => i !== index);
+        setLosses(updatedLosses);
     };
 
     const updateLoss = (index, field, value) => {
@@ -93,6 +98,14 @@ const History = () => {
         updatedLosses[index][field] = value;
         setLosses(updatedLosses);
     };
+
+    const isFormValid = () => {
+        return (
+            priorCarrier &&
+            expirationDate &&
+            lapse
+        )
+    }
 
     return (
         <div className="w-full h-full flex flex-col">
@@ -156,7 +169,10 @@ const History = () => {
                     </button>
                 </Link>
                 <Link to="/quote/coverage">
-                    <button className="bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm">
+                    <button 
+                        className={`bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm ${!isFormValid() ? 'opacity-50 cursor-not-allowed' : ""}`}
+                        disabled={!isFormValid()}
+                    >
                         Next
                     </button>
                 </Link>

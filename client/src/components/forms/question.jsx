@@ -44,17 +44,17 @@ const UnderwritingQuestion = () => {
     const [unansweredQuestions, setUnansweredQuestions] = useState([]);
 
     useEffect(() => {
-        const storedAnswers = JSON.parse(localStorage.getItem("answers"));
-        if (storedAnswers) {
-            setAnswers(storedAnswers);
-        }
+        const storedAnswers = JSON.parse(localStorage.getItem("answers")) || {};
+        const updatedAnswers = questions.reduce((acc, question) => {
+            acc[question] = storedAnswers[question] || ""; // Keep existing answers or default to empty
+            return acc;
+        }, {});
+        setAnswers(updatedAnswers);
     }, []);
-
+    
     useEffect(() => {
-        if (Object.keys(answers).length > 0) {
-            localStorage.setItem("answers", JSON.stringify(answers));
-        }
-    }, [answers]);
+        localStorage.setItem("answers", JSON.stringify(answers));
+    }, [answers]);    
 
     const handleAnswerChange = (question, answer) => {
         setAnswers((prev) => ({ ...prev, [question]: answer }));
@@ -68,6 +68,14 @@ const UnderwritingQuestion = () => {
         setAnswers(allNoAnswers);
         setUnansweredQuestions([]);
     }
+    const clearAnswers = () => {
+        const emptyAnswers = questions.reduce((acc, question) => {
+            acc[question] = "";
+            return acc;
+        }, {});
+        setAnswers(emptyAnswers);
+        localStorage.removeItem("answers");
+    };    
 
     const handleSubmit = () => {
         const unanswered = questions.filter((question) => !answers[question]);
@@ -82,14 +90,18 @@ const UnderwritingQuestion = () => {
         setUnansweredQuestions(unanswered);
     }, [answers]);
 
-    const isFormValid = questions.every((question) => answers[question]);
+    // const isFormValid = questions.every((question) => answers[question]);
+    const isFormValid = unansweredQuestions.length === 0;
 
     return (
         <div className="w-full h-full flex flex-col">
             <CreateQuote />
             <div className="w-full max-w-screen-lg mx-auto text-md gap-4 pl-4 pr-4">
                 <h3 className="text-md font-semibold text-center">Underwriting Questions</h3>
-                <div className="w-full flex justify-end">
+                <div className="w-full flex justify-end gap-2">
+                    <button onClick={clearAnswers} className="bg-gray-500 text-white text-sm px-2 py-1 rounded-md mb-4">
+                        Clear Answers
+                    </button>
                     <button
                         onClick={selectAllNo}
                         className="bg-gray-500 text-white text-sm px-2 py-1 rounded-md mb-4"
@@ -140,7 +152,9 @@ const UnderwritingQuestion = () => {
                 </Link>
                 <Link to="/quote/rate">
                     <button
-                        className="bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm"
+                        className={`bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm ${
+                            !isFormValid ? "opacity-50 cursor-not-allowed" : ""
+                        }`}
                         onClick={handleSubmit}
                         disabled={!isFormValid}
                     >

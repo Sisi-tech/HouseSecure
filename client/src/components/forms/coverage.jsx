@@ -1,26 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CreateQuote from "../policy/createQuote";
 import BackToTop from "../shared/backToTop";
 import Footer from "../shared/footer";
 
 const Coverage = () => {
-    const [coverageA, setCoverageA] = useState("");
-    const [coverageB, setCoverageB] = useState("");
-    const [coverageC, setCoverageC] = useState("");
-    const [coverageD, setCoverageD] = useState("");
-    const [coverageE, setCoverageE] = useState("");
-    const [ded, setDed] = useState("");
-    const [windDed, setWindDed] = useState("");
-    const [catDed, setCatDed] = useState("");
-    const [RCVonCoverageC, setRCVonCoverageC] = useState("");
-    const [waterBackUp, setWaterBackUp] = useState("");
-    const [equipment, setEquipment] = useState("");
-    const [ordinance, setOrdinance] = useState("");
-    const [inflationGuard, setInflationGuard] = useState("");
-    const [burglarAlarm, setBurglarAlarm] = useState("");
-    const [fireAlarm, setFireAlarm] = useState("");
-    const [sprinkler, setSprinkler] = useState("");
+    // const [coverageA, setCoverageA] = useState("");
+    // const [coverageB, setCoverageB] = useState("");
+    // const [coverageC, setCoverageC] = useState("");
+    // const [coverageD, setCoverageD] = useState("");
+    // const [coverageE, setCoverageE] = useState("");
+    // const [ded, setDed] = useState("");
+    // const [windDed, setWindDed] = useState("");
+    // const [catDed, setCatDed] = useState("");
+    // const [RCVonCoverageC, setRCVonCoverageC] = useState("");
+    // const [waterBackUp, setWaterBackUp] = useState("");
+    // const [equipment, setEquipment] = useState("");
+    // const [ordinance, setOrdinance] = useState("");
+    // const [inflationGuard, setInflationGuard] = useState("");
+    // const [burglarAlarm, setBurglarAlarm] = useState("");
+    // const [fireAlarm, setFireAlarm] = useState("");
+    // const [sprinkler, setSprinkler] = useState("");
+    const [formData, setFormData] = useState({
+        coverageA: "",
+        coverageB: "",
+        coverageC: "",
+        coverageD: "",
+        coverageE: "",
+        ded: "",
+        windDed: "",
+        catDed: "",
+        RCVonCoverageC: "",
+        waterBackup: "",
+        equipment: "",
+        ordinance: "",
+        inflationGuard: "",
+        burglarAlarm: "",
+        fireAlarm: "",
+        sprinkler: "",
+    });
+
+    useEffect(() => {
+        const savedData = JSON.parse(localStorage.getItem("coverage"));
+        if (savedData) setFormData(savedData);
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        const updatedData = { ...formData, [name]: value };
+        setFormData(updatedData);
+        localStorage.setItem("coverage", JSON.stringify(updatedData));
+    };
+
+    const isFormValid = () => {
+        return (
+            formData.coverageA &&
+            formData.coverageB &&
+            formData.coverageC &&
+            formData.coverageD &&
+            formData.coverageE &&
+            formData.ded &&
+            formData.windDed &&
+            formData.catDed &&
+            formData.RCVonCoverageC &&
+            formData.waterBackup &&
+            formData.equipment &&
+            formData.ordinance &&
+            formData.inflationGuard &&
+            formData.burglarAlarm &&
+            formData.fireAlarm &&
+            formData.sprinkler
+        )
+    }
 
     return (
         <div className="w-full h-auto flex flex-col relative">
@@ -40,9 +91,10 @@ const Coverage = () => {
                                     <input
                                         id="coverageA"
                                         type="number"
+                                        name="coverageA"
                                         className="p-1 pl-2 border rounded-sm w-full"
-                                        value={coverageA}
-                                        onChange={(e) => setCoverageA(e.target.value)}
+                                        value={formData.coverageA}
+                                        onChange={handleChange}
                                         required
                                     />
                                 </div>
@@ -51,9 +103,10 @@ const Coverage = () => {
                                     <input
                                         id="coverageB"
                                         type="number"
+                                        name="coverageB"
                                         className="p-1 pl-2 border rounded-sm w-full"
-                                        value={coverageB}
-                                        onChange={(e) => setCoverageB(e.target.value)}
+                                        value={formData.coverageB}
+                                        onChange={handleChange}
                                         required
                                     />
                                 </div>
@@ -61,10 +114,11 @@ const Coverage = () => {
                                     <label htmlFor="coverageC" className="w-full">Coverage C - Personal property:</label>
                                     <input
                                         id="coverageC"
+                                        name="coverageC"
                                         type="number"
                                         className="p-1 pl-2 border rounded-sm w-full"
-                                        value={coverageC}
-                                        onChange={(e) => setCoverageC(e.target.value)}
+                                        value={formData.coverageC}
+                                        onChange={handleChange}
                                         required
                                     />
                                 </div>
@@ -72,10 +126,11 @@ const Coverage = () => {
                                     <label htmlFor="coverageD" className="w-full">Coverage D - Loss of use:</label>
                                     <input
                                         id="coverageD"
+                                        name="coverageD"
                                         type="number"
                                         className="p-1 pl-2 border rounded-sm w-full"
-                                        value={coverageD}
-                                        onChange={(e) => setCoverageD(e.target.value)}
+                                        value={formData.coverageD}
+                                        onChange={handleChange}
                                         required
                                     />
                                 </div>
@@ -83,9 +138,10 @@ const Coverage = () => {
                                     <label htmlFor="coverageE" className="w-full">Coverage E - Personal liability:</label>
                                     <select
                                         id="coverageE"
+                                        name="coverageE"
                                         className="p-2 border rounded-sm w-full"
-                                        value={coverageE}
-                                        onChange={(e) => setCoverageE(e.target.value)}
+                                        value={formData.coverageE}
+                                        onChange={handleChange}
                                     >
                                         <option value="" disabled>Required</option>
                                         <option value="1k">100,000</option>
@@ -113,9 +169,10 @@ const Coverage = () => {
                                     <label htmlFor="ded" className="w-full">AOP deductible:</label>
                                     <select
                                         id="ded"
+                                        name="ded"
                                         className="p-2 border rounded-sm w-full"
-                                        value={ded}
-                                        onChange={(e) => setDed(e.target.value)}
+                                        value={formData.ded}
+                                        onChange={handleChange}
                                     >
                                         <option value="" disabled>Required</option>
                                         <option value="ded5">500</option>
@@ -129,9 +186,10 @@ const Coverage = () => {
                                     <label htmlFor="windDed" className="w-full">Wind/Hall deductible:</label>
                                     <select
                                         id="windDed"
+                                        name="windDed"
                                         className="p-2 border rounded-sm w-full"
-                                        value={windDed}
-                                        onChange={(e) => setWindDed(e.target.value)}
+                                        value={formData.windDed}
+                                        onChange={handleChange}
                                     >
                                         <option value="" disabled>Required</option>
                                         <option value="sameAsAOP">Same as All Perils</option>
@@ -143,25 +201,10 @@ const Coverage = () => {
                                     <label htmlFor="catDed" className="w-full">Catastrophe Windstorm deductible:</label>
                                     <select
                                         id="catDed"
+                                        name="catDed"
                                         className="p-2 border rounded-sm w-full"
-                                        value={catDed}
-                                        onChange={(e) => setCatDed(e.target.value)}
-                                    >
-                                        <option value="" disabled>Required</option>
-                                        <option value="1%">1%</option>
-                                        <option value="2%">2%</option>
-                                        <option value="3%">3%</option>
-                                        <option value="5%">5%</option>
-                                        <option value="10%">10%</option>
-                                    </select>
-                                </div>
-                                <div className="flex justify-center items-center">
-                                    <label htmlFor="catDed" className="w-full">Catastrophe Windstorm deductible:</label>
-                                    <select
-                                        id="catDed"
-                                        className="p-2 border rounded-sm w-full"
-                                        value={catDed}
-                                        onChange={(e) => setCatDed(e.target.value)}
+                                        value={formData.catDed}
+                                        onChange={handleChange}
                                     >
                                         <option value="" disabled>Required</option>
                                         <option value="1%">1%</option>
@@ -184,9 +227,10 @@ const Coverage = () => {
                                 <label htmlFor="inflationGuard" className="w-full">Inflation Guard:</label>
                                 <select
                                     id="inflationGuard"
+                                    name="inflationGuard"
                                     className="p-2 border rounded-sm w-full"
-                                    value={inflationGuard}
-                                    onChange={(e) => setInflationGuard(e.target.value)}
+                                    value={formData.inflationGuard}
+                                    onChange={handleChange}
                                 >
                                     <option value="" disabled></option>
                                     <option value="inflation2%">2%</option>
@@ -198,9 +242,10 @@ const Coverage = () => {
                                 <label htmlFor="ordinance" className="w-full">Ordinance or Law:</label>
                                 <select
                                     id="ordinance"
+                                    name="ordinance"
                                     className="p-2 border rounded-sm w-full"
-                                    value={ordinance}
-                                    onChange={(e) => setOrdinance(e.target.value)}
+                                    value={formData.ordinance}
+                                    onChange={handleChange}
                                 >
                                     <option value="" disabled></option>
                                     <option value="noOrdinance">No ordinance or law</option>
@@ -212,21 +257,23 @@ const Coverage = () => {
                                 <label htmlFor="RCVonCoverageC" className="w-full">RCV on Coverage C:</label>
                                 <select
                                     id="RCVonCoverageC"
+                                    name="RCVonCoverageC"
                                     className="p-2 border rounded-sm w-full"
-                                    value={RCVonCoverageC}
-                                    onChange={(e) => setRCVonCoverageC(e.target.value)}
+                                    value={formData.RCVonCoverageC}
+                                    onChange={handleChange}
                                 >
                                     <option value="noRCVonCoverageC">No</option>
                                     <option value="RCVonCoverageC">Yes</option>
                                 </select>
                             </div>
                             <div className="flex justify-center items-center">
-                                <label htmlFor="waterBackUp" className="w-full">Water backup:</label>
+                                <label htmlFor="waterBackup" className="w-full">Water backup:</label>
                                 <select
-                                    id="waterBackUp"
+                                    id="waterBackup"
+                                    name="waterBackup"
                                     className="p-2 border rounded-sm w-full"
-                                    value={waterBackUp}
-                                    onChange={(e) => setWaterBackUp(e.target.value)}
+                                    value={formData.waterBackup}
+                                    onChange={handleChange}
                                 >
                                     <option value="" disabled></option>
                                     <option value="5kWaterBackup">$5,000</option>
@@ -238,9 +285,10 @@ const Coverage = () => {
                                 <label htmlFor="equipment" className="w-full">Equipment breakdown:</label>
                                 <select
                                     id="equipment"
+                                    name="equipment"
                                     className="p-2 border rounded-sm w-full"
-                                    value={equipment}
-                                    onChange={(e) => setEquipment(e.target.value)}
+                                    value={formData.equipment}
+                                    onChange={handleChange}
                                 >
                                     <option value="noEquipment">No</option>
                                     <option value="equipment">$5,000</option>
@@ -257,9 +305,10 @@ const Coverage = () => {
                                 <label htmlFor="burglarAlarm" className="w-full">Burglar Alarm:</label>
                                 <select
                                     id="burglarAlarm"
+                                    name="burglarAlarm"
                                     className="p-2 border rounded-sm w-full"
-                                    value={burglarAlarm}
-                                    onChange={(e) => setBurglarAlarm(e.target.value)}
+                                    value={formData.burglarAlarm}
+                                    onChange={handleChange}
                                 >
                                     <option value="noBurglar">No burglar alarm</option>
                                     <option value="localBurglar">Local burglar alarm</option>
@@ -270,9 +319,10 @@ const Coverage = () => {
                                 <label htmlFor="fireAlarm" className="w-full">Fire alarm:</label>
                                 <select
                                     id="fireAlarm"
+                                    name="fireAlarm"
                                     className="p-2 border rounded-sm w-full"
-                                    value={fireAlarm}
-                                    onChange={(e) => setFireAlarm(e.target.value)}
+                                    value={formData.fireAlarm}
+                                    onChange={handleChange}
                                 >
                                     <option value="noFireAlarm">No fire alarm</option>
                                     <option value="localFireAlarm">Local fire alarm</option>
@@ -283,9 +333,10 @@ const Coverage = () => {
                                 <label htmlFor="sprinkler" className="w-full">Sprinkler system:</label>
                                 <select
                                     id="sprinkler"
+                                    name="sprinkler"
                                     className="p-2 border rounded-sm w-full"
-                                    value={sprinkler}
-                                    onChange={(e) => setSprinkler(e.target.value)}
+                                    value={formData.sprinkler}
+                                    onChange={handleChange}
                                 >
                                     <option value="noSprinkler">no sprinkler system</option>
                                     <option value="sprinkler">With sprinkler system</option>
@@ -301,7 +352,10 @@ const Coverage = () => {
                         </button>
                     </Link>
                     <Link to="/quote/interest">
-                        <button className="bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm">
+                        <button
+                            className={`bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm ${!isFormValid() ? 'opacity-50 cursor-not-allowed' : ""}`}
+                            disabled={!isFormValid()}
+                        >
                             Next
                         </button>
                     </Link>

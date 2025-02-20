@@ -21,6 +21,7 @@ const applicantInfoRouter = require("./routes/applicantInfoRoutes");
 const interestRouter = require("./routes/interestRoutes");
 const questionRouter = require("./routes/questionRoutes");
 const coverageRouter = require("./routes/coverageRoutes");
+const quoteRouter = require("./routes/quoteRoutes");
 
 app.use(express.static("public"));
 app.use(
@@ -49,6 +50,7 @@ app.use("/api/v1/applicant-info", applicantInfoRouter);
 app.use("/api/v1/interest", interestRouter);
 app.use("/api/v1/question", questionRouter);
 app.use("/api/v1/coverage", coverageRouter);
+app.use("/api/v1/quote", quoteRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandleMiddleware);

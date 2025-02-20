@@ -29,7 +29,7 @@ const Welcome = () => {
                 className='flex justify-center w-full min-h-screen bg-no-repeat'
                 style={{ 
                     backgroundImage: `url(${backgroundImage})`,
-                    backgroundSize: "800px",
+                    backgroundSize: "600px",
                     backgroundPosition: "right bottom"
                 }}
             >

@@ -18,7 +18,7 @@ const createHistory = async (req, res) => {
             user: user._id,
         });
         await history.save();
-        res.status(201).send(history);
+        res.status(201).json({ historyId: history._id })
     } catch (err) {
         res.status(400).send("Error saving history: " + err);
     }

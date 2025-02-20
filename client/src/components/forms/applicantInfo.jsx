@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CreateQuote from "../policy/createQuote";
 import Footer from "../shared/footer";
@@ -6,21 +6,44 @@ import BackToTop from "../shared/backToTop";
 
 const ApplicantInfo = () => {
     const today = new Date().toISOString().split("T")[0];
-    const [selectedDate, setSelectedDate] = useState(today);
-    const [entityType, setEntityType] = useState("individual");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [businessName, setBusinessName] = useState("");
-    const [policyForm, setPolicyForm] = useState("");
-    const [occupancyType, setOccupancyType] = useState("");
-    const [lossHistory, setLossHistory] = useState("");
+    // const [selectedDate, setSelectedDate] = useState(today);
+    // const [entityType, setEntityType] = useState("individual");
+    // const [firstName, setFirstName] = useState("");
+    // const [lastName, setLastName] = useState("");
+    // const [businessName, setBusinessName] = useState("");
+    // const [policyForm, setPolicyForm] = useState("");
+    // const [occupancyType, setOccupancyType] = useState("");
+    // const [lossHistory, setLossHistory] = useState("");
+
+    const [formData, setFormData] = useState({
+        selectedDate: today,
+        entityType: "",
+        firstName: "",
+        lastName: "",
+        businessName: "",
+        policyForm: "",
+        occupancyType: "",
+        lossHistory: "",
+    })
+
+    useEffect(() => {
+        const savedData = JSON.parse(localStorage.getItem("applicantInfo")) || {};
+        if (savedData) setFormData(savedData);
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        const updatedData = { ...formData, [name]: value };
+        setFormData(updatedData);
+        localStorage.setItem("applicantInfo", JSON.stringify(updatedData));
+    };
 
     const isFormValid = () => {
-        if (!entityType || !policyForm || !occupancyType || !lossHistory) return false;
-        if (entityType === "individual" && (!firstName || !lastName)) return false;
-        if (entityType !== "individual" && !businessName) return false;
+        if (!formData.entityType || !formData.policyForm || !formData.occupancyType || !formData.lossHistory) return false;
+        if (formData.entityType === "individual" && (!formData.firstName || !formData.lastName)) return false;
+        if (formData.entityType !== "individual" && !formData.businessName) return false;
         return true;
-    }
+    };    
 
     return (
         <div className="w-full min-h-screen flex flex-col">
@@ -33,19 +56,21 @@ const ApplicantInfo = () => {
                         <input
                             id="date"
                             type="date"
+                            name="selectedDate"
                             className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
-                            value={selectedDate}
+                            value={formData.selectedDate}
                             min={today}
-                            onChange={(e) => setSelectedDate(e.target.value)}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="flex flex-col md:flex-row md:items-center gap-4">
                         <label htmlFor="entityType" className="w-auto md:w-160 lg:w-240 text-start md:text-right">Entity Type:</label>
                         <select
                             id="entityType"
+                            name="entityType"
                             className="p-2 border rounded-sm w-auto md:w-100 lg:w-200"
-                            value={entityType}
-                            onChange={(e) => setEntityType(e.target.value)}
+                            value={formData.entityType}
+                            onChange={handleChange}
                         >
                             <option value="" disabled>Required</option>
                             <option value="individual">Individual</option>
@@ -56,7 +81,7 @@ const ApplicantInfo = () => {
                             <option value="trust">Trust</option>
                         </select>
                     </div>
-                    {entityType === "individual" ? (
+                    {formData.entityType === "individual" ? (
                         <>
                             <div className="flex flex-col md:flex-row md:items-center gap-4">
                                 <label htmlFor="firstName" className="w-auto md:w-160 lg:w-240 text-start md:text-right">
@@ -65,9 +90,10 @@ const ApplicantInfo = () => {
                                 <input
                                     id="firstName"
                                     type="text"
+                                    name="firstName"
                                     className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)}
+                                    value={formData.firstName}
+                                    onChange={handleChange}
                                     required
                                     placeholder="Required"
                                 />
@@ -79,15 +105,16 @@ const ApplicantInfo = () => {
                                 <input
                                     id="lastName"
                                     type="text"
+                                    name="lastName"
                                     className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
+                                    value={formData.lastName}
+                                    onChange={handleChange}
                                     required
                                     placeholder="Required"
                                 />
                             </div>
                         </>
-                    ) : entityType ? (
+                    ) : formData.entityType ? (
                         <div className="flex flex-col md:flex-row md:items-center gap-4">
                             <label htmlFor="businessName" className="md:w-160 lg:w-240 sm:text-start md:text-right">
                                 {`${entityType}:`}
@@ -95,9 +122,10 @@ const ApplicantInfo = () => {
                             <input
                                 id="businessName"
                                 type="text"
+                                name="businessName"
                                 className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
-                                value={businessName}
-                                onChange={(e) => setBusinessName(e.target.value)}
+                                value={formData.businessName}
+                                onChange={handleChange}
                                 required
                                 placeholder="Required"
                             />
@@ -109,9 +137,10 @@ const ApplicantInfo = () => {
                         </label>
                         <select
                             id="policyForm"
+                            name="policyForm"
                             className="p-2 border rounded-sm w-auto md:w-100 lg:w-200"
-                            value={policyForm}
-                            onChange={(e) => setPolicyForm(e.target.value)}
+                            value={formData.policyForm}
+                            onChange={handleChange}
                         >
                             <option value="" disabled>Required</option>
                             <option value="ho3">HO3</option>
@@ -130,9 +159,10 @@ const ApplicantInfo = () => {
                         </label>
                         <select
                             id="occupancyType"
+                            name="occupancyType"
                             className="p-2 border rounded-sm w-auto md:w-100 lg:w-200"
-                            value={occupancyType}
-                            onChange={(e) => setOccupancyType(e.target.value)}
+                            value={formData.occupancyType}
+                            onChange={handleChange}
                         >
                             <option value="" disabled hidden>Required</option>
                             <option value="owner">Primary - Owner occupied</option>
@@ -146,9 +176,10 @@ const ApplicantInfo = () => {
                         <label htmlFor="loss" className="w-auto md:w-160 lg:w-240 text-start md:text-right">Is there any loss history from the past 3 years?</label>
                         <select
                             id="loss"
+                            name="lossHistory"
                             className="p-2 border rounded-sm w-auto md:w-100 lg:w-200"
-                            value={lossHistory}
-                            onChange={(e) => setLossHistory(e.target.value)}
+                            value={formData.lossHistory}
+                            onChange={handleChange}
                         >
                             <option value="" disabled>Required</option>
                             <option value="yes">Yes</option>
@@ -158,15 +189,15 @@ const ApplicantInfo = () => {
                 </form>
             </div>
             <div className="w-full flex justify-center gap-4 p-6 pt-14 pb-14 text-white">
-                    <Link to="/quote/location">
-                        <button
-                            className={`bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm ${!isFormValid() ? 'opacity-50 cursor-not-allowed' : ""}`}
-                            disabled={!isFormValid()}
-                        >
-                            Next
-                        </button>
-                    </Link>
-                </div>
+                <Link to="/quote/location">
+                    <button
+                        className={`bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm ${!isFormValid() ? 'opacity-50 cursor-not-allowed' : ""}`}
+                        disabled={!isFormValid()}
+                    >
+                        Next
+                    </button>
+                </Link>
+            </div>
             <BackToTop />
             <Footer />
         </div>

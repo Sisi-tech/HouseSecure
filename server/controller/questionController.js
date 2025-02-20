@@ -19,7 +19,7 @@ const submitResponses = async (req, res) => {
         }
         const newResponse = new UnderwritingResponse({ userId, responses });
         await newResponse.save();
-        res.status(201).json({ message: "Responses submitted successfully", data: newResponse });
+        res.status(201).json({ message: "Responses submitted successfully", data: newResponse, responseId: newResponse._id });
     } catch (error) {
         res.status(500).json({ error: "Server error", message: error.message });
     }

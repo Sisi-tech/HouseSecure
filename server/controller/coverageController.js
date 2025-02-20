@@ -24,7 +24,7 @@ const upsertCoverage = async (req, res) => {
             { ...coverageData },
             { new: true, upsert: true, runValidators: true }
         );
-        res.status(200).json(updatedCoverage);
+        res.status(200).json({ coverageId: updatedCoverage._id, data: updatedCoverage });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error });
     }

@@ -1,26 +1,56 @@
-import { Interests } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CreateQuote from "../policy/createQuote";
 import BackToTop from "../shared/backToTop";
 import Footer from "../shared/footer";
 
 const Interest = () => {
-    const [interests, setInterests] = useState([]);
-    const [interestType, setInterestType] = useState("");
-    const [name, setName] = useState("");
-    const [mailingAddress, setMailingAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [code, setCode] = useState("");
-    const [optionalAddress, setOptionalAddress] = useState("");
+    // const [interests, setInterests] = useState([]);
+    // const [interestType, setInterestType] = useState("");
+    // const [name, setName] = useState("");
+    // const [mailingAddress, setMailingAddress] = useState("");
+    // const [city, setCity] = useState("");
+    // const [state, setState] = useState("");
+    // const [code, setCode] = useState("");
+    // const [optionalAddress, setOptionalAddress] = useState("");
+    const [formData, setFormData] = useState({
+        interest: [],
+        interestType: "",
+        name: "",
+        mailingAddress: "",
+        city: "",
+        state: "",
+        code: "",
+        optionalAddress: "",
+    });
+
+    useEffect(() => {
+        const savedData = JSON.parse(localStorage.getItem("interest"));
+        if (savedData) setFormData(savedData);
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        const updatedData = { ...formData, [name]: value };
+        setFormData(updatedData);
+        localStorage.setItem("interest", JSON.stringify(updatedData));
+    };
 
     const handleAddInterest = () => {
-        if (!interestType || !name) return;
-        setInterests([...interests, { interestType, name }]);
-        setInterestType("");
-        setName("");
-    }
+        if (!formData.interestType || !formData.name) return;
+        const updatedInterests = [
+            ...formData.interest,
+            { interestType: formData.interestType, name: formData.name },
+        ];
+        setFormData({ ...formData, interest: updatedInterests, interestType: "", name: "" });
+        localStorage.setItem("interest", JSON.stringify({ ...formData, interest: updatedInterests }));
+    };
+
+    const handleDeleteInterest = (index) => {
+        const updatedInterests = formData.interest.filter((_, i) => i !== index);
+        setFormData({ ...formData, interest: updatedInterests });
+        localStorage.setItem("interest", JSON.stringify(updatedData));
+    };
 
     return (
         <div className="w-full h-full flex flex-col">
@@ -29,7 +59,7 @@ const Interest = () => {
                 <h3 className="text-md font-semibold text-center pb-4">Interest</h3>
                 {/* display list of interests has been added */}
                 <div className="flex flex-col justify-center items-center gap-6">
-                    {interests.length > 0 ? (
+                    {formData.interest.length > 0 ? (
                         <table className="border-collapse border border-gray-400 text-black">
                             <thead>
                                 <tr className="bg-gray-200">
@@ -39,7 +69,7 @@ const Interest = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {interests.map((item, index) => ( // Use interests instead of Interests
+                                {formData.interest.map((item, index) => ( // Use interests instead of Interests
                                     <tr key={index} className="border border-gray-400">
                                         <td className="border border-gray-400 p-2">{item.interestType}</td>
                                         <td className="border border-gray-400 p-2">{item.name}</td>
@@ -47,7 +77,7 @@ const Interest = () => {
                                             <button className="text-blue-600">Edit</button>
                                             <button
                                                 className="text-red-600 ml-2"
-                                                onClick={() => setInterests(interests.filter((_, i) => i !== index))}
+                                                onClick={() => handleDeleteInterest(index)}
                                             >Delete</button>
                                         </td>
                                     </tr>
@@ -65,11 +95,12 @@ const Interest = () => {
                         <label htmlFor="interestType" className="w-full">Interest type:</label>
                         <select
                             id="interestType"
+                            name="interestType"
                             className="p-2 border rounded-sm w-full"
-                            value={interestType}
-                            onChange={(e) => setInterestType(e.target.value)}
+                            value={formData.interestType}
+                            onChange={handleChange}
                         >
-                            <option value="notApplicable" disabled>Not Applicable</option>
+                            <option value="" disabled>Not Applicable</option>
                             <option value="additionalInterest">Additional Interest</option>
                             <option value="additionalInsured">Additional Insured</option>
                             <option value="firstMortgage">First Mortgage</option>
@@ -81,10 +112,11 @@ const Interest = () => {
                         <label htmlFor="name" className="w-full">Name:</label>
                         <input
                             id="name"
+                            name="name"
                             type="text"
                             className="p-1 pl-2 border rounded-sm w-full"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            value={formData.name}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -97,9 +129,10 @@ const Interest = () => {
                                 <input
                                     id="mailingAddress"
                                     type="text"
+                                    name="mailingAddress"
                                     className="p-1 pl-2 border rounded-sm w-full"
-                                    value={mailingAddress}
-                                    onChange={(e) => setMailingAddress(e.target.value)}
+                                    value={formData.mailingAddress}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -107,10 +140,11 @@ const Interest = () => {
                                 <label htmlFor="optional" className="w-full">Optional/mailing address:</label>
                                 <input
                                     id="optional"
+                                    name="optionalAddress"
                                     type="text"
                                     className="p-1 pl-2 border rounded-sm w-full"
-                                    value={optionalAddress}
-                                    onChange={(e) => setOptionalAddress(e.target.value)}
+                                    value={formData.optionalAddress}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
@@ -120,10 +154,11 @@ const Interest = () => {
                                 <label htmlFor="mailingCity" className="w-full">City:</label>
                                 <input
                                     id="mailingCity"
+                                    name="city"
                                     type="text"
                                     className="p-1 pl-2 border rounded-sm w-full"
-                                    value={city}
-                                    onChange={(e) => setCity(e.target.value)}
+                                    value={formData.city}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
@@ -131,9 +166,10 @@ const Interest = () => {
                                 <label htmlFor="mailingState" className="w-full">State:</label>
                                 <select
                                     id="mailingState"
+                                    name="state"
                                     className="p-2 border rounded-sm w-full"
-                                    value={state}
-                                    onChange={(e) => setState(e.target.value)}
+                                    value={formData.state}
+                                    onChange={handleChange}
                                 >
                                     <option value="" disabled>Select a state</option>
                                     <option value="AL">AL - Alabama</option>
@@ -193,10 +229,11 @@ const Interest = () => {
                                 <label htmlFor="postalCode" className="w-full">Postal Code:</label>
                                 <input
                                     id="postalCode"
+                                    name="code"
                                     type="text"
                                     className="p-1 pl-2 border rounded-sm w-full"
-                                    value={code}
-                                    onChange={(e) => setCode(e.target.value)}
+                                    value={formData.code}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>

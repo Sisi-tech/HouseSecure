@@ -25,7 +25,7 @@ const createLocation = async (req, res) => {
             user: user._id,
         });
         await location.save();
-        res.status(201).send(location);
+        res.status(201).json({ locationId: location._id })
     } catch (err) {
         res.status(400).send('Error saving location: ' + err);
     }
