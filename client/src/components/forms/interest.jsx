@@ -59,7 +59,7 @@ const Interest = () => {
                 <h3 className="text-md font-semibold text-center pb-4">Interest</h3>
                 {/* display list of interests has been added */}
                 <div className="flex flex-col justify-center items-center gap-6">
-                    {formData.interest.length > 0 ? (
+                    {formData.interest?.length > 0 ? (
                         <table className="border-collapse border border-gray-400 text-black">
                             <thead>
                                 <tr className="bg-gray-200">

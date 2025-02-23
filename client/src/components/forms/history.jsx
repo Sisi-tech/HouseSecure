@@ -5,6 +5,7 @@ import BackToTop from "../shared/backToTop";
 import Footer from "../shared/footer";
 import { FaTrash } from "react-icons/fa";
 
+// Loss Component
 const Loss = ({ index, loss, updatedLoss, removeLoss }) => {
     return (
         <div className="w-full mx-auto max-w-screen-lg text-md space-y-4 pt-4">
@@ -12,7 +13,9 @@ const Loss = ({ index, loss, updatedLoss, removeLoss }) => {
             {/* first row */}
             <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex flex-col md:flex-1 gap-2">
-                    <label htmlFor={`dateOfLoss-${index}`} className="w-full">Date of Loss:</label>
+                    <label htmlFor={`dateOfLoss-${index}`} className="w-full">
+                        Date of Loss:
+                    </label>
                     <input
                         id={`dateOfLoss-${index}`}
                         type="date"
@@ -22,7 +25,9 @@ const Loss = ({ index, loss, updatedLoss, removeLoss }) => {
                     />
                 </div>
                 <div className="flex flex-col md:flex-1 gap-2">
-                    <label htmlFor={`category-${index}`} className="w-full">Category:</label>
+                    <label htmlFor={`category-${index}`} className="w-full">
+                        Category:
+                    </label>
                     <select
                         id={`category-${index}`}
                         className="p-2 border rounded-sm w-full"
@@ -35,7 +40,9 @@ const Loss = ({ index, loss, updatedLoss, removeLoss }) => {
                     </select>
                 </div>
                 <div className="flex flex-col md:flex-1 gap-2">
-                    <label htmlFor={`paidAmount-${index}`} className="w-full">Amount:</label>
+                    <label htmlFor={`paidAmount-${index}`} className="w-full">
+                        Amount:
+                    </label>
                     <input
                         id={`paidAmount-${index}`}
                         type="text"
@@ -48,7 +55,9 @@ const Loss = ({ index, loss, updatedLoss, removeLoss }) => {
 
             {/* second row */}
             <div className="flex flex-col gap-2">
-                <label htmlFor={`description-${index}`} className="w-full">Description of Loss:</label>
+                <label htmlFor={`description-${index}`} className="w-full">
+                    Description of Loss:
+                </label>
                 <textarea
                     id={`description-${index}`}
                     type="text"
@@ -69,24 +78,43 @@ const Loss = ({ index, loss, updatedLoss, removeLoss }) => {
                 </button>
             </div>
         </div>
-    )
+    );
 };
 
+// History Component
 const History = () => {
-    const [priorCarrier, setPriorCarrier] = useState("");
-    const [expirationDate, setExpirationDate] = useState("");
-    const [lapse, setLapse] = useState("");
-    const [losses, setLosses] = useState([
-        { dateOfLoss: "", category: "", paidAmount: "", description: "" }
-    ]);
+    const [formData, setFormData] = useState(() => {
+        const savedData = JSON.parse(localStorage.getItem("history"));
+        return savedData ? savedData.formData : { priorCarrier: "", expirationDate: "", lapse: "" };
+    });
+    const [losses, setLosses] = useState(() => {
+        const savedData = JSON.parse(localStorage.getItem("history"));
+        return savedData ? savedData.losses : [];
+    });
 
     useEffect(() => {
-        localStorage.setItem("historyData", JSON.stringify({ priorCarrier, expirationDate, lapse, losses }));
-    }, [priorCarrier, expirationDate, lapse, losses]);
+        const dataToSave = { formData, losses };
+        localStorage.setItem("history", JSON.stringify(dataToSave));
+    }, [formData, losses]);
+
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        const updatedData = { ...formData, [name]: value};
+        setFormData(updatedData);
+        setFormData(updatedData);
+    }
+
+    const isFormValid = () => {
+        if (!formData.priorCarrier || !formData.expirationDate || !formData.lapse) return false;
+        return true;
+    }
 
     const addLoss = () => {
-        setLosses([...losses, { dateOfLoss: "", category: "", paidAmount: "", description: "" }]);
-    }
+        setLosses([
+            ...losses,
+            { dateOfLoss: "", category: "", paidAmount: "", description: "" },
+        ]);
+    };
 
     const removeLoss = (index) => {
         const updatedLosses = losses.filter((_, i) => i !== index);
@@ -99,14 +127,6 @@ const History = () => {
         setLosses(updatedLosses);
     };
 
-    const isFormValid = () => {
-        return (
-            priorCarrier &&
-            expirationDate &&
-            lapse
-        )
-    }
-
     return (
         <div className="w-full h-full flex flex-col">
             <CreateQuote />
@@ -118,9 +138,10 @@ const History = () => {
                         <input
                             id="priorCarrier"
                             type="text"
+                            name="priorCarrier"
                             className="p-1 pl-2 border rounded-sm w-full"
-                            value={priorCarrier}
-                            onChange={(e) => setPriorCarrier(e.target.value)}
+                            value={formData.priorCarrier}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -129,9 +150,10 @@ const History = () => {
                         <input
                             id="expirationDate"
                             type="date"
+                            name="expirationDate"
                             className="p-1 pl-2 border rounded-sm w-full"
-                            value={expirationDate}
-                            onChange={(e) => setExpirationDate(e.target.value)}
+                            value={formData.expirationDate}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -140,8 +162,9 @@ const History = () => {
                         <select
                             id="lapse"
                             className="p-2 border rounded-sm w-full"
-                            value={lapse}
-                            onChange={(e) => setLapse(e.target.value)}
+                            name="lapse"
+                            value={formData.lapse}
+                            onChange={handleChange}
                             required
                         >
                             <option value="" disabled hidden></option>
@@ -169,7 +192,7 @@ const History = () => {
                     </button>
                 </Link>
                 <Link to="/quote/coverage">
-                    <button 
+                    <button
                         className={`bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm ${!isFormValid() ? 'opacity-50 cursor-not-allowed' : ""}`}
                         disabled={!isFormValid()}
                     >
