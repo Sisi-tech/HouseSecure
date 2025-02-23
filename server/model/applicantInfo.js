@@ -21,14 +21,20 @@ const ApplicantInfoSchema = new mongoose.Schema(
         individual: {
             firstName: {
                 type: String,
-                required: function() {
-                    return this.entityType === "individual";
+                validate: {
+                    validator: function(value) {
+                        return this.entityType !== "individual" || (value && value.trim() !== "");
+                    },
+                    message: "First name is required for individuals.",
                 },
             },
             lastName: {
                 type: String,
-                required: function() {
-                    return this.entityType === "individual";
+                validate: {
+                    validator: function(value) {
+                        return this.entityType !== "individual" || (value && value.trim() !== "");
+                    },
+                    message: "Last name is required for individuals.",
                 },
             },
         },
@@ -76,8 +82,8 @@ const ApplicantInfoSchema = new mongoose.Schema(
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',  
-            required: true, 
+            ref: 'User',
+            required: true,
         },
     },
     { timestamps: true } // Automatically add createdAt and updatedAt fields

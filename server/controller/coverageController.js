@@ -2,8 +2,8 @@ const Coverage = require("../model/coverage");
 
 const getCoverage = async (req, res) => {
     try {
-        const { userId } = req.params;
-        const coverage = await Coverage.findOne(userId);
+        const userId = req.params.user;
+        const coverage = await Coverage.findOne({ user: userId });
 
         if (!coverage) {
             return res.status(404).json({ message: "Coverage not found for this user" });
@@ -30,10 +30,28 @@ const upsertCoverage = async (req, res) => {
     }
 };
 
+const updateCoverage = async (req, res) => {
+    try {
+        const coverage = await Coverage.findById(req.params.id);
+        if (!coverage) {
+            return res.status(404).json({ message: "Coverage not found"});
+        }
+        Object.keys(req.body).forEach(key => {
+            if (req.body[key] !== undefined) {
+                coverage[key] = req.body[key];
+            }
+        });
+        await coverage.save();
+        res.status(200).json(coverage);
+    } catch (err) {
+        res.status(400).json({ message: "Error updating coverage", error: err.message });
+    }
+};
+
 const deleteCoverage = async (req, res) => {
     try {
-        const { userId } = req.params;
-        const deletedCoverage = await Coverage.findOneAndDelete(userId);
+        const userId = req.params.user;
+        const deletedCoverage = await Coverage.findOneAndDelete({ user: userId });
         if (!deletedCoverage) {
             return res.status(404).json({ message: 'Coverage not found for this user'});
         }
@@ -43,4 +61,4 @@ const deleteCoverage = async (req, res) => {
     }
 };
 
-module.exports = { getCoverage, upsertCoverage, deleteCoverage };
+module.exports = { getCoverage, upsertCoverage, deleteCoverage, updateCoverage };

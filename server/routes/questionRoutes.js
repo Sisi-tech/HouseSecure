@@ -10,8 +10,8 @@ const {
 
 router.post('/', submitResponses);
 router.get('/:userId', getResponses);
-router.put('/:id', updateResponse);
-router.delete('/:id', deleteHistory);
+router.put('/:userId', updateResponse);
+router.delete('/:userId', deleteResponse);
 
 module.exports = router;
 

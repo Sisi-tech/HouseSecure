@@ -14,7 +14,7 @@ const historySchema = new mongoose.Schema({
   expirationDate: { type: Date, required: true },
   lapse: { type: String, enum: ['lapse', 'noLapse'], required: true },
   losses: [lossSchema], // Embed the Loss schema
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Connect the history with the user
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Connect the history with the user
 }, { timestamps: true });
 
 

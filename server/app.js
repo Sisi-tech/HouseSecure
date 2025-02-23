@@ -39,6 +39,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(mongoSanitize());
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
 
 
 app.set("trust proxy", 1);

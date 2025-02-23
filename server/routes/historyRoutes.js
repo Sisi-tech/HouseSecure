@@ -10,6 +10,6 @@ const {
 router.post('/', createHistory);
 router.get('/:userId', getHistory);
 router.put('/:id', updateHistory);
-router.delete('/:id', deleteHistory);
+router.delete('/:user', deleteHistory);
 
 module.exports = router;

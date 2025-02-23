@@ -7,7 +7,7 @@ const {
 } = require("../controller/applicantInfoController");
 
 router.post("/", createApplicantInfo);
-router.get("/:userId", getApplicantInfo);
+router.get("/:user", getApplicantInfo);
 router.put("/:id", updateApplicantInfo);
 
 module.exports = router; 

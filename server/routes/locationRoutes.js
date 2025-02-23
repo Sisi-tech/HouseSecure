@@ -4,10 +4,12 @@ const {
     createLocation,
     getLocation,
     updateLocation,
+    deleteLocation,
 } = require("../controller/locationController");
 
-router.post('/', createLocation),
-router.get('/:userId', getLocation),
+router.post('/', createLocation);
+router.get('/:userId', getLocation);
 router.put('/:id', updateLocation);
+router.delete('/:id', deleteLocation);
 
 module.exports = router;

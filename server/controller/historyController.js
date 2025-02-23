@@ -1,32 +1,56 @@
 const History = require("../model/history");
 const User = require("../model/user");
 
-const createHistory = async (req, res) => {
-    const { priorCarrier, expirationDate, lapse, losses, userId } = req.body;
+// const createHistory = async (req, res) => {
+//     const { priorCarrier, expirationDate, lapse, losses } = req.body;
+//     const userId = req.body.user;
+//     console.log("userId:", userId);
+//     try {
+//         const user = await User.findById(userId);
+//         if (!user) {
+//             return res.status(404).send("User not found");
+//         }
+//         // create a new history document, including the losses as part of the document
+//         const history = {
+//             priorCarrier,
+//             expirationDate,
+//             lapse,
+//             losses, // Embed losses directly within the history.
+//             user: user._id,
+//         };
+//         const historyInfo = new History(history);
+//         await historyInfo.save();
+//         res.status(201).json({ _id: historyInfo._id, ...history });
+//     } catch (err) {
+//         res.status(400).send("Error saving history: " + err);
+//     }
+// };
 
+const createHistory = async (req, res) => {
     try {
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).send("User not found");
-        }
-        // create a new history document, including the losses as part of the document
-        const history = new History({
-            priorCarrier,
-            expirationDate,
-            lapse,
-            losses, // Embed losses directly within the history.
-            user: user._id,
-        });
-        await history.save();
-        res.status(201).json({ historyId: history._id })
-    } catch (err) {
-        res.status(400).send("Error saving history: " + err);
+        const { userId } = req.params;
+        const historyData = req.body;
+
+        console.log("create history user id:", userId);
+
+        const updatedHistory = await History.findOneAndUpdate(
+            userId,
+            { ...historyData },
+            { new: true, upsert: true, runValidators: true }
+        );
+        res.status(200).json({ historyId: updatedHistory._id, data: updatedHistory });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error });
     }
-};
+}
+
+
 
 const getHistory = async (req, res) => {
     try {
-        const history = await History.findOne({ user: req.params.userId });
+        const userId = req.params.userId;
+        console.log("get history id:", userId);
+        const history = await History.findOne({userId: userId});
         if (!history) {
             return res.status(404).send('History not found');
         }
@@ -37,19 +61,17 @@ const getHistory = async (req, res) => {
 };
 
 const updateHistory = async (req, res) => {
-    const { priorCarrier, expirationDate, lapse, losses } = req.body;
     try {
         const history = await History.findById(req.params.id);
         if (!history) {
             return res.status(404).send('History not found');
         }
-        history.priorCarrier = priorCarrier || history.priorCarrier;
-        history.expirationDate = expirationDate || history.expirationDate;
-        history.lapse = lapse || history.lapse;
+        Object.keys(req.body).forEach(key => {
+            if (req.body[key] !== undefined) {
+                history[key] = req.body[key];
+            }
+        });
 
-        if (losses) {
-            history.losses = losses;
-        }
         await history.save();
         res.status(200).send(history);
     } catch (err) {
@@ -59,12 +81,13 @@ const updateHistory = async (req, res) => {
 
 const deleteHistory = async (req, res) => {
     try {
-        const history = await History.findById(req.params.id);
-        if (!history) {
+        const userId = req.params.user;
+        console.log("userId:", userId);
+        const deletedHistory = await History.findOneAndDelete({ user: userId });
+        if (!deletedHistory) {
             return res.status(404).send("History not found");
         }
-        await history.remove();
-        res.status(200).send('History deleted');
+        res.status(200).send({ message: "History deleted successfully" });
     } catch (err) {
         res.status(400).send('Error deleting history: ' + err);
     }

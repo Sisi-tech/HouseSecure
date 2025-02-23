@@ -1,37 +1,54 @@
 const Interest = require("../model/interest");
 const User = require("../model/user");
 
+// const createInterest = async (req, res) => {
+//     const { interestType, name, mailingAddress, optionalAddress, city, state, postalCode } = req.body;
+//     const userId = req.body.user;
+//     console.log("userId to create interest:", userId);
+//     try {
+//         const user = await User.findById(userId);
+//         if (!user) {
+//             return res.status(404).json({ message: "User not found" });
+//         }
+//         const interestData = {
+//             interestType,
+//             name,
+//             mailingAddress,
+//             optionalAddress,
+//             city,
+//             state,
+//             postalCode,
+//             user: user._id,
+//         };
+
+//         const interest = new Interest(interestData);
+//         await interest.save();
+//         res.status(201).json({ _id: interest._id, ...interestData });
+//     } catch (err) {
+//         res.status(400).json({ message: "Error saving interest", error: err.message });
+//     }
+// };
+
 const createInterest = async (req, res) => {
-    const { interestType, name, mailingAddress, optionalAddress, city, state, postalCode, userId } = req.body;
     try {
-        if (!userId) {
-            return res.status(400).json({ message: "User ID is required" });
-        }
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-        const interest = new Interest({
-            interestType,
-            name,
-            mailingAddress,
-            optionalAddress,
-            city,
-            state,
-            postalCode,
-            user: user._id,
-        });
-        await interest.save();
-        res.status(201).json({ interestId: interest._id });
-    } catch (err) {
-        res.status(500).json({ message: "Error saving interest", error: err.message });
+        const { userId } = req.params;
+        const interestData = req.body;
+        const updatedInterest = await Interest.findOneAndUpdate(
+            userId,
+            {...interestData},
+            { new: true, upsert: true, runValidators: true }
+        );
+        res.status(200).json({ coverageId: updatedInterest._id, data: updatedInterest });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error });
     }
 };
 
 const getInterest = async (req, res) => {
     try {
-        const interests = await Interest.find({ user: req.params.userId });
-        if (!interests.length) {
+        const userId = req.params.user;
+        const interests = await Interest.findOne({ user: userId });
+        if (!interests) {
             return res.status(404).json({ message: "No interests found" });
         }
         res.status(200).json(interests);
@@ -47,7 +64,11 @@ const updateInterest = async (req, res) => {
             return res.status(404).json({ message: "Interest not found" });
         }
         delete req.body.user; // Prevent user modification
-        Object.assign(interest, req.body);
+        Object.keys(req.body).forEach(key => {
+            if (req.body[key] !== undefined) {
+                coverage[key] = req.body[key];
+            }
+        });
         await interest.save();
         res.status(200).json(interest);
     } catch (err) {

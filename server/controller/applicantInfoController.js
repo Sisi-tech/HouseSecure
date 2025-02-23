@@ -2,12 +2,21 @@ const ApplicantInfo = require("../model/applicantInfo");
 const User = require("../model/user");
 
 const createApplicantInfo = async (req, res) => {
-    const { effectiveDate, entityType, policyForm, occupancyType, lossHistory, userId, firstName, lastName, partnership, jointVenture, llc, corporation, trust } = req.body;
+    const { effectiveDate, entityType, policyForm, occupancyType, lossHistory, firstName, lastName, partnership, jointVenture, llc, corporation, trust } = req.body;
+    const userId = req.body.user;
+    console.log("req.body:", req.body);
+    console.log("UserId:", userId);
     
     try {
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ message: "User not found" });
+        }
+
+        if (entityType === "individual") {
+            if (!firstName || !lastName) {
+                return res.status(400).json({ message: "First name and last name are required for individuals." });
+            }
         }
 
         const applicantInfoData = {
@@ -19,29 +28,18 @@ const createApplicantInfo = async (req, res) => {
             user: user._id,
         };
 
-        // Standardize entityType to lowercase
-        const entityTypeLower = entityType?.toLowerCase();
-
         // Validate and assign additional fields based on entityType
-        if (entityTypeLower === "individual") {
-            if (!firstName || !lastName) {
-                return res.status(400).json({ message: "First name and last name are required for individuals." });
-            }
+        if (entityType === "individual") {
             applicantInfoData.individual = { firstName, lastName };
-        } else if (entityTypeLower === "partnership") {
-            if (!partnership) return res.status(400).json({ message: "Partnership details are required." });
+        } else if (entityType === "Partnership") {
             applicantInfoData.partnership = partnership;
-        } else if (entityTypeLower === "joint venture") {
-            if (!jointVenture) return res.status(400).json({ message: "Joint Venture details are required." });
+        } else if (entityType === "Joint Venture") {
             applicantInfoData.jointVenture = jointVenture;
-        } else if (entityTypeLower === "limited liability corporation") {
-            if (!llc) return res.status(400).json({ message: "LLC details are required." });
+        } else if (entityType === "Limited Liability Corporation") {
             applicantInfoData.llc = llc;
-        } else if (entityTypeLower === "corporation") {
-            if (!corporation) return res.status(400).json({ message: "Corporation details are required." });
+        } else if (entityType === "corporation") {
             applicantInfoData.corporation = corporation;
-        } else if (entityTypeLower === "trust") {
-            if (!trust) return res.status(400).json({ message: "Trust details are required." });
+        } else if (entityType === "trust") {
             applicantInfoData.trust = trust;
         }
 
@@ -56,8 +54,10 @@ const createApplicantInfo = async (req, res) => {
 
 const getApplicantInfo = async (req, res) => {
     try {
-        const applicantInfo = await ApplicantInfo.findOne({ user: req.params.userId });
-        if (!applicantInfo) {
+        const userId = req.params.user;
+        const applicantInfo = await ApplicantInfo.findOne({ user: userId });
+        console.log("req.params.user:", userId);
+        if (!userId) {
             return res.status(404).json({ message: "ApplicantInfo not found" });
         }
         res.status(200).json(applicantInfo);

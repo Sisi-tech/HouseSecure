@@ -53,7 +53,7 @@ const LocationSchema = new mongoose.Schema(
             type: Number,
             required: [true, "Year built is required"],
         },
-        user: {
+        userId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
             required: true, // Ensures each location is tied to a specific user

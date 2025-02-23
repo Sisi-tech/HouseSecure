@@ -7,7 +7,7 @@ const questionSchema = new mongoose.Schema({
 });
 
 const underwritingSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     responses: { type: [questionSchema], required: true },
     createdAt: { type: Date, default: Date.now }
 });
