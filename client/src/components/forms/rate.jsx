@@ -15,31 +15,45 @@ const Rate = () => {
     const [isSubmit, setIsSubmit] = useState(false);
     const submitQuote = async () => {
         try {
-            const userId = localStorage.getItem("userId")?.trim();
-            if (!userId) {
-                console.error("User ID not found. Please log in again.");
-                return;
+            const storedUser = JSON.parse(localStorage.getItem("user"));
+            console.log("Stored userId in localStorage:", storedUser);
+            if (storedUser?.id) {
+                console.log("User ID found:", storedUser.id);
+            } else {
+                console.log("User ID not found in localStorage.");
             }
+            const userId = storedUser?.id;
+            console.log("User ID found:", userId);
 
             // get form data from localStorage
-            const applicantInfo = JSON.parse(localStorage.getItem("applicantInfo")) || {};
-            const location = JSON.parse(localStorage.getItem("location")) || {};
-            const history = JSON.parse(localStorage.getItem("history")) || {};
-            const interest = JSON.parse(localStorage.getItem("interest")) || {};
-            const coverage = JSON.parse(localStorage.getItem("coverage")) || {};
-            const question = JSON.parse(localStorage.getItem("question")) || {};
+            const applicantInfo = JSON.parse(localStorage.getItem("applicantInfo") || "{}");
+            const location = JSON.parse(localStorage.getItem("location") || "{}");
+            const history = JSON.parse(localStorage.getItem("history") || "{}");
+            const interest = JSON.parse(localStorage.getItem("interest") || "{}");
+            const coverage = JSON.parse(localStorage.getItem("coverage") || "{}");
+            const question = JSON.parse(localStorage.getItem("question") || "{}");
+
+            console.log(localStorage.getItem("applicantInfo"));
+            console.log(localStorage.getItem("location"));
+            console.log(localStorage.getItem("history"));
+            console.log(localStorage.getItem("interest"));
+            console.log(localStorage.getItem("coverage"));
+            console.log(localStorage.getItem("question"));
+
 
             const postData = async (url, data) => {
                 const res = await fetch(url, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ ...data, userId }),
+                    body: JSON.stringify({ userId, ...data }),
                 });
-                if (!res.OK) {
-                    const errorMsg = await res.text(); // Read response error message
-                    throw new Error(`Failed to submit data to ${url}: ${errorMsg}`);
+                const responseText = await res.text();
+                console.log(`Response from ${url}:`, responseText);
+
+                if (!res.ok) {
+                    throw new Error(`Failed to submit data to ${url}: ${responseText}`);
                 }
-                return res.json();
+                return JSON.parse(responseText);
             }
 
             const [applicantInfoRes, locationRes, historyRes, coverageRes, interestRes, questionRes] = await Promise.all([
