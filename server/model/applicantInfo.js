@@ -1,10 +1,20 @@
 const mongoose = require("mongoose");
 
-const ApplicantInfoSchema = new mongoose.Schema(
-    {
-        effectiveDate: {
+const ApplicantInfoSchema = new mongoose.Schema({
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
+        selectedDate: {
             type: Date,
             required: [true, "Error: no effective date provided"],
+            validate: {
+                validator: function(v) {
+                    return v && v >= new Date();
+                },
+                message: props => `${props.value}`
+            }
         },
         entityType: {
             type: String,
@@ -21,19 +31,25 @@ const ApplicantInfoSchema = new mongoose.Schema(
         individual: {
             firstName: {
                 type: String,
-                required: function() {
-                    return this.entityType === "individual";
+                validate: {
+                    validator: function(value) {
+                        // Access the document instance using 'this'
+                        return this.entityType !== 'individual' || value != null;
+                    },
+                    message: 'First name is required for individuals.',
                 },
-                message: "First name is required for individuals.",
             },
             lastName: {
                 type: String,
-                required: function() {
-                    return this.entityType === "individual";
+                validate: {
+                    validator: function(value) {
+                        // Access the document instance using 'this'
+                        return this.entityType !== 'individual' || value != null;
+                    },
+                    message: 'Last name is required for individuals.',
                 },
-                message: "Last name is required for individuals.",
             },
-        },
+        },        
         partnership: {
             type: String,
             required: function() {
@@ -43,7 +59,7 @@ const ApplicantInfoSchema = new mongoose.Schema(
         jointVenture: {
             type: String,
             required: function() {
-                return this.entityType === "Joint Venture";
+                return this.entityType === "joint Venture";
             },
         },
         llc: {
@@ -75,11 +91,6 @@ const ApplicantInfoSchema = new mongoose.Schema(
         lossHistory: {
             type: String,
             required: [true, "Error: no loss history is provided"],
-        },
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true,
         },
     },
     { timestamps: true } // Automatically add createdAt and updatedAt fields

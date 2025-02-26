@@ -1,34 +1,6 @@
 const Interest = require("../model/interest");
 const User = require("../model/user");
 
-// const createInterest = async (req, res) => {
-//     const { interestType, name, mailingAddress, optionalAddress, city, state, postalCode } = req.body;
-//     const userId = req.body.user;
-//     console.log("userId to create interest:", userId);
-//     try {
-//         const user = await User.findById(userId);
-//         if (!user) {
-//             return res.status(404).json({ message: "User not found" });
-//         }
-//         const interestData = {
-//             interestType,
-//             name,
-//             mailingAddress,
-//             optionalAddress,
-//             city,
-//             state,
-//             postalCode,
-//             user: user._id,
-//         };
-
-//         const interest = new Interest(interestData);
-//         await interest.save();
-//         res.status(201).json({ _id: interest._id, ...interestData });
-//     } catch (err) {
-//         res.status(400).json({ message: "Error saving interest", error: err.message });
-//     }
-// };
-
 const createInterest = async (req, res) => {
     try {
         const { userId } = req.params;

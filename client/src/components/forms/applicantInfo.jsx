@@ -6,23 +6,19 @@ import BackToTop from "../shared/backToTop";
 
 const ApplicantInfo = () => {
     const today = new Date().toISOString().split("T")[0];
-    // const [selectedDate, setSelectedDate] = useState(today);
-    // const [entityType, setEntityType] = useState("individual");
-    // const [firstName, setFirstName] = useState("");
-    // const [lastName, setLastName] = useState("");
-    // const [businessName, setBusinessName] = useState("");
-    // const [policyForm, setPolicyForm] = useState("");
-    // const [occupancyType, setOccupancyType] = useState("");
-    // const [lossHistory, setLossHistory] = useState("");
-
+    console.log("today is:", today);
     const [formData, setFormData] = useState({
         selectedDate: today,
         entityType: "",
         firstName: "",
         lastName: "",
-        businessName: "",
+        partnership: "",
+        jointVenture: "",
         policyForm: "",
         occupancyType: "",
+        llc: "",
+        corporation: "",
+        trust: "",
         lossHistory: "",
     })
 
@@ -30,7 +26,7 @@ const ApplicantInfo = () => {
         const savedData = JSON.parse(localStorage.getItem("applicantInfo")) || {};
         setFormData(prevData => ({
             ...prevData,
-            ...savedData
+            ...savedData,
         }));
     }, []);
 
@@ -46,7 +42,7 @@ const ApplicantInfo = () => {
         if (formData.entityType === "individual" && (!formData.firstName || !formData.lastName)) return false;
         if (formData.entityType !== "individual" && !formData.businessName) return false;
         return true;
-    };    
+    };
 
     return (
         <div className="w-full min-h-screen flex flex-col">
@@ -84,7 +80,7 @@ const ApplicantInfo = () => {
                             <option value="trust">Trust</option>
                         </select>
                     </div>
-                    {formData.entityType === "individual" ? (
+                    {formData.entityType === "individual" && (
                         <>
                             <div className="flex flex-col md:flex-row md:items-center gap-4">
                                 <label htmlFor="firstName" className="w-auto md:w-160 lg:w-240 text-start md:text-right">
@@ -95,7 +91,7 @@ const ApplicantInfo = () => {
                                     type="text"
                                     name="firstName"
                                     className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
-                                    value={formData.firstName || ""}
+                                    value={formData.firstName}
                                     onChange={handleChange}
                                     required
                                     placeholder="Required"
@@ -117,23 +113,97 @@ const ApplicantInfo = () => {
                                 />
                             </div>
                         </>
-                    ) : formData.entityType ? (
+                    )}
+                    {formData.entityType === "Partnership" && (
                         <div className="flex flex-col md:flex-row md:items-center gap-4">
-                            <label htmlFor="businessName" className="md:w-160 lg:w-240 sm:text-start md:text-right">
-                                {`${entityType}:`}
+                            <label htmlFor="partnership" className="md:w-160 lg:w-240 sm:text-start md:text-right">
+                                Business Name:
                             </label>
                             <input
-                                id="businessName"
+                                id="partnership"
                                 type="text"
-                                name="businessName"
+                                name="partnership"
                                 className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
-                                value={formData.businessName}
+                                value={formData.partnership}
                                 onChange={handleChange}
                                 required
                                 placeholder="Required"
                             />
                         </div>
-                    ) : null}
+                    )}
+
+                    {formData.entityType === "Joint Venture" && (
+                        <div className="flex flex-col md:flex-row md:items-center gap-4">
+                            <label htmlFor="jointVenture" className="md:w-160 lg:w-240 sm:text-start md:text-right">
+                                Business Name:
+                            </label>
+                            <input
+                                id="jointVenture"
+                                type="text"
+                                name="jointVenture"
+                                className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
+                                value={formData.jointVenture}
+                                onChange={handleChange}
+                                required
+                                placeholder="Required"
+                            />
+                        </div>
+                    )}
+
+                    {formData.entityType === "Limited Liability Corporation" && (
+                        <div className="flex flex-col md:flex-row md:items-center gap-4">
+                            <label htmlFor="llc" className="md:w-160 lg:w-240 sm:text-start md:text-right">
+                                Business Name:
+                            </label>
+                            <input
+                                id="llc"
+                                type="text"
+                                name="llc"
+                                className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
+                                value={formData.llc}
+                                onChange={handleChange}
+                                required
+                                placeholder="Required"
+                            />
+                        </div>
+                    )}
+
+                    {formData.entityType === "corporation" && (
+                        <div className="flex flex-col md:flex-row md:items-center gap-4">
+                            <label htmlFor="corporation" className="md:w-160 lg:w-240 sm:text-start md:text-right">
+                                Business Name:
+                            </label>
+                            <input
+                                id="corporation"
+                                type="text"
+                                name="corporation"
+                                className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
+                                value={formData.corporation}
+                                onChange={handleChange}
+                                required
+                                placeholder="Required"
+                            />
+                        </div>
+                    )}
+
+                    {formData.entityType === "trust" && (
+                        <div className="flex flex-col md:flex-row md:items-center gap-4">
+                            <label htmlFor="trust" className="md:w-160 lg:w-240 sm:text-start md:text-right">
+                                Business Name:
+                            </label>
+                            <input
+                                id="trust"
+                                type="text"
+                                name="trust"
+                                className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
+                                value={formData.trust}
+                                onChange={handleChange}
+                                required
+                                placeholder="Required"
+                            />
+                        </div>
+                    )}
+
                     <div className="flex flex-col md:flex-row md:items-center gap-4">
                         <label htmlFor="policyForm" className="w-auto md:w-160 lg:w-240 text-start md:text-right">
                             Policy Form:

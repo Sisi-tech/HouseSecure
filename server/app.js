@@ -8,6 +8,7 @@ const logger = require("morgan");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const cookieParser = require("cookie-parser");
+const bodyParser = require('body-parser');
 
 // npm install serve-favicon
 
@@ -41,6 +42,8 @@ app.use(mongoSanitize());
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
+app.use(bodyParser.json());
+
 
 
 app.set("trust proxy", 1);

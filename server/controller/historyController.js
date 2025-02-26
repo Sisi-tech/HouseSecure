@@ -1,31 +1,6 @@
 const History = require("../model/history");
 const User = require("../model/user");
 
-// const createHistory = async (req, res) => {
-//     const { priorCarrier, expirationDate, lapse, losses } = req.body;
-//     const userId = req.body.user;
-//     console.log("userId:", userId);
-//     try {
-//         const user = await User.findById(userId);
-//         if (!user) {
-//             return res.status(404).send("User not found");
-//         }
-//         // create a new history document, including the losses as part of the document
-//         const history = {
-//             priorCarrier,
-//             expirationDate,
-//             lapse,
-//             losses, // Embed losses directly within the history.
-//             user: user._id,
-//         };
-//         const historyInfo = new History(history);
-//         await historyInfo.save();
-//         res.status(201).json({ _id: historyInfo._id, ...history });
-//     } catch (err) {
-//         res.status(400).send("Error saving history: " + err);
-//     }
-// };
-
 const createHistory = async (req, res) => {
     try {
         const { userId } = req.params;
@@ -43,7 +18,6 @@ const createHistory = async (req, res) => {
         res.status(500).json({ message: 'Server error', error });
     }
 }
-
 
 
 const getHistory = async (req, res) => {

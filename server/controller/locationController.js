@@ -1,37 +1,5 @@
 const Location = require("../model/location");
 const User = require("../model/user");
-const mongoose = require("mongoose");
-
-// const createLocation = async (req, res) => {
-//     const { address1, address2, zipCode, city, state, distanceToCoast, rental, numOfFamily, townhouse, sqft, constructionType, protectionClass, yearBuilt } = req.body;
-//     const userId = req.body.user;
-//     console.log("userId to create location:", userId);
-//     try {
-//         if (!userId) {
-//             return res.status(404).send('User not found');
-//         }
-//         const location = new Location({
-//             address1,
-//             address2, 
-//             zipCode,
-//             city,
-//             state,
-//             distanceToCoast,
-//             rental,
-//             numOfFamily,
-//             townhouse,
-//             sqft,
-//             constructionType,
-//             protectionClass,
-//             yearBuilt,
-//             user: userId,
-//         });
-//         await location.save();
-//         res.status(201).json({ locationId: location._id })
-//     } catch (err) {
-//         res.status(400).send('Error saving location: ' + err);
-//     }
-// };
 
 const createLocation = async (req, res) => {
     try {
@@ -49,17 +17,6 @@ const createLocation = async (req, res) => {
     }
 };
 
-// const getLocation = async (req, res) => {
-//     try {
-//         const location = await Location.findOne({ user: req.params.userId });
-//         if (!location) {
-//             return res.status(404).send('Location not found');
-//         }
-//         res.status(200).send(location);
-//     } catch (err) {
-//         res.status(400).send('Error fetching location: ' + err);
-//     }
-// };
 
 const getLocation = async (req, res) => {
     try {
