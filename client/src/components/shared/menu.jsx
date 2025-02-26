@@ -34,23 +34,23 @@ export default function Menu({ isAuthenticated, handleLogout }) {
             {/* Navigation Links */}
             <nav className={`lg:flex lg:items-center lg:justify-between ${menuOpen ? "block" : "hidden"} w-full ${showDropdown ? "dropdown-open" : ""}`}>
                 <ul className="flex flex-col lg:flex-row font-semibold text-md space-y-4 lg:space-y-0 lg:space-x-6 py-2">
-                    <li className="flex items-center gap-2 p-4 hover:scale-105">
+                    <li className="flex items-center gap-2 p-4 hover:scale-105 hover:text-sky-800">
                         <FaHome size={18} />
                         <Link to="/quote/applicant-info" onClick={() => setMenuOpen(false)}>Create Quote</Link>
                     </li>
-                    <li className="flex items-center gap-2 p-4 hover:scale-105">
+                    <li className="flex items-center gap-2 p-4 hover:scale-105 hover:text-sky-800">
                         <FaRegEye size={18} />
                         <Link to="/view-coverages" onClick={() => setMenuOpen(false)}>View Coverages</Link>
                     </li>
-                    <li className="flex items-center gap-2 p-4 hover:scale-105">
+                    <li className="flex items-center gap-2 p-4 hover:scale-105 hover:text-sky-800">
                         <FaPen size={18} />
                         <Link to="/change-coverages" onClick={() => setMenuOpen(false)}>Change Coverages</Link>
                     </li>
-                    <li className="flex items-center gap-2 p-4 hover:scale-105">
+                    <li className="flex items-center gap-2 p-4 hover:scale-105 hover:text-sky-800">
                         <FaFileAlt size={18} />
                         <Link to="/policy-documents" onClick={() => setMenuOpen(false)}>Policy Documents</Link>
                     </li>
-                    <li className="flex items-center gap-2 p-4 hover:scale-105">
+                    <li className="flex items-center gap-2 p-4 hover:scale-105 hover:text-sky-800">
                         <FaCreditCard size={18} />
                         <Link to="/billing-info" onClick={() => setMenuOpen(false)}>Billing Info</Link>
                     </li>

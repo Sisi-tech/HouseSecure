@@ -21,21 +21,17 @@ const ApplicantInfoSchema = new mongoose.Schema(
         individual: {
             firstName: {
                 type: String,
-                validate: {
-                    validator: function(value) {
-                        return this.entityType !== "individual" || (value && value.trim() !== "");
-                    },
-                    message: "First name is required for individuals.",
+                required: function() {
+                    return this.entityType === "individual";
                 },
+                message: "First name is required for individuals.",
             },
             lastName: {
                 type: String,
-                validate: {
-                    validator: function(value) {
-                        return this.entityType !== "individual" || (value && value.trim() !== "");
-                    },
-                    message: "Last name is required for individuals.",
+                required: function() {
+                    return this.entityType === "individual";
                 },
+                message: "Last name is required for individuals.",
             },
         },
         partnership: {

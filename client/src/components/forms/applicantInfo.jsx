@@ -28,7 +28,10 @@ const ApplicantInfo = () => {
 
     useEffect(() => {
         const savedData = JSON.parse(localStorage.getItem("applicantInfo")) || {};
-        if (savedData) setFormData(savedData);
+        setFormData(prevData => ({
+            ...prevData,
+            ...savedData
+        }));
     }, []);
 
     const handleChange = (e) => {
@@ -92,7 +95,7 @@ const ApplicantInfo = () => {
                                     type="text"
                                     name="firstName"
                                     className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
-                                    value={formData.firstName}
+                                    value={formData.firstName || ""}
                                     onChange={handleChange}
                                     required
                                     placeholder="Required"
