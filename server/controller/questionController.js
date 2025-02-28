@@ -1,39 +1,39 @@
+const { response } = require("express");
 const UnderwritingResponse = require("../model/question");
 const User = require("../model/user");
 
 const submitResponses = async (req, res) => {
     try {
         const { responses } = req.body;
-        console.log("Request body:", req.body);
-        const userId = req.body.userId; // Ensure this matches your request structure
-        console.log("Type of responses:", Array.isArray(responses) ? "Array" : typeof responses);
-        console.log("userId for response:", userId);
-        if (!userId || !responses || !Array.isArray(responses)) {
-            return res.status(400).json({ error: "Invalid request data" });
-        }
-        // Check if user exists
-        const user = await User.findById(userId);
-        if (!user) {
-            return res.status(404).json({ error: "User not found" });
-        }
-        for (const response of responses) {
+        const userId = req.body.userId;
+        const formattedResponses = Array.isArray(responses)
+            ? responses
+            : Object.entries(responses).map(([question, answer]) => ({
+                question, answer
+            }));
+        console.log("Formatted responses:", formattedResponses);
+
+        // Validate the responses
+        for (const response of formattedResponses) {
             if (!response.question || !response.answer) {
                 return res.status(400).json({ error: "Each response must have a question and an answer" });
             }
         }
-        const newResponse = new UnderwritingResponse({ user: userId, responses });
-        await newResponse.save();
-        res.status(201).json({
+        const updatedResponse = await UnderwritingResponse.findOneAndUpdate(
+            { user: userId },
+            { responses: formattedResponses },
+            { new: true, upsert: true, runValidators: true }
+        );
+        res.status(200).json({ 
             message: "Responses submitted successfully",
-            data: newResponse,
-            responseId: newResponse._id
+            responseId: updatedResponse._id, 
+            data: updatedResponse,
         });
     } catch (error) {
-        res.status(500).json({ error: "Server error", message: error.message });
+        console.error("Error in submitResponses:", error);
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
-
-
 
 const getResponses = async (req, res) => {
     try {

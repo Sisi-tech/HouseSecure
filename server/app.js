@@ -45,7 +45,6 @@ app.use(express.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
 
-
 app.set("trust proxy", 1);
 
 app.use("/api/v1/user", userRouter);

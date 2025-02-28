@@ -31,30 +31,37 @@ const Rate = () => {
             const history = JSON.parse(localStorage.getItem("history") || "{}");
             const interest = JSON.parse(localStorage.getItem("interest") || "{}");
             const coverage = JSON.parse(localStorage.getItem("coverage") || "{}");
-            const question = JSON.parse(localStorage.getItem("question") || "{}");
+            const question = JSON.parse(localStorage.getItem("responses") || "{}");
 
             console.log(localStorage.getItem("applicantInfo"));
             console.log(localStorage.getItem("location"));
             console.log(localStorage.getItem("history"));
             console.log(localStorage.getItem("interest"));
             console.log(localStorage.getItem("coverage"));
-            console.log(localStorage.getItem("question"));
+            console.log(localStorage.getItem("responses"));
 
 
             const postData = async (url, data) => {
-                const res = await fetch(url, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ userId, ...data }),
-                });
-                const responseText = await res.text();
-                console.log(`Response from ${url}:`, responseText);
-
-                if (!res.ok) {
-                    throw new Error(`Failed to submit data to ${url}: ${responseText}`);
+                try {
+                    const res = await fetch(url, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ userId, responses: data }),
+                    });
+                    const responseText = await res.text();
+                    console.log(`Response from ${url}:`, responseText);
+                    console.log('Payload sent:', { userId, responses: data });
+            
+                    if (!res.ok) {
+                        throw new Error(`Failed to submit data to ${url}: ${responseText}`);
+                    }
+                    return JSON.parse(responseText);
+                } catch (error) {
+                    console.error(`Error in postData for ${url}:`, error);
+                    throw error; // Re-throw the error after logging it
                 }
-                return JSON.parse(responseText);
-            }
+            };
+            
 
             const [applicantInfoRes, locationRes, historyRes, coverageRes, interestRes, questionRes] = await Promise.all([
                 postData(applicantInfoUrl, applicantInfo),

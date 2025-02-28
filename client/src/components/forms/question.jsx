@@ -39,24 +39,29 @@ const questions = [
 
 
 const UnderwritingQuestion = () => {
-    const [answers, setAnswers] = useState({});
+    const [responses, setResponses] = useState({});
     const [unansweredQuestions, setUnansweredQuestions] = useState([]);
 
     useEffect(() => {
-        const storedAnswers = JSON.parse(localStorage.getItem("answers")) || {};
-        const updatedAnswers = questions.reduce((acc, question) => {
-            acc[question] = storedAnswers[question] || ""; // Keep existing answers or default to empty
-            return acc;
-        }, {});
-        setAnswers(updatedAnswers);
+        const storedAnswers = JSON.parse(localStorage.getItem("responses")) || {};
+        if (Object.keys(storedAnswers).length > 0) {
+            setResponses(storedAnswers);
+        }
     }, []);
-    
-    useEffect(() => {
-        localStorage.setItem("answers", JSON.stringify(answers));
-    }, [answers]);    
 
-    const handleAnswerChange = (question, answer) => {
-        setAnswers((prev) => ({ ...prev, [question]: answer }));
+    useEffect(() => {
+        if (Object.keys(responses).length > 0) {
+            localStorage.setItem("responses", JSON.stringify(responses));
+        }
+    }, [responses]);
+
+    useEffect(() => {
+        const storedAnswers = JSON.parse(localStorage.getItem("responses")) || {};
+        setResponses(storedAnswers);
+    }, []);
+
+    const handleAnswerChange = (question, response) => {
+        setResponses((prev) => ({ ...prev, [question]: response }));
     };
 
     const selectAllNo = () => {
@@ -64,7 +69,7 @@ const UnderwritingQuestion = () => {
             acc[question] = "no";
             return acc;
         }, {});
-        setAnswers(allNoAnswers);
+        setResponses(allNoAnswers);
         setUnansweredQuestions([]);
     }
     const clearAnswers = () => {
@@ -72,22 +77,22 @@ const UnderwritingQuestion = () => {
             acc[question] = "";
             return acc;
         }, {});
-        setAnswers(emptyAnswers);
-        localStorage.removeItem("answers");
-    };    
+        setResponses(emptyAnswers);
+        localStorage.removeItem("responses");
+    };
 
     const handleSubmit = () => {
-        const unanswered = questions.filter((question) => !answers[question]);
+        const unanswered = questions.filter((question) => !responses[question]);
         setUnansweredQuestions(unanswered);
         if (unanswered.length === 0) {
-            console.log("Submitted Answers:", answers);
+            console.log("Submitted Answers:", responses);
         }
     };
 
     useEffect(() => {
-        const unanswered = questions.filter((question) => !answers[question]);
+        const unanswered = questions.filter((question) => !responses[question]);
         setUnansweredQuestions(unanswered);
-    }, [answers]);
+    }, [responses]);
 
     // const isFormValid = questions.every((question) => answers[question]);
     const isFormValid = unansweredQuestions.length === 0;
@@ -122,7 +127,7 @@ const UnderwritingQuestion = () => {
                                         type="radio"
                                         name={question}
                                         value="yes"
-                                        checked={answers[question] === "yes"}
+                                        checked={responses[question] === "yes"}
                                         onChange={() => handleAnswerChange(question, "yes")}
                                     />
                                     Yes
@@ -132,7 +137,7 @@ const UnderwritingQuestion = () => {
                                         type="radio"
                                         name={question}
                                         value="no"
-                                        checked={answers[question] === "no"}
+                                        checked={responses[question] === "no"}
                                         onChange={() => handleAnswerChange(question, "no")}
                                     />
                                     No
@@ -151,9 +156,8 @@ const UnderwritingQuestion = () => {
                 </Link>
                 <Link to="/quote/rate">
                     <button
-                        className={`bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm ${
-                            !isFormValid ? "opacity-50 cursor-not-allowed" : ""
-                        }`}
+                        className={`bg-sky-700 w-14 p-1 rounded-lg shadow-lg text-sm ${!isFormValid ? "opacity-50 cursor-not-allowed" : ""
+                            }`}
                         onClick={handleSubmit}
                         disabled={!isFormValid}
                     >
