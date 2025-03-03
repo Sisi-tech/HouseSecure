@@ -4,13 +4,14 @@ const Quote = require("../model/quote");
 const submitQuote = async (req, res) => {
     try {
         console.log("request body:", req.body);
-        const { applicantInfoId, locationId, historyId, coverageId, interestId, responseId } = req.body;
-        console.log('Destructured Values:', { applicantInfoId, locationId, historyId, coverageId, interestId, responseId });
+        const { userId, applicantInfoId, locationId, historyId, coverageId, interestId, responseId } = req.body;
+        console.log('Destructured Values:', { userId, applicantInfoId, locationId, historyId, coverageId, interestId, responseId });
         console.log("applicantId:", applicantInfoId);
-        if (!applicantInfoId || !locationId || !historyId || !coverageId || !interestId || !responseId ) {
+        if (!userId || !applicantInfoId || !locationId || !historyId || !coverageId || !interestId || !responseId ) {
             return res.status(400).json({ error: "Missing required fields" });
         }
         const quote = new Quote({
+            userId,
             applicantInfo: applicantInfoId,
             location: locationId,
             history: historyId,
@@ -25,4 +26,19 @@ const submitQuote = async (req, res) => {
     }
 };
 
-module.exports = { submitQuote };
+const getQuote = async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        console.log("Get quote user id:", userId);
+        const quote = await Quote.findOne({ userId: userId });
+        if (!quote) {
+            return res.status(404).send("Quote not found");
+        }
+        res.status(200).send(quote);
+    } catch (err) {
+        res.status(400).send('Error fetching quote: ' + err);
+    }
+}
+
+
+module.exports = { submitQuote, getQuote };

@@ -1,5 +1,4 @@
 const express = require("express");
-const { deleteHistory } = require("../controller/historyController");
 const router = express.Router();
 const {
     submitResponses,

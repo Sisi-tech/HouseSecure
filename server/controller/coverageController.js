@@ -1,19 +1,5 @@
 const Coverage = require("../model/coverage");
 
-const getCoverage = async (req, res) => {
-    try {
-        const userId = req.params.user;
-        const coverage = await Coverage.findOne({ user: userId });
-
-        if (!coverage) {
-            return res.status(404).json({ message: "Coverage not found for this user" });
-        }
-        res.status(200).json(coverage);
-    } catch (error) {
-        res.status(500).json({ message: 'Server error', message: error.message });
-    }
-};
-
 const upsertCoverage = async (req, res) => {
     try {
         const { userId } = req.params;
@@ -29,6 +15,21 @@ const upsertCoverage = async (req, res) => {
         res.status(500).json({ message: 'Server error', error });
     }
 };
+
+const getCoverage = async (req, res) => {
+    try {
+        const userId = req.params.user;
+        const coverage = await Coverage.findOne({ user: userId });
+
+        if (!coverage) {
+            return res.status(404).json({ message: "Coverage not found for this user" });
+        }
+        res.status(200).json(coverage);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', message: error.message });
+    }
+};
+
 
 const updateCoverage = async (req, res) => {
     try {
