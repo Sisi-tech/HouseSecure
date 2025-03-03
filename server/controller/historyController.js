@@ -3,10 +3,8 @@ const User = require("../model/user");
 
 const createHistory = async (req, res) => {
     try {
-        const { userId } = req.params;
+        const { userId } = req.body.userId;
         const historyData = req.body;
-
-        console.log("create history user id:", userId);
 
         const updatedHistory = await History.findOneAndUpdate(
             userId,

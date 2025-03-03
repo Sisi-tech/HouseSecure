@@ -3,12 +3,15 @@ const Quote = require("../model/quote");
 
 const submitQuote = async (req, res) => {
     try {
-        const { applicantId, locationId, historyId, coverageId, interestId, responseId } = req.body;
-        if (!applicantId || !locationId || !historyId || !coverageId || !interestId || !responseId ) {
+        console.log("request body:", req.body);
+        const { applicantInfoId, locationId, historyId, coverageId, interestId, responseId } = req.body;
+        console.log('Destructured Values:', { applicantInfoId, locationId, historyId, coverageId, interestId, responseId });
+        console.log("applicantId:", applicantInfoId);
+        if (!applicantInfoId || !locationId || !historyId || !coverageId || !interestId || !responseId ) {
             return res.status(400).json({ error: "Missing required fields" });
         }
         const quote = new Quote({
-            applicantInfo: applicantId,
+            applicantInfo: applicantInfoId,
             location: locationId,
             history: historyId,
             coverage: coverageId,

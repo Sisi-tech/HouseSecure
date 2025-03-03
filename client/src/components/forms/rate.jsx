@@ -72,6 +72,7 @@ const Rate = () => {
                 postData(questionUrl, question),
             ])
 
+            console.log("res:", applicantInfoRes, locationRes, historyRes, coverageRes, interestRes, questionRes );
             const quoteRes = await fetch(quoteUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -85,7 +86,7 @@ const Rate = () => {
                     responseId: questionRes.responseId,
                 }),
             });
-            if (!quoteRes.OK) throw new Error("Failed to submit quote");
+            if (!quoteRes.ok) throw new Error("Failed to submit quote");
 
             const quoteData = await quoteRes.json();
             console.log("Quote saved:", quoteData);

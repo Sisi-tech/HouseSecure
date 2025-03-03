@@ -5,10 +5,17 @@ import Footer from "../shared/footer";
 import BackToTop from "../shared/backToTop";
 
 const ApplicantInfo = () => {
-    const today = new Date().toISOString().split("T")[0];
-    console.log("today is:", today);
+    const getTodayDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+        const day = String(today.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+    const todayString = getTodayDate();
+
     const [formData, setFormData] = useState({
-        selectedDate: today,
+        selectedDate: todayString || "",
         entityType: "",
         firstName: "",
         lastName: "",
@@ -22,6 +29,9 @@ const ApplicantInfo = () => {
         lossHistory: "",
     })
 
+
+    console.log("selected date:", formData.selectedDate);
+   
     useEffect(() => {
         const savedData = JSON.parse(localStorage.getItem("applicantInfo")) || {};
         setFormData(prevData => ({
@@ -32,10 +42,17 @@ const ApplicantInfo = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        const updatedData = { ...formData, [name]: value };
+        let formattedValue = value;
+        
+        const updatedData = { 
+            ...formData, 
+            [name]: formattedValue,
+        };
+    
         setFormData(updatedData);
         localStorage.setItem("applicantInfo", JSON.stringify(updatedData));
     };
+    
 
     const isFormValid = () => {
         if (!formData.entityType || !formData.policyForm || !formData.occupancyType || !formData.lossHistory) return false;
@@ -58,7 +75,7 @@ const ApplicantInfo = () => {
                             name="selectedDate"
                             className="p-1 pl-2 border rounded-sm w-auto md:w-100 lg:w-200"
                             value={formData.selectedDate}
-                            min={today}
+                            min={todayString}
                             onChange={handleChange}
                         />
                     </div>

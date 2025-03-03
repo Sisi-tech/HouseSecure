@@ -10,10 +10,12 @@ const ApplicantInfoSchema = new mongoose.Schema({
             type: Date,
             required: [true, "Error: no effective date provided"],
             validate: {
-                validator: function(v) {
-                    return v && v >= new Date();
+                validator: function(value) {
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    return value >= today;
                 },
-                message: props => `${props.value}`
+                message: 'selectedDate must be today or a future date.'
             }
         },
         entityType: {

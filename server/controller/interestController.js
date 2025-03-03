@@ -10,7 +10,7 @@ const createInterest = async (req, res) => {
             {...interestData},
             { new: true, upsert: true, runValidators: true }
         );
-        res.status(200).json({ coverageId: updatedInterest._id, data: updatedInterest });
+        res.status(200).json({ interestId: updatedInterest._id, data: updatedInterest });
     } catch (error) {
         res.status(500).json({ message: 'Server error', error });
     }
