@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../shared/footer";
 import Menu from "../shared/menu";
 import FetchApplicantInfo from "../fetch/fetchApplicantInfo";
+import FetchLocationInfo from "../fetch/fetchLocation";
 
 const ViewCoverages = () => {
     const [user, setUser] = useState(null);
@@ -26,6 +27,7 @@ const ViewCoverages = () => {
             <Menu isAuthenticated={!!user} handleLogout={handleLogout} />
             <div className="w-full flex flex-col flex-1 items-center pt-2 text-md">
                 <FetchApplicantInfo />
+                <FetchLocationInfo />
             </div>
             <Footer />
         </div>

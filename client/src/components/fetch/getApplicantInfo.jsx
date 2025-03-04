@@ -10,7 +10,7 @@ const GetApplicantInfoItem = ({ info }) => {
         individual: (
             <>
                 <div>
-                    <p>Applicant Name</p>
+                    <p className='font-semibold'>Applicant Name</p>
                     <p>{info.individual?.firstName || 'N/A'} {info.individual?.lastName || 'N/A'}</p>
                 </div>
             </>
@@ -48,15 +48,15 @@ const GetApplicantInfoItem = ({ info }) => {
     };
 
     return (
-        <div className='flex flex-col justify-center items-center text-center min-w-screen space-y-4 p-4'>
-            <h2 className='font-semibold text-lg'>Applicant Information</h2>
+        <div className='flex flex-col justify-center items-center text-center min-w-screen space-y-2 pl-6 pr-6 pt-4'>
+            <h2 className='font-semibold text-lg text-sky-800'>Applicant Information</h2>
             <div className='w-full grid grid-cols-3 md:grid-cols-6 gap-4 space-x-4 text-md p-4 border-b-1'>
                 <div className='flex flex-col'>
-                    <p>Effective Date</p>
+                    <p className='font-semibold'>Effective Date</p>
                     <p>{new Date(info.selectedDate).toISOString().split('T')[0]}</p>
                 </div>
                 <div>
-                    <p>Entity type</p>
+                    <p className='font-semibold'>Entity type</p>
                     <p>{info.entityType}</p>
                 </div>
                 {entityTypeMapping[info.entityType] || (
@@ -65,15 +65,15 @@ const GetApplicantInfoItem = ({ info }) => {
                     </div>
                 )}
                 <div>
-                    <p>Policy Form</p>
+                    <p className='font-semibold'>Policy Form</p>
                     <p>{info.policyForm}</p>
                 </div>
                 <div>
-                    <p>Occupancy Type</p>
+                    <p className='font-semibold'>Occupancy Type</p>
                     <p>{info.occupancyType}</p>
                 </div>
                 <div>
-                    <p>Loss History</p>
+                    <p className='font-semibold'>Loss History</p>
                     <p>{info.lossHistory}</p>
                 </div>
             </div>
