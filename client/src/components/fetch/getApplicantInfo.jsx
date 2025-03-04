@@ -6,86 +6,78 @@ const GetApplicantInfoItem = ({ info }) => {
         return null;
     }
 
-    const entityTypeMappings = {
+    const entityTypeMapping = {
         individual: (
             <>
-                <tr>
-                    <td>First Name:</td>
-                    <td>{info.individual?.firstName || 'N/A'}</td>
-                </tr>
-                <tr>
-                    <td>Last Name</td>
-                    <td>{info.individual?.lastName || 'N/A'}</td>
-                </tr>
+                <div>
+                    <p>Applicant Name</p>
+                    <p>{info.individual?.firstName || 'N/A'} {info.individual?.lastName || 'N/A'}</p>
+                </div>
             </>
         ),
         Partnership: (
-            <tr>
-                <tb>Business Name:</tb>
-                <tb>{info.Partnership || 'N/A'}</tb>
-            </tr>
+            <div>
+                <p>Business Name</p>
+                <p>{info.Partnership || 'N/A'}</p>
+            </div>
         ),
         'Joint Venture': (
-            <tr>
-                <td>Business Name:</td>
-                <td>{info.jointVenture || 'N/A'}</td>
-            </tr>
+            <div>
+                <p>Business Name</p>
+                <p>{info.jointVenture}</p>
+            </div>
         ),
         'Limited Liability Corporation': (
-            <tr>
-                <tb>Business Name:</tb>
-                <td>{info.llc || 'N/A'}</td>
-            </tr>
+            <div>
+                <p>Business Name</p>
+                <p>{info.llc || 'N/A'}</p>
+            </div>
         ),
         corporation: (
-            <tr>
-                <td>Business Name:</td>
-                <td>{info.corporation || 'N/A'}</td>
-            </tr>
+            <div>
+                <p>Business Name:</p>
+                <p>{info.corporation}</p>
+            </div>
         ),
         trust: (
-            <tr>
-                <td>Business Name:</td>
-                <td>{info.trust || 'N/A'}</td>
-            </tr>
-        ),
+            <div>
+                <p>Business Name</p>
+                <p>{info.trust || 'N/A'}</p>
+            </div>
+        )
     };
 
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>ApplicantInfo</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Proposed Effected Date:</td>
-                    <td>{new Date(info.selectedDate).toISOString().split('T')[0]}</td>
-                </tr>
-                <tr>
-                    <td>Entity Type:</td>
-                    <td>{info.entityType}</td>
-                </tr>
-                {entityTypeMappings[info.entityType] || (
-                    <tr>
-                        <td colSpan="2">Unknown Entity Type</td>
-                    </tr>
+        <div className='flex flex-col justify-center items-center text-center min-w-screen space-y-4 p-4'>
+            <h2 className='font-semibold text-lg'>Applicant Information</h2>
+            <div className='w-full grid grid-cols-3 md:grid-cols-6 gap-4 space-x-4 text-md p-4 border-b-1'>
+                <div className='flex flex-col'>
+                    <p>Effective Date</p>
+                    <p>{new Date(info.selectedDate).toISOString().split('T')[0]}</p>
+                </div>
+                <div>
+                    <p>Entity type</p>
+                    <p>{info.entityType}</p>
+                </div>
+                {entityTypeMapping[info.entityType] || (
+                    <div>
+                        <p>Unknown Entity Type</p>
+                    </div>
                 )}
-                <tr>
-                    <td>Policy Form:</td>
-                    <td>{info.policyForm}</td>
-                </tr>
-                <tr>
-                    <td>Occupancy Type:</td>
-                    <td>{info.occupancyType}</td>
-                </tr>
-                <tr>
-                    <td>Loss History:</td>
-                    <td>{info.lossHistory}</td>
-                </tr>
-            </tbody>
-        </table>
+                <div>
+                    <p>Policy Form</p>
+                    <p>{info.policyForm}</p>
+                </div>
+                <div>
+                    <p>Occupancy Type</p>
+                    <p>{info.occupancyType}</p>
+                </div>
+                <div>
+                    <p>Loss History</p>
+                    <p>{info.lossHistory}</p>
+                </div>
+            </div>
+        </div>
     )
 }
 

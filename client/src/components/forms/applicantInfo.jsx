@@ -233,14 +233,14 @@ const ApplicantInfo = () => {
                             onChange={handleChange}
                         >
                             <option value="" disabled>Required</option>
-                            <option value="ho3">HO3</option>
-                            <option value="ho2">HO2</option>
-                            <option value="ho4">HO4</option>
-                            <option value="ho5">HO5</option>
-                            <option value="ho6">HO6</option>
-                            <option value="ho8">HO8</option>
-                            <option value="dp2">DP2</option>
-                            <option value="dp3">DP3</option>
+                            <option value="Ho3">HO3</option>
+                            <option value="Ho2">HO2</option>
+                            <option value="Ho4">HO4</option>
+                            <option value="HO5">HO5</option>
+                            <option value="HO6">HO6</option>
+                            <option value="HO8">HO8</option>
+                            <option value="DP2">DP2</option>
+                            <option value="DP3">DP3</option>
                         </select>
                     </div>
                     <div className="flex flex-col md:flex-row md:items-center gap-4">

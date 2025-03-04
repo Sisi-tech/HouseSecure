@@ -14,7 +14,7 @@ const ViewCoverages = () => {
             setUser(JSON.parse(userData));
         }
     }, []);
-    
+
     const handleLogout = () => {
         localStorage.removeItem("user");
         setUser(null);
@@ -24,8 +24,7 @@ const ViewCoverages = () => {
     return (
         <div className="w-full min-h-screen flex flex-col">
             <Menu isAuthenticated={!!user} handleLogout={handleLogout} />
-            <div className="flex flex-col flex-1 items-center pl-4 pr-4 text-md">
-                <h3 className="text-md text-center font-semibold pt-6">View coverages</h3>
+            <div className="w-full flex flex-col flex-1 items-center pt-2 text-md">
                 <FetchApplicantInfo />
             </div>
             <Footer />
