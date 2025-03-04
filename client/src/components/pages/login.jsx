@@ -60,27 +60,22 @@ const Login = () => {
             setFormValid(error?.message || "Invalid email or password.");
         }
     };
-
-    async function postData(url, data) {
-        const res = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-        });
-        if (!res.ok) {
-            const errorMessage = await res.text();
-            console.log("Error message from server:", errorMessage);
-            throw new Error(errorMessage);
-        }
-        return res.json();
-    }
-
     async function loginUser(URL, requestBody) {
         try {
-            const myData = await postData(URL, requestBody);
-            if (myData?.user) {
-                localStorage.setItem("user", JSON.stringify(myData.user));
-                handleClose(myData);
+            const response = await fetch(URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestBody),
+            });
+            if (!response.ok) {
+                const errorMessage = await response.text();
+                throw new Error(errorMessage);
+            }
+            const data = await response.json();
+            if (data?.token) {
+                localStorage.setItem("authToken", data.token);
+                localStorage.setItem("user", JSON.stringify(data.user));
+                handleClose(data);
             }
         } catch (error) {
             setFormValid(error?.message || "Invalid email or password, login failed.");

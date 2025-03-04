@@ -219,17 +219,15 @@ const createApplicantInfo = async (req, res) => {
 
 const getApplicantInfo = async (req, res) => {
     try {
-        const userId = req.params.user;
+        const  userId = req.params.id;
         console.log("req.params.user for get applicant info:", userId);
-
-        const applicantInfo = await ApplicantInfo.findOne({ user: userId });
+        if (!userId) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        const applicantInfo = await ApplicantInfo.findOne({ userId: userId });
 
         if (!applicantInfo) {
             return res.status(404).json({ message: "ApplicantInfo not found" });
-        }
-
-        if (!userId) {
-            return res.status(404).json({ message: "User not found" });
         }
         res.status(200).json(applicantInfo);
     } catch (err) {
