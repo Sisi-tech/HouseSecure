@@ -48,9 +48,9 @@ const GetApplicantInfoItem = ({ info }) => {
     };
 
     return (
-        <div className='flex flex-col justify-center items-center text-center min-w-screen space-y-2 pl-6 pr-6 pt-4'>
+        <div className='w-full min-w-screen flex flex-col justify-center items-center space-y-2 p-2 pl-16 pr-16'>
             <h2 className='font-semibold text-lg text-sky-800'>Applicant Information</h2>
-            <div className='w-full grid grid-cols-3 md:grid-cols-6 gap-4 space-x-4 text-md p-4 border-b-1'>
+            <div className='w-full grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 space-x-4 text-md p-4 border-b'>
                 <div className='flex flex-col'>
                     <p className='font-semibold'>Effective Date</p>
                     <p>{new Date(info.selectedDate).toISOString().split('T')[0]}</p>
