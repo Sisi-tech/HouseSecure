@@ -33,8 +33,8 @@ const ViewCoverages = () => {
                 <FetchApplicantInfo />
                 <FetchLocationInfo />
                 <FetchHistoryInfo />
-                {/* <FetchCoverageInfo /> */}
-                {/* <FetchInterestInfo /> */}
+                <FetchCoverageInfo />
+                <FetchInterestInfo />
                 <FetchQuestionInfo />
             </div>
             <Footer />

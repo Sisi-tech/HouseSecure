@@ -18,7 +18,7 @@ export default function Menu({ isAuthenticated, handleLogout }) {
     };
 
     return (
-        <div className="flex flex-col w-full px-3 shadow-md">
+        <div className="flex flex-col w-full px-3 shadow-md bg-gray-800 text-white">
             {/* Navbar Header */}
             <div className="flex justify-between items-center w-full p-1 pb-2 md:pb-0">
                 <Link to="/" className="font-bold text-xl text-sky-700 font-serif" style={{ textShadow: "3px 3px 4px rgba(0, 0, 0, 0.5)" }}>

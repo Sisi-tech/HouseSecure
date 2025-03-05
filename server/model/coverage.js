@@ -21,6 +21,11 @@ const coverageSchema = new mongoose.Schema({
         required: true,
         min: 0,
     },
+    coverageD: {
+        type: Number,
+        required: true,
+        min: 0,
+    },
     coverageE: {
         type: String,
         required: true,

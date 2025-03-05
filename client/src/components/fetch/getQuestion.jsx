@@ -7,9 +7,9 @@ const GetQuestionInfo = ({ questionItem }) => {
     }
 
     return (
-        <div className='w-full min-w-screen flex flex-col justify-center items-center space-y-2 pb-5 pl-16 pr-16'>
-            <h2 className='font-semibold text-lg text-sky-800'>Underwriting Questions</h2>
-            <dl className='w-full flex flex-col gap-4 p-4 text-md border-b'>
+        <div className='w-full min-w-screen flex flex-col justify-center items-center space-y-2 pb-20 pl-16 pr-16'>
+            <h2 className='font-semibold text-lg text-sky-700'>Underwriting Questions</h2>
+            <dl className='w-full flex flex-col gap-4 p-4 text-md'>
                 {questionItem.responses.map((response, index) => (
                     <div key={response._id} className="flex gap-6">
                         <dd>{response.answer}</dd>

@@ -5,22 +5,6 @@ import BackToTop from "../shared/backToTop";
 import Footer from "../shared/footer";
 
 const Coverage = () => {
-    // const [coverageA, setCoverageA] = useState("");
-    // const [coverageB, setCoverageB] = useState("");
-    // const [coverageC, setCoverageC] = useState("");
-    // const [coverageD, setCoverageD] = useState("");
-    // const [coverageE, setCoverageE] = useState("");
-    // const [ded, setDed] = useState("");
-    // const [windDed, setWindDed] = useState("");
-    // const [catDed, setCatDed] = useState("");
-    // const [RCVonCoverageC, setRCVonCoverageC] = useState("");
-    // const [waterBackUp, setWaterBackUp] = useState("");
-    // const [equipment, setEquipment] = useState("");
-    // const [ordinance, setOrdinance] = useState("");
-    // const [inflationGuard, setInflationGuard] = useState("");
-    // const [burglarAlarm, setBurglarAlarm] = useState("");
-    // const [fireAlarm, setFireAlarm] = useState("");
-    // const [sprinkler, setSprinkler] = useState("");
     const [formData, setFormData] = useState({
         coverageA: "",
         coverageB: "",
