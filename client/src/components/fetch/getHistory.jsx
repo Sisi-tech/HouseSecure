@@ -7,10 +7,10 @@ const GetHistoryInfo = ({ historyItem }) => {
     }
 
     return (
-        <div className="w-full flex flex-col justify-center items-center space-y-2 p-4 pl-16 pr-16">
-            <div className='w-full min-w-screen pl-16 pr-16'>
-                <h2 className="font-semibold text-lg text-sky-800 text-center">History</h2>
-                <div className="w-full grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4 text-md border-b">
+        <div className="w-full flex flex-col justify-center items-center space-y-2 p-4  pl-4 pr-4 lg:pl-16 lg:pr-16">
+            <div className='w-full min-w-screen pl-4 pr-4 lg:pl-16 lg:pr-16'>
+                <h2 className="font-semibold text-lg text-sky-700 text-center">History</h2>
+                <div className="w-full grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4 text-md border-b ">
                     <div className="flex flex-col">
                         <p className="font-semibold">Prior Carrier</p>
                         <p>{historyItem.priorCarrier}</p>
@@ -26,7 +26,7 @@ const GetHistoryInfo = ({ historyItem }) => {
                 </div>
             </div>
             {historyItem.losses && historyItem.losses.length > 0 && (
-                <div className="w-full min-w-screen p-4 pl-16 pr-16">
+                <div className="min-w-screen pl-4 pr-4 lg:pl-16 lg:pr-16">
                     <h3 className="font-semibold text-md text-sky-800 text-center">Losses</h3>
                     {historyItem.losses.map((loss, index) => (
                         <div key={index} className="w-full grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4 text-md border-b">

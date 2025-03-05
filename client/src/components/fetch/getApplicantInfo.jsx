@@ -48,7 +48,7 @@ const GetApplicantInfoItem = ({ info }) => {
     };
 
     return (
-        <div className='w-full min-w-screen flex flex-col justify-center items-center space-y-2 p-6 pl-16 pr-16'>
+        <div className='w-full min-w-screen flex flex-col justify-center items-center space-y-2 p-6 pl-4 pr-4 lg:pl-16 lg:pr-16'>
             <h2 className='font-semibold text-lg text-sky-700'>Applicant Information</h2>
             <div className='w-full grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 space-x-4 text-md p-4 border-b'>
                 <div className='flex flex-col'>

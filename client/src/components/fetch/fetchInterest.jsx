@@ -43,7 +43,7 @@ const FetchInterestInfo = () => {
     }, []);
     
     return (
-        <div className='w-full pl-16 pr-16'>
+        <div className='w-full justify-center items-center pl-4 pr-4 lg:pl-16 lg:pr-16'>
             {loading ? (
                 <p>Loading interest info ...</p>
             ) : interestInfo ? (
@@ -51,7 +51,7 @@ const FetchInterestInfo = () => {
                     <GetInterestInfo interestItem={interestInfo} />
                 </>
             ) : (
-                <div className='w-full flex flex-col justify-center items-center space-y-2 mb-3 border-b'>
+                <div className='w-full flex flex-col justify-center items-center mb-3 border-b'>
                     <p className='font-semibold p-4 text-center text-sky-800'>No Interest</p>
                 </div>
             )
