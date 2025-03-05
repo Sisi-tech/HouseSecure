@@ -5,6 +5,9 @@ import Menu from "../shared/menu";
 import FetchApplicantInfo from "../fetch/fetchApplicantInfo";
 import FetchLocationInfo from "../fetch/fetchLocation";
 import FetchHistoryInfo from "../fetch/fetchHistory";
+import FetchCoverageInfo from "../fetch/fetchCoverage";
+import FetchInterestInfo from "../fetch/fetchInterest";
+import FetchQuestionInfo from "../fetch/fetchQuestion";
 
 const ViewCoverages = () => {
     const [user, setUser] = useState(null);
@@ -30,6 +33,9 @@ const ViewCoverages = () => {
                 <FetchApplicantInfo />
                 <FetchLocationInfo />
                 <FetchHistoryInfo />
+                {/* <FetchCoverageInfo /> */}
+                {/* <FetchInterestInfo /> */}
+                <FetchQuestionInfo />
             </div>
             <Footer />
         </div>
