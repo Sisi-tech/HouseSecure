@@ -91,6 +91,12 @@ const Rate = () => {
             const quoteData = await quoteRes.json();
             console.log("Quote saved:", quoteData);
             setIsSubmit(true);
+            localStorage.removeItem('applicantInfo');
+            localStorage.removeItem('location');
+            localStorage.removeItem('history');
+            localStorage.removeItem('coverage');
+            localStorage.removeItem('interest');
+            localStorage.removeItem('responses');
         } catch (error) {
             console.error("Error submitting quote", error);
         }

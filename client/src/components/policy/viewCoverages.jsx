@@ -29,7 +29,7 @@ const ViewCoverages = () => {
     return (
         <div className="w-full">
             <Menu isAuthenticated={!!user} handleLogout={handleLogout} />
-            <div className="w-full flex flex-col flex-1 justify-center items-center pt-2 text-md shadow-md overflow-hidden ">
+            <div className="w-full flex flex-col flex-1 justify-center items-center pt-2 text-sm shadow-md overflow-hidden ">
                 <FetchApplicantInfo />
                 <FetchLocationInfo />
                 <FetchHistoryInfo />
