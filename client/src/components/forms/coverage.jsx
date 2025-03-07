@@ -5,7 +5,7 @@ import BackToTop from "../shared/backToTop";
 import Footer from "../shared/footer";
 
 const Coverage = () => {
-    const [formData, setFormData] = useState({
+    const initialFormData = {
         coverageA: "",
         coverageB: "",
         coverageC: "",
@@ -22,7 +22,9 @@ const Coverage = () => {
         burglarAlarm: "",
         fireAlarm: "",
         sprinkler: "",
-    });
+    };
+
+    const [formData, setFormData] = useState(initialFormData);
 
     useEffect(() => {
         const savedData = JSON.parse(localStorage.getItem("coverage"));
@@ -32,30 +34,29 @@ const Coverage = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         const updatedData = { ...formData, [name]: value };
+        
+        if (name === "coverageA") {
+            const coverageAValue = parseFloat(value) || 0;
+            updatedData = {
+                ...updatedData,
+                coverageB: (coverageAValue * 0.10).toFixed(2),
+                coverageC: (coverageAValue * 0.50).toFixed(2),
+                coverageD: (coverageAValue * 0.20).toFixed(2),
+            };
+        }
         setFormData(updatedData);
         localStorage.setItem("coverage", JSON.stringify(updatedData));
     };
 
-    const isFormValid = () => {
-        return (
-            formData.coverageA &&
-            formData.coverageB &&
-            formData.coverageC &&
-            formData.coverageD &&
-            formData.coverageE &&
-            formData.ded &&
-            formData.windDed &&
-            formData.catDed &&
-            formData.RCVonCoverageC &&
-            formData.waterBackup &&
-            formData.equipment &&
-            formData.ordinance &&
-            formData.inflationGuard &&
-            formData.burglarAlarm &&
-            formData.fireAlarm &&
-            formData.sprinkler
-        )
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setFormData(initialFormData);
     }
+
+    const isFormValid = () => {
+        const requiredFields = ["coverageA", "coverageE", "ded", "windDed", "catDed"]
+        return requiredFields.every(field => formData[field] !== "");
+    };
 
     return (
         <div className="w-full h-auto flex flex-col relative">
@@ -63,7 +64,7 @@ const Coverage = () => {
             <BackToTop />
             <div className="w-full pb-8">
                 <h3 className="text-md font-semibold text-center">Coverage</h3>
-                <form className="w-full mx-auto max-w-screen-lg text-md space-y-5 p-4 text-black">
+                <form className="w-full mx-auto max-w-screen-lg text-md space-y-5 p-4 text-black" onSubmit={handleSubmit}>
                     {/* first row */}
                     <div className="w-full mx-auto max-w-screen-lg grid grid-cols-1 md:grid-cols-2 justify-center gap-6">
                         {/* coverages */}
@@ -74,7 +75,6 @@ const Coverage = () => {
                                     <label htmlFor="coverageA" className="w-full">Coverage A - Dwelling:</label>
                                     <input
                                         id="coverageA"
-                                        type="number"
                                         name="coverageA"
                                         className="p-1 pl-2 border rounded-sm w-full"
                                         value={formData.coverageA}
@@ -86,7 +86,6 @@ const Coverage = () => {
                                     <label htmlFor="coverageB" className="w-full">Coverage B - Other structures:</label>
                                     <input
                                         id="coverageB"
-                                        type="number"
                                         name="coverageB"
                                         className="p-1 pl-2 border rounded-sm w-full"
                                         value={formData.coverageB}
@@ -99,7 +98,6 @@ const Coverage = () => {
                                     <input
                                         id="coverageC"
                                         name="coverageC"
-                                        type="number"
                                         className="p-1 pl-2 border rounded-sm w-full"
                                         value={formData.coverageC}
                                         onChange={handleChange}
@@ -111,7 +109,6 @@ const Coverage = () => {
                                     <input
                                         id="coverageD"
                                         name="coverageD"
-                                        type="number"
                                         className="p-1 pl-2 border rounded-sm w-full"
                                         value={formData.coverageD}
                                         onChange={handleChange}
@@ -160,7 +157,7 @@ const Coverage = () => {
                                     >
                                         <option value="" disabled>Required</option>
                                         <option value="ded5">500</option>
-                                        <option value="ded1k">1,000</option>
+                                        <option value="ded1k" defaultChecked>1,000</option>
                                         <option value="ded2k">2,000</option>
                                         <option value="ded2.5">2,500</option>
                                         <option value="ded5k">5,000</option>
@@ -176,7 +173,7 @@ const Coverage = () => {
                                         onChange={handleChange}
                                     >
                                         <option value="" disabled>Required</option>
-                                        <option value="sameAsAOP">Same as All Perils</option>
+                                        <option value="sameAsAOP" defaultChecked>Same as All Perils</option>
                                         <option value="windDed2k">2,000</option>
                                         <option value="windDed5k">5,000</option>
                                     </select>
@@ -192,7 +189,7 @@ const Coverage = () => {
                                     >
                                         <option value="" disabled>Required</option>
                                         <option value="1%">1%</option>
-                                        <option value="2%">2%</option>
+                                        <option value="2%" defaultChecked>2%</option>
                                         <option value="3%">3%</option>
                                         <option value="5%">5%</option>
                                         <option value="10%">10%</option>
@@ -260,7 +257,7 @@ const Coverage = () => {
                                     onChange={handleChange}
                                 >
                                     <option value="" disabled></option>
-                                    <option value="5kWaterBackup">$5,000</option>
+                                    <option value="5kWaterBackup" defaultChecked>$5,000</option>
                                     <option value="10kWaterBackup">$10,000</option>
                                     <option value="15kWaterBackup">$15,000</option>
                                 </select>
@@ -294,7 +291,7 @@ const Coverage = () => {
                                     value={formData.burglarAlarm}
                                     onChange={handleChange}
                                 >
-                                    <option value="noBurglar">No burglar alarm</option>
+                                    <option value="noBurglar" defaultChecked>No burglar alarm</option>
                                     <option value="localBurglar">Local burglar alarm</option>
                                     <option value="centralBurglar">Central burglar alarm</option>
                                 </select>
@@ -308,7 +305,7 @@ const Coverage = () => {
                                     value={formData.fireAlarm}
                                     onChange={handleChange}
                                 >
-                                    <option value="noFireAlarm">No fire alarm</option>
+                                    <option value="noFireAlarm" defaultChecked>No fire alarm</option>
                                     <option value="localFireAlarm">Local fire alarm</option>
                                     <option value="centralFireAlarm">Central fire alarm</option>
                                 </select>
@@ -322,7 +319,7 @@ const Coverage = () => {
                                     value={formData.sprinkler}
                                     onChange={handleChange}
                                 >
-                                    <option value="noSprinkler">no sprinkler system</option>
+                                    <option value="noSprinkler" defaultChecked>no sprinkler system</option>
                                     <option value="sprinkler">With sprinkler system</option>
                                 </select>
                             </div>

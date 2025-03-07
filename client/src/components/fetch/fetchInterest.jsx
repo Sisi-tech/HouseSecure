@@ -52,7 +52,7 @@ const FetchInterestInfo = () => {
                 </>
             ) : (
                 <div className='w-full flex flex-col justify-center items-center mb-3 border-b'>
-                    <p className='font-semibold p-4 text-center text-sky-800'>No Interest</p>
+                    <p className='font-semibold p-4 text-center text-[16px] text-sky-800'>No Interest</p>
                 </div>
             )
             }

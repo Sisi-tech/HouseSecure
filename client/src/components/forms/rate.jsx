@@ -13,10 +13,26 @@ const quoteUrl = `${import.meta.env.VITE_API_URL}/api/v1/quote`;
 
 const Rate = () => {
     const [isSubmit, setIsSubmit] = useState(false);
+    const [formData, setFormData] = useState({
+        applicantInfo: {},
+        location: {},
+        history: {},
+        coverage: {},
+        interest: {},
+        responses: {},
+    });
+
+    const handleInputChange = (section, data) => {
+        setFormData(prevState => ({
+            ...prevState,
+            [section]: data,
+        }));
+    };
+
     const submitQuote = async () => {
         try {
             const storedUser = JSON.parse(localStorage.getItem("user"));
-            console.log("Stored userId in localStorage:", storedUser);
+
             if (storedUser?.id) {
                 console.log("User ID found:", storedUser.id);
             } else {
@@ -51,7 +67,7 @@ const Rate = () => {
                     const responseText = await res.text();
                     console.log(`Response from ${url}:`, responseText);
                     console.log('Payload sent:', { userId, responses: data });
-            
+
                     if (!res.ok) {
                         throw new Error(`Failed to submit data to ${url}: ${responseText}`);
                     }
@@ -61,7 +77,7 @@ const Rate = () => {
                     throw error; // Re-throw the error after logging it
                 }
             };
-            
+
 
             const [applicantInfoRes, locationRes, historyRes, coverageRes, interestRes, questionRes] = await Promise.all([
                 postData(applicantInfoUrl, applicantInfo),
@@ -72,7 +88,7 @@ const Rate = () => {
                 postData(questionUrl, question),
             ])
 
-            console.log("res:", applicantInfoRes, locationRes, historyRes, coverageRes, interestRes, questionRes );
+            console.log("res:", applicantInfoRes, locationRes, historyRes, coverageRes, interestRes, questionRes);
             const quoteRes = await fetch(quoteUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -91,19 +107,26 @@ const Rate = () => {
             const quoteData = await quoteRes.json();
             console.log("Quote saved:", quoteData);
             setIsSubmit(true);
-            localStorage.removeItem('applicantInfo');
-            localStorage.removeItem('location');
-            localStorage.removeItem('history');
-            localStorage.removeItem('coverage');
-            localStorage.removeItem('interest');
-            localStorage.removeItem('responses');
+            setFormData({
+                applicantInfo: {},
+                location: {},
+                coverage: {},
+                interest: {},
+                responses: {},
+            });
+            localStorage.removeItem("applicantInfo");
+            localStorage.removeItem("location");
+            localStorage.removeItem("history");
+            localStorage.removeItem("interest");
+            localStorage.removeItem("coverage");
+            localStorage.removeItem("responses");
         } catch (error) {
             console.error("Error submitting quote", error);
         }
     }
     return (
         <div className="w-full min-h-screen flex flex-col">
-            <CreateQuote />
+            <CreateQuote onInputChange={handleInputChange} formData={formData} />
             <div className="flex-1 flex flex-col justify-center items-center text-center text-md pl-4 pr-4">
                 {isSubmit ? (
                     <div className="flex flex-col gap-6">

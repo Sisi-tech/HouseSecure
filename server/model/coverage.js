@@ -9,7 +9,7 @@ const coverageSchema = new mongoose.Schema({
     coverageA: {
         type: Number,
         required: true,
-        min: 0,
+        min: 300000,
     },
     coverageB: {
         type: Number,

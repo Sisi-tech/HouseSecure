@@ -11,6 +11,7 @@ import FetchQuestionInfo from "../fetch/fetchQuestion";
 
 const ViewCoverages = () => {
     const [user, setUser] = useState(null);
+    const [hasData, setHasData] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,16 +27,28 @@ const ViewCoverages = () => {
         navigate("/")
     }
 
+    const handleDataFetched = (data) => {
+        if (data && data.length > 0) {
+            setHasData(true);
+        }
+    };
+
     return (
-        <div className="w-full">
+        <div className="w-full min-h-screen flex flex-col">
             <Menu isAuthenticated={!!user} handleLogout={handleLogout} />
             <div className="w-full flex flex-col flex-1 justify-center items-center pt-2 text-sm shadow-md overflow-hidden ">
-                <FetchApplicantInfo />
-                <FetchLocationInfo />
-                <FetchHistoryInfo />
-                <FetchCoverageInfo />
-                <FetchInterestInfo />
-                <FetchQuestionInfo />
+                {hasData ? (
+                    <>
+                        <FetchApplicantInfo />
+                        <FetchLocationInfo />
+                        <FetchHistoryInfo />
+                        <FetchCoverageInfo />
+                        <FetchInterestInfo />
+                        <FetchQuestionInfo />
+                    </>
+                ) : (
+                    <p className="text-lg font-semibold">There is no quote yet...</p>
+                )}
             </div>
             <Footer />
         </div>
